@@ -9,7 +9,9 @@ $(function () {
     //EN XAMP DEBES DE TRABAJAR CON ESTA RUTA , YA CUANDO LO SUBES AL HOSTING QUITAS EL "/pedidos/public"
     //fecthAllOders();
     function fecthAllOders() {
-        $.get('/pedidos/public/cajera/orders/fecth', {}, function (data) {
+        // /pedidos/public/cajera/orders/fecth  : EN LOCAL
+        // /cajera/orders/fecthEN PRODUCCION
+        $.get('/cajera/orders/fecth', {}, function (data) {
             $('#allOrders').html(data.result).fadeIn();
             //console.log('datos: ' + data.result);
         }, 'json');

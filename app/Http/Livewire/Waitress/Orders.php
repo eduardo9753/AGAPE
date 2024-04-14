@@ -37,7 +37,8 @@ class Orders extends Component
         $this->reload();
 
         //inicializando primer id del palto
-        $this->product_id = Dish::first()->id;
+        $firstDish = Dish::first();
+        $this->product_id = $firstDish ? $firstDish->id : null;
 
         // Inicializa $totalAmount
         $this->totalAmount = 0;
