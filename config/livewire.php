@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => 'http://localhost/pedidos/public',
+    'asset_url' => null,
 
     /*
     |--------------------------------------------------------------------------
