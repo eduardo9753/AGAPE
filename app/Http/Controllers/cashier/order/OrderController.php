@@ -5,6 +5,7 @@ namespace App\Http\Controllers\cashier\order;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Table;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -73,6 +74,8 @@ class OrderController extends Controller
 
         if ($payment) {
             $order->update(['state' => 'COBRADO']);
+            $tables = Table::find($order->table_id);
+            $tables->update(['state' => 'ACTIVO']);
             return redirect()->route('cashier.pay.index')->with('message', 'pago procesado correctamente');
         } else {
             return redirect()->route('cashier.pay.index')->with('message', 'pago no procesado');

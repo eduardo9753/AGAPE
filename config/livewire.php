@@ -53,7 +53,7 @@ return [
     | Examples: "/assets", "myurl.com/app".
     |
     */
-    //'asset_url' => 'http://localhost/your_project/public/', EN LOCAL
+    //'asset_url' => 'http://localhost/pedidos/public', //EN LOCAL
     'asset_url' => null, //EN PRODUCCION
 
     /*

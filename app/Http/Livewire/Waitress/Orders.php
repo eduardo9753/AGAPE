@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Dish;
 use App\Models\Order;
 use App\Models\OrderDish;
+use App\Models\Table;
 use Livewire\Component;
 
 class Orders extends Component
@@ -20,6 +21,9 @@ class Orders extends Component
 
     //tabla orderDish
     public $orderDetails;
+
+    //id de la tabla "mesa"
+    public $table_id;
 
     //ultimo id de la oden
     public $last_order;
@@ -36,10 +40,6 @@ class Orders extends Component
         // Actualiza los detalles del pedido
         $this->reload();
 
-        //inicializando primer id del palto
-        $firstDish = Dish::first();
-        $this->product_id = $firstDish ? $firstDish->id : null;
-
         // Inicializa $totalAmount
         $this->totalAmount = 0;
     }
@@ -52,10 +52,12 @@ class Orders extends Component
         });
 
         $products = Dish::all();
+        $tables = Table::where('state', 'ACTIVO')->get();
         // Retornar la vista con los datos necesarios
         return view('livewire.waitress.orders', [
             'products' => $products,
             'totalAmount' => $this->totalAmount,
+            'tables' => $tables
         ]);
     }
 
@@ -66,7 +68,8 @@ class Orders extends Component
         $this->validate([
             'name' => 'required|string',
             'identity' => 'required|string',
-            'product_id' => 'required|exists:dishes,id'
+            'product_id' => 'required|exists:dishes,id',
+            'table_id' => 'required|exists:tables,id'
         ]);
 
         // Buscar al cliente por su identidad
@@ -91,7 +94,7 @@ class Orders extends Component
             $order = Order::create([
                 'state' => 'PENDIENTE',
                 'customer_id' => $customer->id,
-                'table_id' => 1, // Puedes cambiar esto según la lógica de tu aplicación
+                'table_id' => $this->table_id, // Puedes cambiar esto según la lógica de tu aplicación
                 'user_id' => auth()->user()->id
             ]);
         }
@@ -177,7 +180,7 @@ class Orders extends Component
     //para eliminar todo la orden
     public function cancel()
     {
-        // Actualiza los detalles del pedido
+        // Me trae el ultimo pedido
         $order = Order::latest()->first();
 
         $customer = Customer::find($order->customer_id);
@@ -199,6 +202,8 @@ class Orders extends Component
         $update = $order->update(['state' => 'PEDIDO']);
 
         if ($update) {
+            $tables = Table::find($this->table_id);
+            $tables->update(['state' => 'INACTIVO']);
             session()->flash('message', 'Pedido generado correctamente.');
         } else {
             session()->flash('message', 'Error del pedido.');
@@ -225,5 +230,14 @@ class Orders extends Component
             $this->last_customer_id = null;
             $this->orderDetails = collect(); // Puedes usar collect() para crear una colección vacía
         }
+
+
+        //inicializando primer id del palto
+        $firstDish = Dish::first();
+        $this->product_id = $firstDish ? $firstDish->id : null;
+
+        //inicializando primer id de la mesa
+        $firstTable = Table::where('state', 'ACTIVO')->first();
+        $this->table_id = $firstTable ? $firstTable->id : null;
     }
 }

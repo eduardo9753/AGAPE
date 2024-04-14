@@ -10,8 +10,8 @@ $(function () {
     //fecthAllOders();
     function fecthAllOders() {
         // /pedidos/public/cajera/orders/fecth  : EN LOCAL
-        // /cajera/orders/fecthEN PRODUCCION
-        $.get('/cajera/orders/fecth', {}, function (data) {
+        // /cajera/orders/fecth   : EN PRODUCCION
+        $.get(' /cajera/orders/fecth', {}, function (data) {
             $('#allOrders').html(data.result).fadeIn();
             //console.log('datos: ' + data.result);
         }, 'json');

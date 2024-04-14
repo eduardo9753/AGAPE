@@ -3,7 +3,7 @@
         <div class="create-invoice-wrapper">
             <!-- Row start -->
             <div class="row">
-                <div class="col-sm-4 col-12">
+                <div class="col-sm-6 col-12">
                     <div class="mb-3">
                         <label for="" class="form-label">Cliente</label>
                         <input type="text" class="form-control" wire:model="name" placeholder="Nombre del Cliente" />
@@ -39,8 +39,34 @@
                                 <i class="icon-calendar"></i>
                             </span>
                         </div>
+                        @error('product_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
+
+
+                <div class="col-md-3 col-12">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Mesa</label>
+                        <div class="input-group">
+                            <select wire:model="table_id" class="form-select">
+                                @foreach ($tables as $table)
+                                    <option value=" {{ $table->id }}" class="text-bg-dark">
+                                        {{ $table->name }} - {{ $table->state }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <span class="input-group-text">
+                                <i class="icon-calendar"></i>
+                            </span>
+                        </div>
+                        @error('table_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
 
                 <div class="col-sm-2 col-12">
                     <div class="mb-3">
