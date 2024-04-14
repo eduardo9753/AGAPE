@@ -22,6 +22,9 @@ class Orders extends Component
     //tabla orderDish
     public $orderDetails;
 
+    //tabla table
+    public $tables;
+
     //id de la tabla "mesa"
     public $table_id;
 
@@ -239,5 +242,8 @@ class Orders extends Component
         //inicializando primer id de la mesa
         $firstTable = Table::where('state', 'ACTIVO')->first();
         $this->table_id = $firstTable ? $firstTable->id : null;
+
+        //refrezcamos las mesas
+        $this->tables = Table::where('state', 'ACTIVO')->get();
     }
 }
