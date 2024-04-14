@@ -55,12 +55,10 @@ class Orders extends Component
         });
 
         $products = Dish::all();
-        $tables = Table::where('state', 'ACTIVO')->get();
         // Retornar la vista con los datos necesarios
         return view('livewire.waitress.orders', [
             'products' => $products,
             'totalAmount' => $this->totalAmount,
-            'tables' => $tables
         ]);
     }
 
@@ -250,6 +248,9 @@ class Orders extends Component
     //metodo para cuando le de click al select de mesas me jale los datos actualizados
     public function updateTables()
     {
+        //inicializando primer id de la mesa
+        $firstTable = Table::where('state', 'ACTIVO')->first();
+        $this->table_id = $firstTable ? $firstTable->id : null;
         $this->tables = Table::where('state', 'ACTIVO')->get();
     }
 }
