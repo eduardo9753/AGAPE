@@ -246,4 +246,10 @@ class Orders extends Component
         //refrezcamos las mesas
         $this->tables = Table::where('state', 'ACTIVO')->get();
     }
+
+    //metodo para cuando le de click al select de mesas me jale los datos actualizados
+    public function updateTables()
+    {
+        $this->tables = Table::where('state', 'ACTIVO')->get();
+    }
 }
