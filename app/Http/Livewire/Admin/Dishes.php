@@ -21,7 +21,8 @@ class Dishes extends Component
 
     public function mount()
     {
-        $this->category_id = Category::all()->first()->id;
+        $firstCategory = Category::first();
+        $this->category_id = $firstCategory ? $firstCategory->id : null;
         $this->photo = 'https://cdn-icons-png.flaticon.com/512/5854/5854128.png';
         $this->dishes = Dish::all();
     }
