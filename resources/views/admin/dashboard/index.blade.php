@@ -51,16 +51,16 @@
                                     <div class="col-sm-6 col-12">
                                         <div class="card mb-2">
                                             <div class="card-header">
-                                                <h5 class="card-title">Today's Tickets</h5>
+                                                <h5 class="card-title">ordes cobradas hoy</h5>
                                             </div>
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between mb-2">
-                                                    <span>Completed</span>
-                                                    <span class="fw-bold">75%</span>
+                                                    <span>cantidad</span>
+                                                    <span class="fw-bold">{{ $ordersCount }}</span>
                                                 </div>
                                                 <div class="progress small">
                                                     <div class="progress-bar bg-success" role="progressbar"
-                                                        style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                                                        style="width: 100%" aria-valuenow="100" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                 </div>
                                             </div>
@@ -69,16 +69,16 @@
                                     <div class="col-sm-6 col-12">
                                         <div class="card mb-2">
                                             <div class="card-header">
-                                                <h5 class="card-title">New Tickets</h5>
+                                                <h5 class="card-title">transacciones realizadas hoy</h5>
                                             </div>
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between mb-2">
-                                                    <span>Assigned</span>
-                                                    <span class="fw-bold">5</span>
+                                                    <span>cantidad</span>
+                                                    <span class="fw-bold">{{ $transactiopnCount }}</span>
                                                 </div>
                                                 <div class="progress small">
                                                     <div class="progress-bar bg-danger" role="progressbar"
-                                                        style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                        style="width: 100%" aria-valuenow="100" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                 </div>
                                             </div>
@@ -89,84 +89,29 @@
                             </div>
                             <div class="col-xl-6 col-12">
                                 <div class="row gx-2">
-                                    <div class="col-sm-4 col-6">
-                                        <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
-                                            <div class="position-relative shape-block">
-                                                <img src="{{ asset('assets/images/shape1.png') }}" class="img-fluid img-4x"
-                                                    alt="Bootstrap Themes" />
-                                                <i class="icon-book-open"></i>
-                                            </div>
-                                            <div class="ms-2">
-                                                <h3 class="m-0 fw-semibold">27</h3>
-                                                <h6 class="m-0 fw-light text-light">Active</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-6">
-                                        <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
-                                            <div class="position-relative shape-block">
-                                                <img src="{{ asset('assets/images/shape2.png') }}" class="img-fluid img-4x"
-                                                    alt="Bootstrap Themes" />
-                                                <i class="icon-check-circle"></i>
-                                            </div>
-                                            <div class="ms-2">
-                                                <h3 class="m-0 fw-semibold">18</h3>
-                                                <h6 class="m-0 fw-light text-light">Solved</h6>
+
+                                    @foreach ($tables as $table)
+                                        <div class="col-sm-4 col-6">
+                                            <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
+                                                <div class="position-relative shape-block">
+                                                    <img src="{{ asset('assets/images/shape1.png') }}"
+                                                        class="img-fluid img-4x" alt="Bootstrap Themes" />
+                                                    <i class="icon-book-open"></i>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <h3 class="m-0 fw-semibold">{{ $table->name }}</h3>
+                                                    @if ($table->state == 'ACTIVO')
+                                                        <h6 class="badge bg-primary">{{ $table->state }}</h6>
+                                                    @else
+                                                        <h6 class="badge bg-danger">{{ $table->state }}</h6>
+                                                    @endif
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-4 col-6">
-                                        <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
-                                            <div class="position-relative shape-block">
-                                                <img src="{{ asset('assets/images/shape3.png') }}" class="img-fluid img-4x"
-                                                    alt="Bootstrap Themes" />
-                                                <i class="icon-x-circle"></i>
-                                            </div>
-                                            <div class="ms-2">
-                                                <h3 class="m-0 fw-semibold">12</h3>
-                                                <h6 class="m-0 fw-light text-light">Closed</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-6">
-                                        <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
-                                            <div class="position-relative shape-block">
-                                                <img src="{{ asset('assets/images/shape4.png') }}" class="img-fluid img-4x"
-                                                    alt="Bootstrap Themes" />
-                                                <i class="icon-add_task"></i>
-                                            </div>
-                                            <div class="ms-2">
-                                                <h3 class="m-0 fw-semibold">3</h3>
-                                                <h6 class="m-0 fw-light text-light">Open</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-6">
-                                        <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
-                                            <div class="position-relative shape-block">
-                                                <img src="{{ asset('assets/images/shape5.png') }}" class="img-fluid img-4x"
-                                                    alt="Bootstrap Themes" />
-                                                <i class="icon-alert-triangle"></i>
-                                            </div>
-                                            <div class="ms-2">
-                                                <h3 class="m-0 fw-semibold">5</h3>
-                                                <h6 class="m-0 fw-light text-light">Critical</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-6">
-                                        <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
-                                            <div class="position-relative shape-block">
-                                                <img src="{{ asset('assets/images/shape6.png') }}"
-                                                    class="img-fluid img-4x" alt="Bootstrap Themes" />
-                                                <i class="icon-access_time"></i>
-                                            </div>
-                                            <div class="ms-2">
-                                                <h3 class="m-0 fw-semibold">7</h3>
-                                                <h6 class="m-0 fw-light text-light">High</h6>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
+
+
                                 </div>
                             </div>
                         </div>
@@ -179,7 +124,7 @@
                             <div class="col-xl-6 col-lg-12 col-12">
                                 <div class="card mb-2">
                                     <div class="card-header">
-                                        <h5 class="card-title">Top 5 Agents</h5>
+                                        <h5 class="card-title">Usuarios</h5>
                                     </div>
                                     <div class="card-body">
                                         <div class="border rounded-3">
@@ -188,61 +133,36 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Agent</th>
-                                                            <th>Tickets</th>
-                                                            <th>Time Spent</th>
-                                                            <th>Feedback</th>
+                                                            <th>Usuario</th>
+                                                            <th>correo</th>
+                                                            <th>rol</th>
+                                                            <th>conexion</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>
-                                                                <div class="fw-semibold">Elisa Shah</div>
-                                                            </td>
-                                                            <td>
-                                                                <span class="badge bg-primary">54</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="badge border border-light">2 Hrs 30
-                                                                    Mins</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="starReadOnly1 rating-stars my-2"></div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>
-                                                                <div class="fw-semibold">Ladonna Jones</div>
-                                                            </td>
-                                                            <td>
-                                                                <span class="badge bg-primary">49</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="badge border border-light">2 Hrs 21
-                                                                    Mins</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="starReadOnly2 rating-stars my-2"></div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>
-                                                                <div class="fw-semibold">Jewel Alexander</div>
-                                                            </td>
-                                                            <td>
-                                                                <span class="badge bg-primary">45</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="badge border border-light">2 Hrs 15
-                                                                    Mins</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="starReadOnly1 rating-stars my-2"></div>
-                                                            </td>
-                                                        </tr>
+                                                        @foreach ($users as $user)
+                                                            <tr>
+                                                                <td>{{ $user->id }}</td>
+                                                                <td>
+                                                                    <div class="fw-semibold">{{ $user->name }}</div>
+                                                                </td>
+                                                                <td>
+                                                                    <span
+                                                                        class="badge bg-primary">{{ $user->email }}</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="badge border border-light">
+                                                                        @foreach ($user->getRoleNames() as $role)
+                                                                            {{ $role }}
+                                                                        @endforeach
+                                                                    </span>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="starReadOnly1 rating-stars my-2"></div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -253,7 +173,7 @@
                             <div class="col-xl-6 col-lg-6 col-12">
                                 <div class="card mb-2">
                                     <div class="card-header">
-                                        <h5 class="card-title">Feedback</h5>
+                                        <h5 class="card-title">Flujos</h5>
                                     </div>
                                     <div class="card-body">
                                         <div class="scroll200">
@@ -263,20 +183,9 @@
                                                         <i class="icon-thumbs-up"></i>
                                                     </div>
                                                     <div class="mb-4">
-                                                        <h5>Christian Ochoa</h5>
-                                                        <p class="mb-1">Amazing</p>
+                                                        <h5>Monto total de hoy</h5>
+                                                        <p class="mb-1">S/. {{ $transactionsAmount }}</p>
                                                         <p class="m-0 text-light">3 mins ago</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="d-flex align-items-start">
-                                                    <div class="media-box me-3 bg-primary rounded-5">
-                                                        <i class="icon-thumbs-up"></i>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <h5>Lily Lyons</h5>
-                                                        <p class="mb-1">Thanks</p>
-                                                        <p class="m-0 text-light">9 mins ago</p>
                                                     </div>
                                                 </div>
                                             </div>
