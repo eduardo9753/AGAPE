@@ -150,9 +150,9 @@ class Orders extends Component
                 $save = $orderDetails->update(['quantity' => $cantidad_final]);
 
                 if ($save) {
-                    session()->flash('message', 'Cantidad agregada.');
+                    session()->flash('message', 'Cantidad restada.');
                 } else {
-                    session()->flash('message', 'Error al agregar la cantidad.');
+                    session()->flash('message', 'Error al restar la cantidad.');
                 }
             } else {
                 session()->flash('message', 'La cantidad minima es uno.');
@@ -192,7 +192,7 @@ class Orders extends Component
         }
 
         // Actualiza los detalles del pedido
-        $this->reset();
+        $this->reset('name', 'identity');
         $this->reload();
     }
 

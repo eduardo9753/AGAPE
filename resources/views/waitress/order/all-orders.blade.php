@@ -8,9 +8,15 @@
                     <h5 class="card-title text-primary">DNI/CI: {{ $order->customer->identity }}</h5>
 
                     <div class="d-flex justify-content-between mt-2">
+                        <form action="{{ route('cashier.order.delete', ['order' => $order]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger"><span
+                                    class="fs-3 icon-x-octagon"></span></button>
+                        </form>
 
-                        <a href="{{ route('cashier.order.list', ['order' => $order]) }}" class="btn btn-success"><span
-                                class="fs-3 icon-monetization_on"></span>
+                        <a href="{{ route('cashier.order.show', ['order' => $order]) }}" class="btn btn-success">
+                            <span class="fs-3 icon-create"></span>
                         </a>
                     </div>
                 </div>

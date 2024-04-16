@@ -11,6 +11,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('waitress.order.index') }}"> Pedidos </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('waitress.order.list') }}"> Tus Ordenes </a>
+                </li>
             </ul>
         </div>
     </div>

@@ -101,9 +101,9 @@
             <h1>Boleta de Venta</h1>
         </div>
         <div class="address">
-            <p>Razón Social: <strong>Ágape Chicken & Grill</strong></p>
-            <p>parque sinchi roc, Av. Universitaria 9311, Comas 15316</p>
-            <p>RUC: <strong>20523287568</strong> </p>
+            <p><strong>Razón Social:</strong> Ágape Chicken & Grill</p>
+            <p><strong>Dirección: </strong> parque sinchi roc, Av. Universitaria 9311, Comas 15316</p>
+            <p><strong>RUC: </strong> 20523287568 </p>
         </div>
         <div class="info">
             <p><strong>Cliente:</strong> {{ $pay->order->customer->name }}</p>

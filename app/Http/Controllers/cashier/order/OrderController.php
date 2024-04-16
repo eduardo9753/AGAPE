@@ -16,14 +16,14 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
-    //lista de las ordenes pendientes
+    //lista de las ordenes en estado 'PEDIDO'
     public function index()
     {
         return view('cashier.order.index');
     }
 
 
-    //traendo los pedidos para poder cobrarlos
+    //traendo los pedidos con AJAX para poder cobrarlos
     public function fetchOrders()
     {
         $orders = Order::with(['customer', 'orderDishes'])->where('state', 'PEDIDO')->latest()->get();
@@ -38,7 +38,7 @@ class OrderController extends Controller
         ]);
     }
 
-    //vista para facturar el pedido
+    //vista donde sale el cliente y los pedidos para poder cobrar
     public function list(Order $order)
     {
         $totalAmount = 0;
@@ -54,7 +54,7 @@ class OrderController extends Controller
         ]);
     }
 
-    //para guardar el consumo del cliente
+    //para guardar el cobro del cliente y sus pedidos
     public function pay(Order $order, Request $request)
     {
         $totalAmount = 0;
