@@ -14,6 +14,7 @@ class TransactionController extends Controller
     public function index()
     {
         $pays = Transaction::with('order')
+            ->where('type_receipt', 'FACTURA')
             ->whereHas('order', function ($query) {
                 $query->whereNotNull('customer_id');
             })
@@ -27,7 +28,7 @@ class TransactionController extends Controller
     //lista de las ordenes pagadas tipo boleta
     public function boleta()
     {
-        $pays = Transaction::with('order')->latest()->get();
+        $pays = Transaction::with('order')->where('type_receipt', 'BOLETA')->latest()->get();
         return view('cashier.transaction.boleta', [
             'pays' => $pays
         ]);
