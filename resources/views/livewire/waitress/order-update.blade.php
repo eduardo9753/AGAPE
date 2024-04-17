@@ -59,7 +59,7 @@
                         <div class="input-group">
                             <select wire:model="table_id" class="form-select">
                                 @foreach ($tables as $table)
-                                    <option value="" class="text-bg-dark">
+                                    <option value="{{ $table->id }}" class="text-bg-dark">
                                         {{ $table->name }} - {{ $table->state }}
                                     </option>
                                 @endforeach
