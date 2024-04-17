@@ -13,6 +13,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('waitress.table.index') }}"> Mesas </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('waitress.order.list') }}"> Tus Ordenes </a>
                 </li>
             </ul>

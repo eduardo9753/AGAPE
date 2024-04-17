@@ -15,11 +15,14 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->double('amount');
-            $table->string('payment_method'); //yape , tarjeta , plin , others
-            $table->string('type_receipt'); //boleta factura
-            $table->date('payment_date')->nullable();
-            $table->time('payment_time')->nullable();
+            $table->double('amount');  //monto total de la cuenta
+            $table->double('income_tax')->nullable(); //impuesto 
+            $table->string('cash_payment')->nullable(); //la moneda o billete del cliente que le da a caja
+            $table->string('payment_id')->nullable(); //si quiere meter el id del pago YAPE/PLIN...
+            $table->string('payment_method')->nullable(); //yape , tarjeta , plin , others
+            $table->string('type_receipt')->nullable(); //boleta factura
+            $table->date('payment_date')->nullable();  //fecha del pago
+            $table->time('payment_time')->nullable();  //hora del pago
 
             // Claves foráneas
             $table->unsignedBigInteger('order_id');

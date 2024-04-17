@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\waitress\order\OrderController;
+use App\Http\Controllers\waitress\table\TableController;
 use Illuminate\Support\Facades\Route;
 
 //RUTAS PARA LA MESERA
@@ -8,6 +9,10 @@ Route::get('/waitress/orders', [OrderController::class, 'index'])->name('waitres
 
 Route::get('/waitress/orders/list', [OrderController::class , 'list'])->name('waitress.order.list');
 Route::get('/waitress/orders/fecth', [OrderController::class, 'fetchOrders'])->name('cashier.order.fetch');
+
+
+Route::get('/waitress/tables', [TableController::class, 'index'])->name('waitress.table.index');
+Route::get('/waitress/tables/fecth', [TableController::class, 'fetchTables'])->name('waitress.table.fetch');
 
 
 Route::get('/waitress/orders/show/{order}', [OrderController::class, 'show'])->name('cashier.order.show');

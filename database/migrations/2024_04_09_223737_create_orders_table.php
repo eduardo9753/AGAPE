@@ -16,9 +16,11 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('state')->default('PENDIENTE');
-            
+            $table->string('description')->nullable(); //la descripcion del plato si quiere mucha o poca papa
+            $table->string('type')->nullable(); //TIPO: CASA O POR DELIVERY
+
             // Claves foráneas
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('table_id');
             $table->unsignedBigInteger('user_id');
 

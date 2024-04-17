@@ -10,12 +10,25 @@ use Illuminate\Support\Facades\App;
 
 class TransactionController extends Controller
 {
-    //lista de las ordenes pagadas
+    //lista de las ordenes pagadas tipo FACTURA
     public function index()
     {
-        //faltaria agregar la fecha de hoy la hora
-        $pays = Transaction::with('order')->latest()->get();
+        $pays = Transaction::with('order')
+            ->whereHas('order', function ($query) {
+                $query->whereNotNull('customer_id');
+            })
+            ->latest()
+            ->get();
         return view('cashier.transaction.index', [
+            'pays' => $pays
+        ]);
+    }
+
+    //lista de las ordenes pagadas tipo boleta
+    public function boleta()
+    {
+        $pays = Transaction::with('order')->latest()->get();
+        return view('cashier.transaction.boleta', [
             'pays' => $pays
         ]);
     }
@@ -30,6 +43,25 @@ class TransactionController extends Controller
             return $detail->quantity * $detail->dish->price;
         });
         $pdf = PDF::loadView('cashier.pdf.factura', [
+            'pay' => $pay,
+            'totalAmount' => $totalAmount
+        ]);
+        $pdfContent = $pdf->output();
+
+        // Devolver la cadena de texto como respuesta
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf');
+    }
+
+    //PDF BOLETA
+    public function pdfBoleta(Transaction $pay)
+    {
+        // Cargar la vista y renderizarla como una cadena de texto
+        $totalAmount = 0;
+        $totalAmount = $pay->order->orderDishes->sum(function ($detail) {
+            return $detail->quantity * $detail->dish->price;
+        });
+        $pdf = PDF::loadView('cashier.pdf.boleta', [
             'pay' => $pay,
             'totalAmount' => $totalAmount
         ]);

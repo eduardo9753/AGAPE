@@ -26,7 +26,7 @@ class OrderController extends Controller
     //traendo los pedidos con AJAX para poder cobrarlos
     public function fetchOrders()
     {
-        $orders = Order::with(['customer', 'orderDishes'])->where('state', 'PEDIDO')->latest()->get();
+        $orders = Order::with(['orderDishes'])->where('state', 'PEDIDO')->latest()->get();
 
         $data = view('cashier.order.all-orders', [
             'orders' => $orders
@@ -42,7 +42,6 @@ class OrderController extends Controller
     public function list(Order $order)
     {
         $totalAmount = 0;
-        $customer = Customer::find($order->customer_id);
         $totalAmount = $order->orderDishes->sum(function ($detail) {
             return $detail->quantity * $detail->dish->price;
         });
@@ -50,11 +49,10 @@ class OrderController extends Controller
         return view('cashier.list.index', [
             'order' => $order,
             'totalAmount' => $totalAmount,
-            'customer' => $customer
         ]);
     }
 
-    //para guardar el cobro del cliente y sus pedidos
+    //para guardar el cobro si es factura o pedido de mesa
     public function pay(Order $order, Request $request)
     {
         $totalAmount = 0;
@@ -62,23 +60,60 @@ class OrderController extends Controller
             return $detail->quantity * $detail->dish->price;
         });
 
-        $payment = Transaction::create([
-            'amount' => $totalAmount,
-            'payment_method' => $request->payment_method,
-            'type_receipt' => $request->type_receipt,
-            'payment_date' => date('Y-m-d'),
-            'payment_time' => date('H:i:s'),
-            'order_id' => $order->id,
-            'user_id' => auth()->user()->id
-        ]);
+        if ($request->is_factura == '1') {
+            //guardar al cliente 
+            $customer = Customer::create([
+                'name' => $request->client_name,
+                'identity' => $request->client_id
+            ]);
 
-        if ($payment) {
-            $order->update(['state' => 'COBRADO']);
-            $tables = Table::find($order->table_id);
-            $tables->update(['state' => 'ACTIVO']);
-            return redirect()->route('cashier.pay.index')->with('message', 'pago procesado correctamente');
+            //actualizamos la orden con el id del cliente
+            if ($customer) {
+                $save =  $order->update([
+                    'state' => 'COBRADO',
+                    'customer_id' => $customer->id
+                ]);
+
+                if ($save) {
+                    $payment = Transaction::create([
+                        'amount' => $totalAmount,
+                        'payment_method' => $request->payment_method,
+                        'type_receipt' => 'FACTURA',
+                        'payment_date' => date('Y-m-d'),
+                        'payment_time' => date('H:i:s'),
+                        'order_id' => $order->id,
+                        'user_id' => auth()->user()->id
+                    ]);
+
+                    if ($payment) {
+                        $order->update(['state' => 'COBRADO']);
+                        $tables = Table::find($order->table_id);
+                        $tables->update(['state' => 'ACTIVO']);
+                        return redirect()->route('cashier.pay.index')->with('message', 'pago procesado correctamente');
+                    } else {
+                        return redirect()->route('cashier.pay.index')->with('message', 'pago no procesado');
+                    }
+                }
+            }
         } else {
-            return redirect()->route('cashier.pay.index')->with('message', 'pago no procesado');
+            $payment = Transaction::create([
+                'amount' => $totalAmount,
+                'payment_method' => $request->payment_method,
+                'type_receipt' => $request->type_receipt,
+                'payment_date' => date('Y-m-d'),
+                'payment_time' => date('H:i:s'),
+                'order_id' => $order->id,
+                'user_id' => auth()->user()->id
+            ]);
+
+            if ($payment) {
+                $order->update(['state' => 'COBRADO']);
+                $tables = Table::find($order->table_id);
+                $tables->update(['state' => 'ACTIVO']);
+                return redirect()->route('cashier.pay.boleta')->with('message', 'pago procesado correctamente');
+            } else {
+                return redirect()->route('cashier.pay.boleta')->with('message', 'pago no procesado');
+            }
         }
     }
 }

@@ -33,10 +33,10 @@
                                 <ol class="breadcrumb mb-3">
                                     <li class="breadcrumb-item">
                                         <i class="icon-home lh-1"></i>
-                                        <a href="{{ route('waitress.order.index') }}" class="text-decoration-none">Mesera</a>
+                                        <a href="{{ route('cashier.order.index') }}" class="text-decoration-none">Mesera</a>
                                     </li>
-                                    <li class="breadcrumb-item">Pedidos</li>
-                                    <li class="breadcrumb-item text-light">Editar Pedidos</li>
+                                    <li class="breadcrumb-item">Mesas</li>
+                                    <li class="breadcrumb-item text-light">Lista de Mesas</li>
                                 </ol>
                                 <!-- Breadcrumb end -->
                             </div>
@@ -44,13 +44,9 @@
                         <!-- Row end -->
 
                         <!-- Row start -->
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="card mb-2">
-                                    <div class="card-body">
-                                        @livewire('waitress.order-update', ['order' => $order], key($order->id))
-                                    </div>
-                                </div>
+                        <div class="row gx-2">
+                            <input type="text" id="count_table_waitress" name="count_table_waitress" value="1" hidden>
+                            <div class="col-sm-12" id="allTablesWaitress">
                             </div>
                         </div>
                         <!-- Row end -->

@@ -49,26 +49,58 @@
                                 <div class="card mb-2">
                                     <div class="card-body">
                                         <div>
-                                            <form action="{{ route('cashier.pay.list', ['order' => $order]) }}"
+                                            <form action="{{ route('cashier.order.pay', ['order' => $order]) }}"
                                                 method="POST">
                                                 @csrf
                                                 <div class="create-invoice-wrapper">
                                                     <!-- Row start -->
                                                     <div class="row">
-                                                        <div class="col-sm-3 col-12">
-                                                            <div class="mb-3">
-                                                                <label for="" class="form-label">Cliente</label>
-                                                                <input type="text" value="{{ $customer->name }}"
-                                                                    class="form-control" placeholder="Nombre del Cliente" />
+                                                        <div class="col-sm-12 col-12">
+                                                            <div class="card mb-2">
+                                                                <div class="card-body">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="inlineRadioOptions" id="inlineRadio1"
+                                                                            value="option1"
+                                                                            onclick="toggleFields(this.value)" />
+                                                                        <label class="form-check-label"
+                                                                            for="inlineRadio1">FACTURA</label>
+                                                                    </div>
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="inlineRadioOptions" id="inlineRadio2"
+                                                                            value="option2"
+                                                                            onclick="toggleFields(this.value)" />
+                                                                        <label class="form-check-label"
+                                                                            for="inlineRadio2">OTRO</label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-3 col-12">
-                                                            <div class="mb-3">
-                                                                <label for="" class="form-label">DNI/CI</label>
-                                                                <input type="text" value="{{ $customer->identity }}"
-                                                                    class="form-control" placeholder="Ingresar DNI/CE" />
+                                                        <div id="facturaFields" style="display: none;">
+                                                            <div class="row">
+                                                                <div class="col-sm-8 col-12">
+                                                                    <div class="mb-3">
+                                                                        <label for=""
+                                                                            class="form-label">Cliente/Razón Social</label>
+                                                                        <input type="text" name="client_name"
+                                                                            class="form-control"
+                                                                            placeholder="Nombre del Cliente" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-4 col-12">
+                                                                    <div class="mb-3">
+                                                                        <label for=""
+                                                                            class="form-label">DNI/CI/RUC</label>
+                                                                        <input type="text" name="client_id"
+                                                                            class="form-control"
+                                                                            placeholder="Ingresar DNI/CE" />
+                                                                    </div>
+                                                                </div>
                                                             </div>
+                                                            <input type="hidden" name="is_factura" value="0">
                                                         </div>
 
                                                         <div class="col-md-3 col-12">
@@ -76,11 +108,7 @@
                                                                 <label for="" class="form-label">TIPO</label>
                                                                 <div class="input-group">
                                                                     <select class="form-select" name="type_receipt">
-                                                                        <option value="BOLETA" class="text-bg-dark">
-                                                                            BOLETA
-                                                                        </option>
-                                                                        <option value="FACTURA" class="text-bg-dark">
-                                                                            FACTURA
+                                                                        <option value="BOLETA" class="text-bg-dark">BOLETA
                                                                         </option>
                                                                     </select>
                                                                     <span class="input-group-text">
@@ -116,12 +144,13 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-12 col-12">
+                                                        <div class="col-sm-3 col-12">
                                                             <div class="mb-3">
                                                                 @if ($order->state == 'PEDIDO')
-                                                                    <button type="submit" class="btn btn-primary">
-                                                                        Cobrar
-                                                                    </button>
+                                                                    <label for=""
+                                                                        class="form-label">Transacción</label>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary w-100">Cobrar</button>
                                                                 @else
                                                                     <div class="alert border border-info alert-dismissible fade show"
                                                                         role="alert">
@@ -249,6 +278,19 @@
         </div>
         <!-- Page wrapper end -->
 
+        <script>
+            function toggleFields(value) {
+                var facturaFields = document.getElementById('facturaFields');
+                var isFactura = document.querySelector('input[name="is_factura"]');
 
+                if (value === 'option1') {
+                    facturaFields.style.display = 'block';
+                    isFactura.value = '1';
+                } else {
+                    facturaFields.style.display = 'none';
+                    isFactura.value = '0';
+                }
+            }
+        </script>
     </body>
 @endsection

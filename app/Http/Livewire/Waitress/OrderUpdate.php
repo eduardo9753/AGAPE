@@ -7,11 +7,13 @@ use App\Models\Dish;
 use App\Models\Order;
 use App\Models\OrderDish;
 use App\Models\Table;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Orders extends Component
+class OrderUpdate extends Component
 {
+
+    public $order;
+
     //tabla orderDish
     public $orderDetails;
 
@@ -39,9 +41,11 @@ class Orders extends Component
     //total del monto
     public $totalAmount;
 
-
-    public function mount()
+    // Montar el componente con el modelo de la orden
+    public function mount($order)
     {
+        $this->order = $order;
+
         // Actualiza los detalles del pedido
         $this->reload();
 
@@ -55,9 +59,7 @@ class Orders extends Component
         $this->totalAmount = $this->orderDetails->sum(function ($detail) {
             return $detail->quantity * $detail->dish->price;
         });
-
-        // Retornar la vista con los datos necesarios
-        return view('livewire.waitress.orders', [
+        return view('livewire.waitress.order-update', [
             'totalAmount' => $this->totalAmount,
         ]);
     }
@@ -71,29 +73,16 @@ class Orders extends Component
             'table_id' => 'required|exists:tables,id'
         ]);
 
-        // Buscar una orden pendiente para la mesa seleccionada
-        $order = Order::where('state', 'PENDIENTE')
-            ->where('table_id', $this->table_id)
-            ->first();
-
-        // Si no hay una orden pendiente para la mesa, crear una nueva orden
-        if (!$order) {
-            $order = Order::create([
-                'state' => 'PENDIENTE',
-                'table_id' => $this->table_id,
-                'user_id' => auth()->user()->id
-            ]);
-        }
-
         // Agregar el plato al pedido
         OrderDish::create([
-            'order_id' => $order->id,
+            'order_id' => $this->order->id,
             'dish_id' => $this->product_id,
             'quantity' => 1 // Puedes cambiar esto según la lógica de tu aplicación
         ]);
 
         // Recuperar los detalles de los platos asociados a esta orden
-        $this->orderDetails = OrderDish::where('order_id', $order->id)->with('dish')->get();
+        $this->orderDetails = OrderDish::where('order_id', $this->order->id)->with('dish')->get();
+        $this->reload();
 
         // Emitir un mensaje de éxito
         session()->flash('message', 'Pedido creado exitosamente.');
@@ -161,62 +150,6 @@ class Orders extends Component
         $this->reload();
     }
 
-    //para eliminar todo la orden
-    public function cancel()
-    {
-        // Obtener la orden pendiente
-        $order = Order::where('state', 'PENDIENTE')->where('user_id', auth()->user()->id)->latest()->first();
-
-        if ($order) {
-            // Eliminar todos los detalles de los pedidos asociados a esta orden
-            OrderDish::where('order_id', $order->id)->delete();
-
-            // Cancelar la orden
-            $order->delete();
-
-            // Emitir un mensaje de éxito
-            session()->flash('message', 'Pedidos cancelados correctamente.');
-        } else {
-            // Emitir un mensaje de error si no se encuentra la orden
-            session()->flash('message', 'No se encontró ninguna orden pendiente para esta mesa.');
-        }
-        // Actualizar los detalles del pedido
-        $this->reload();
-    }
-
-    //para pedir la orden a cocina y mandar a caja
-    public function order()
-    {
-        // Obtener la orden pendiente
-        $order = Order::where('state', 'PENDIENTE')->where('user_id', auth()->user()->id)->latest()->first();
-
-        if ($order) {
-            // Intentar actualizar el estado de la orden a "PEDIDO"
-            DB::beginTransaction();
-            try {
-                $order->update(['state' => 'PEDIDO']);
-
-                // Actualizar el estado de la mesa a "INACTIVO"
-                $table = Table::find($this->table_id);
-                $table->update(['state' => 'INACTIVO']);
-
-                DB::commit();
-
-                // Emitir un mensaje de éxito
-                session()->flash('message', 'Pedido generado correctamente.');
-            } catch (\Exception $e) {
-                DB::rollBack();
-                // Emitir un mensaje de error específico
-                session()->flash('message', 'Error al generar el pedido: ' . $e->getMessage());
-            }
-        } else {
-            // Emitir un mensaje si no se encuentra la orden
-            session()->flash('message', 'No se encontró ninguna orden pendiente para esta mesa.');
-        }
-        // Actualizar los detalles del pedido
-        $this->reload();
-    }
-
     public function filterProductsByCategory()
     {
         // Obtener el ID de la categoría seleccionada
@@ -237,7 +170,7 @@ class Orders extends Component
     //refrezcar los datos de los pedidos
     public function reload()
     {
-        $last_order = Order::where('state', 'PENDIENTE')->where('user_id', auth()->user()->id)->latest()->first();
+        $last_order = $this->order;
         $this->categories = Category::all();
         $this->products = Dish::all();
         $this->tables = Table::where('state', 'ACTIVO')->get();

@@ -58,7 +58,7 @@
                         <label for="" class="form-label">Mesa</label>
                         <div class="input-group">
                             <select wire:model="table_id" wire:click="updateTables" class="form-select">
-                                {{--<option value="" class="text-bg-dark">Seleccionar mesa</option>--}}
+                                {{-- <option value="" class="text-bg-dark">Seleccionar mesa</option> --}}
                                 @foreach ($tables as $table)
                                     <option value=" {{ $table->id }}" class="text-bg-dark">
                                         {{ $table->name }} - {{ $table->state }}
@@ -171,22 +171,6 @@
 
     <div class="col-12">
         <div class="d-flex justify-content-between mt-3">
-
-            @if ($orderDetails->isNotEmpty())
-                <div class="text-end">
-                    <button class="btn btn-success ms-1" wire:click="order()">Generar pedidos</button>
-                </div>
-            @endif
-
-
-            @if ($orderDetails->isNotEmpty())
-                <div class="text-end">
-                    <button class="btn btn-danger ms-1" wire:click="cancel()">Anular
-                        pedidos</button>
-                </div>
-            @endif
-
-
             <div class="d-flex align-items-center gap-2">
                 <label for="" class="">TOTAL: </label>
                 <input type="text" class="form-control" value="{{ $totalAmount }}">

@@ -17,6 +17,12 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    // Definir la relación con la mesa
+    public function table()
+    {
+        return $this->belongsTo(Table::class);
+    }
+
     // Definir la relación con OrderDish
     public function orderDishes()
     {

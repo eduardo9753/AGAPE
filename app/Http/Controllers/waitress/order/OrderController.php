@@ -30,7 +30,7 @@ class OrderController extends Controller
     //traendo los pedidos con AJAX para poder cobrarlos
     public function fetchOrders()
     {
-        $orders = Order::with(['customer', 'orderDishes'])->where('state', 'PEDIDO')->latest()->get();
+        $orders = Order::with(['orderDishes'])->where('state', 'PEDIDO')->latest()->get();
 
         $data = view('waitress.order.all-orders', [
             'orders' => $orders
@@ -42,10 +42,13 @@ class OrderController extends Controller
         ]);
     }
 
-    //para poder modificar el pedido del cliente
+    //para poder modificar el pedido del cliente "agregar mas platos"
     public function show(Order $order)
     {
-        return view('waitress.order.show');
+        //dd($order);
+        return view('waitress.order.show',[
+            'order' => $order
+        ]);
     }
 
     //para eliminar una orden 
@@ -53,8 +56,8 @@ class OrderController extends Controller
     {
         $table = Table::find($order->table_id);
         $table->update(['state' => 'ACTIVO']);
-        $customer = Customer::find($order->customer_id);
-        if ($customer->delete()) {
+       
+        if ($order->delete()) {
             return redirect()->route('waitress.order.list')->with('mensaje', '¡La orden se ha eliminado correctamente!');
         } else {
             return redirect()->route('waitress.order.list')->with('mensaje', '¡Orden no eliminada!');

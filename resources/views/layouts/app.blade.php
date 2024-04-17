@@ -78,7 +78,9 @@
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 
 <script src="{{ asset('js/cashier/all-orders.js') }}"></script>
+<script src="{{ asset('js/cashier/all-tables.js') }}"></script>
 
 <script src="{{ asset('js/waitress/all-orders.js') }}"></script>
+<script src="{{ asset('js/waitress/all-tables.js') }}"></script>
 
 </html>

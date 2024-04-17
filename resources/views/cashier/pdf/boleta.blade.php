@@ -98,7 +98,7 @@
             <img src="{{ asset('img/logo.png') }}" alt="Logo de la empresa">
         </div>
         <div class="header">
-            <h1>Factura de Venta</h1>
+            <h1>Boleta de Venta</h1>
         </div>
         <div class="address">
             <p><strong>Razón Social:</strong> Ágape Chicken & Grill</p>
@@ -106,7 +106,7 @@
             <p><strong>RUC: </strong> 20523287568 </p>
         </div>
         <div class="info">
-            <p><strong>Cliente:</strong> {{ $pay->order->customer->name }}</p>
+            <p><strong>Mesa:</strong> {{ $pay->order->table->name }}</p>
             <p><strong>Fecha:</strong>
                 {{ \Carbon\Carbon::parse($pay->payment_date)->formatLocalized('%d de %B de %Y') }}</p>
             <p><strong>Hora:</strong> {{ \Carbon\Carbon::parse($pay->payment_time)->format('h:i A') }}</p>
@@ -137,7 +137,7 @@
             <p><strong>Total Pagado:</strong> S/.{{ $totalAmount }}</p>
         </div>
         <div class="footer">
-            <p>Gracias por su compra - <strong>{{ $pay->order->customer->name }}</strong></p>
+            <p>Gracias por su compra - <strong>{{ $pay->order->table->name }}</strong></p>
         </div>
     </div>
 </body>

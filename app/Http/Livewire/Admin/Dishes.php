@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Category;
 use App\Models\Dish;
+use App\Models\Type;
 use Livewire\Component;
 
 class Dishes extends Component
@@ -12,17 +13,25 @@ class Dishes extends Component
     public $name;
     public $price;
     public $category_id;
+    public $type_id;
     public $photo;
     public $description;
 
     public $categories;
+    public $types;
 
     public $dishes;
 
     public function mount()
     {
+        //incializando categorias
         $firstCategory = Category::first();
         $this->category_id = $firstCategory ? $firstCategory->id : null;
+
+        //iniciando tipos
+        $firstType = Type::first();
+        $this->type_id = $firstType ? $firstType->id : null;
+
         $this->photo = 'https://cdn-icons-png.flaticon.com/512/5854/5854128.png';
         $this->dishes = Dish::all();
     }
@@ -30,6 +39,7 @@ class Dishes extends Component
     public function render()
     {
         $this->categories = Category::all();
+        $this->types = Type::all();
         return view('livewire.admin.dishes');
     }
 
@@ -38,7 +48,8 @@ class Dishes extends Component
         $this->validate([
             'name' => 'required',
             'price' => 'required',
-            'category_id' => 'required',
+            'category_id' => 'required', 
+            'type_id' => 'required',
             'photo' => 'required|url',
             'description' => 'required',
         ]);
@@ -47,6 +58,7 @@ class Dishes extends Component
             'name' => $this->name,
             'price' => $this->price,
             'category_id' => $this->category_id,
+            'type_id' => $this->type_id,
             'photo' => $this->photo,
             'description' => $this->description,
         ]);
@@ -62,6 +74,7 @@ class Dishes extends Component
         $this->name = $dishes->name;
         $this->price = $dishes->price;
         $this->category_id = $dishes->category_id;
+        $this->type_id = $dishes->type_id;
         $this->photo = $dishes->photo;
         $this->description = $dishes->description;
     }
@@ -72,6 +85,7 @@ class Dishes extends Component
             'name' => 'required',
             'price' => 'required',
             'category_id' => 'required',
+            'type_id' => 'required',
             'photo' => 'required|url',
             'description' => 'required',
         ]);
@@ -81,6 +95,7 @@ class Dishes extends Component
             'name' => $this->name,
             'price' => $this->price,
             'category_id' => $this->category_id,
+            'type_id' => $this->type_id,
             'photo' => $this->photo,
             'description' => $this->description,
         ]);

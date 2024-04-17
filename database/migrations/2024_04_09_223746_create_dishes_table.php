@@ -22,9 +22,11 @@ class CreateDishesTable extends Migration
 
             // Claves foráneas
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('type_id');
 
             // Restricciones de clave foránea
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->timestamps();
         });
     }

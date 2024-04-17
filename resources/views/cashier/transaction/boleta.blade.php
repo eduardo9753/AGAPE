@@ -36,7 +36,7 @@
                                         <a href="{{ route('cashier.order.index') }}" class="text-decoration-none">Cajera</a>
                                     </li>
                                     <li class="breadcrumb-item">Pagos</li>
-                                    <li class="breadcrumb-item text-light">Lista Pagos Facturas</li>
+                                    <li class="breadcrumb-item text-light">Lista Pagos Boletas</li>
                                 </ol>
                                 <!-- Breadcrumb end -->
                             </div>
@@ -66,7 +66,7 @@
                                                         <th>CREADO</th>
                                                         <th>TIPO</th>
                                                         <th>ESTADO</th>
-                                                        <th>CLIENTE</th>
+                                                        <th>MESA</th>
                                                         <th>PDF</th>
                                                     </tr>
                                                 </thead>
@@ -86,10 +86,10 @@
                                                             </td>
                                                             <td>{{ $pay->type_receipt }}</td>
                                                             <td>{{ $pay->order->state }}</td>
-                                                            <td>{{ $pay->order->customer->name }}</td>
+                                                            <td>{{ $pay->order->table->name }}</td>
                                                             <td>
                                                                 <a target="_blank" class="btn btn-outline-danger"
-                                                                    href="{{ route('cashier.pdf', ['pay' => $pay]) }}">PDF</a>
+                                                                    href="{{ route('cashier.pdf.boleta', ['pay' => $pay]) }}">PDF</a>
                                                             </td>
                                                         </tr>
                                                     @empty

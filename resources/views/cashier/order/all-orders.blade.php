@@ -4,11 +4,9 @@
             <div class="card mb-2">
                 <div class="card-header">
                     <h5 class="card-title text-primary">Pedido: #{{ $order->id }} </h5>
-                    <h5 class="card-title text-primary">Cliente: {{ $order->customer->name }}</h5>
-                    <h5 class="card-title text-primary">DNI/CI: {{ $order->customer->identity }}</h5>
+                    <h5 class="card-title text-primary">Mesa: #{{ $order->table->name }}</h5>
 
                     <div class="d-flex justify-content-between mt-2">
-
                         <a href="{{ route('cashier.order.list', ['order' => $order]) }}" class="btn btn-success"><span
                                 class="fs-3 icon-monetization_on"></span>
                         </a>

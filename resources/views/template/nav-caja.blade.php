@@ -13,7 +13,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cashier.pay.index') }}"> Pagos </a>
+                    <a class="nav-link" href="{{ route('cashier.table.index') }}"> Mesas </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('cashier.pay.index') }}"> Pagos Facturas</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('cashier.pay.boleta') }}"> Pagos Boletas</a>
                 </li>
             </ul>
         </div>
