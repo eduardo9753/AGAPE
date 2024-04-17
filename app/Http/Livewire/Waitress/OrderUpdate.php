@@ -46,7 +46,7 @@ class OrderUpdate extends Component
     {
         $this->order = $order;
         $this->tables = Table::find($this->order->table_id);
-        $this->table_id = $this->order->table_id;
+        $this->table_id = $this->tables->id;
 
         // Actualiza los detalles del pedido
         $this->reload();
