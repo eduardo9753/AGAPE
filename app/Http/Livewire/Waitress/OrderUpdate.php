@@ -171,7 +171,8 @@ class OrderUpdate extends Component
     public function reload()
     {
         $last_order = $this->order;
-        $this->categories = Category::all();
+        dd($last_order);
+        /*$this->categories = Category::all();
         $this->products = Dish::all();
         $this->tables = Table::find($last_order->table_id);
 
@@ -183,6 +184,6 @@ class OrderUpdate extends Component
             // Si no hay ningún pedido, inicializa las propiedades a un valor predeterminado o nulo
             $this->last_order = null;
             $this->orderDetails = collect(); // Puedes usar collect() para crear una colección vacía
-        }
+        }*/
     }
 }
