@@ -57,13 +57,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Mesa</label>
                         <div class="input-group">
-                            <select wire:model="table_id" class="form-select">
-                                @foreach ($tables as $table)
-                                    <option value="{{ $table->id }}" class="text-bg-dark">
-                                        {{ $table->name }} - {{ $table->state }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" wire:model="table_id">
                             <span class="input-group-text">
                                 <i class="icon-calendar"></i>
                             </span>
