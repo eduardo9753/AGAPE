@@ -42,7 +42,7 @@ class OrderUpdate extends Component
     public $totalAmount;
 
     // Montar el componente con el modelo de la orden
-    public function mount($order)
+    public function mount(Order $order)
     {
         $this->order = $order;
         $this->tables = Table::find($this->order->table_id);
