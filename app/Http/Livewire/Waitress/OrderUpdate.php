@@ -45,8 +45,7 @@ class OrderUpdate extends Component
     public function mount(Order $order)
     {
         $this->order = $order;
-        $this->tables = Table::find($this->order->table_id);
-        $this->table_id = $this->tables->id;
+        $this->tables = $order->table;
 
         // Actualiza los detalles del pedido
         $this->reload();
