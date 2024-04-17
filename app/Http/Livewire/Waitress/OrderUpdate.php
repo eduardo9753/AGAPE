@@ -184,9 +184,5 @@ class OrderUpdate extends Component
             $this->last_order = null;
             $this->orderDetails = collect(); // Puedes usar collect() para crear una colección vacía
         }
-
-        //inicializando primer id de la mesa
-        $firstTable = Table::where('state', 'ACTIVO')->first();
-        $this->table_id = $firstTable ? $firstTable->id : null;
     }
 }
