@@ -150,23 +150,6 @@ class OrderUpdate extends Component
         $this->reload();
     }
 
-    public function filterProductsByCategory()
-    {
-        // Obtener el ID de la categoría seleccionada
-        $categoryId = $this->category_id;
-
-        // Verificar si se seleccionó una categoría
-        if ($categoryId) {
-            // Obtener los productos correspondientes a la categoría seleccionada
-            $products = Dish::where('category_id', $categoryId)->get();
-        } else {
-            // Si no se seleccionó una categoría, obtener todos los productos
-            $products = Dish::all();
-        }
-        // Actualizar la propiedad $products con los productos filtrados
-        $this->products = $products;
-    }
-
     //refrezcar los datos de los pedidos
     public function reload()
     {
@@ -188,11 +171,5 @@ class OrderUpdate extends Component
         //inicializando primer id de la mesa
         $firstTable = Table::find($last_order->table_id);
         $this->table_id = $firstTable ? $firstTable->id : null;
-    }
-
-    //metodo para cuando le de click al select de mesas me jale los datos actualizados
-    public function updateTables()
-    {
-        $this->tables = Table::where('state', 'ACTIVO')->get();
     }
 }

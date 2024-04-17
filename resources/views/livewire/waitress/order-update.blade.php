@@ -58,11 +58,11 @@
                         <label for="" class="form-label">Mesa</label>
                         <div class="input-group">
                             <select wire:model="table_id" class="form-select">
-                                @if ($table)
+                                @foreach ($tables as $table)
                                     <option value="{{ $table->id }}" class="text-bg-dark">
                                         {{ $table->name }} - {{ $table->state }}
                                     </option>
-                                @endif
+                                @endforeach
                             </select>
                             <span class="input-group-text">
                                 <i class="icon-calendar"></i>
