@@ -57,13 +57,12 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Mesa</label>
                         <div class="input-group">
-                            <select wire:model="table_id" wire:click="updateTables" class="form-select">
-                                {{-- <option value="" class="text-bg-dark">Seleccionar mesa</option> --}}
-                                @foreach ($tables as $table)
-                                    <option value=" {{ $table->id }}" class="text-bg-dark">
+                            <select wire:model="table_id" class="form-select">
+                                @if ($table)
+                                    <option value="{{ $table->id }}" class="text-bg-dark">
                                         {{ $table->name }} - {{ $table->state }}
                                     </option>
-                                @endforeach
+                                @endif
                             </select>
                             <span class="input-group-text">
                                 <i class="icon-calendar"></i>

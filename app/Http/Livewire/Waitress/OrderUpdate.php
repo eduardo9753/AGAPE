@@ -173,7 +173,7 @@ class OrderUpdate extends Component
         $last_order = $this->order;
         $this->categories = Category::all();
         $this->products = Dish::all();
-        $this->tables = Table::where('state', 'ACTIVO')->get();
+        $this->tables = $last_order ? $last_order->table : null;
 
         //cuando hay un pedido en la base de datos
         if ($last_order) {
@@ -186,7 +186,7 @@ class OrderUpdate extends Component
         }
 
         //inicializando primer id de la mesa
-        $firstTable = Table::where('state', 'ACTIVO')->first();
+        $firstTable = Table::where('id', $this->table->id)->where('state', 'ACTIVO')->first();
         $this->table_id = $firstTable ? $firstTable->id : null;
     }
 
