@@ -45,6 +45,8 @@ class OrderUpdate extends Component
     public function mount($order)
     {
         $this->order = $order;
+        $this->tables = $this->order ? Table::find($this->order->table_id) : null;
+        $this->table_id = $this->order ? $this->tables->id : null;
 
         // Actualiza los detalles del pedido
         $this->reload();
@@ -174,8 +176,6 @@ class OrderUpdate extends Component
 
         $this->categories = Category::all();
         $this->products = Dish::all();
-        $this->tables = $last_order ? Table::find($last_order->table_id) : null;
-        $this->table_id = $last_order ? $this->tables->id : null;
 
         //cuando hay un pedido en la base de datos
         if ($last_order) {
