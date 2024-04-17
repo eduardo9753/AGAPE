@@ -150,29 +150,43 @@ class OrderUpdate extends Component
         $this->reload();
     }
 
+    public function filterProductsByCategory()
+    {
+        // Obtener el ID de la categoría seleccionada
+        $categoryId = $this->category_id;
+
+        // Verificar si se seleccionó una categoría
+        if ($categoryId) {
+            // Obtener los productos correspondientes a la categoría seleccionada
+            $products = Dish::where('category_id', $categoryId)->get();
+        } else {
+            // Si no se seleccionó una categoría, obtener todos los productos
+            $products = Dish::all();
+        }
+        // Actualizar la propiedad $products con los productos filtrados
+        $this->products = $products;
+    }
+
     //refrezcar los datos de los pedidos
     public function reload()
     {
         $last_order = $this->order;
         $this->categories = Category::all();
         $this->products = Dish::all();
+        $this->tables = Table::find($last_order->table_id);
 
-        // Verificar si existe una última orden
+        //cuando hay un pedido en la base de datos
         if ($last_order) {
-            $this->tables = Table::find($last_order->table_id);
-
             $this->last_order = $last_order;
             $this->orderDetails = OrderDish::where('order_id', $last_order->id)->with('dish')->get();
-
-            // Inicializar el primer id de la mesa solo si la última orden tiene una mesa asociada
-            $firstTable = Table::find($last_order->table_id);
-            $this->table_id = $firstTable ? $firstTable->id : null;
         } else {
-            // Si no hay una última orden, inicializar las propiedades relacionadas a null
+            // Si no hay ningún pedido, inicializa las propiedades a un valor predeterminado o nulo
             $this->last_order = null;
             $this->orderDetails = collect(); // Puedes usar collect() para crear una colección vacía
-            $this->tables = null;
-            $this->table_id = null;
         }
+
+        //inicializando primer id de la mesa
+        $firstTable = Table::where('state', 'ACTIVO')->first();
+        $this->table_id = $firstTable ? $firstTable->id : null;
     }
 }
