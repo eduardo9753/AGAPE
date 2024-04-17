@@ -156,20 +156,23 @@ class OrderUpdate extends Component
         $last_order = $this->order;
         $this->categories = Category::all();
         $this->products = Dish::all();
-        $this->tables = Table::find($last_order->table_id);
 
-        //cuando hay un pedido en la base de datos
+        // Verificar si existe una última orden
         if ($last_order) {
+            $this->tables = Table::find($last_order->table_id);
+
             $this->last_order = $last_order;
             $this->orderDetails = OrderDish::where('order_id', $last_order->id)->with('dish')->get();
+
+            // Inicializar el primer id de la mesa solo si la última orden tiene una mesa asociada
+            $firstTable = Table::find($last_order->table_id);
+            $this->table_id = $firstTable ? $firstTable->id : null;
         } else {
-            // Si no hay ningún pedido, inicializa las propiedades a un valor predeterminado o nulo
+            // Si no hay una última orden, inicializar las propiedades relacionadas a null
             $this->last_order = null;
             $this->orderDetails = collect(); // Puedes usar collect() para crear una colección vacía
+            $this->tables = null;
+            $this->table_id = null;
         }
-
-        //inicializando primer id de la mesa
-        $firstTable = Table::find($last_order->table_id);
-        $this->table_id = $firstTable ? $firstTable->id : null;
     }
 }
