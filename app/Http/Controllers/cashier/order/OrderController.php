@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Table;
+use Illuminate\Http\Client\ConnectionException as ClientConnectionException;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\Exception\ConnectionException;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -114,6 +118,49 @@ class OrderController extends Controller
             } else {
                 return redirect()->route('cashier.pay.boleta')->with('message', 'pago no procesado');
             }
+        }
+    }
+
+    //imprimir los datos de manera directa
+    public function print(Order $order)
+    {
+        try {
+            $table = Table::find($order->table_id);
+            $table->update(['state' => 'PRECUENTA']);
+
+            // Conecta a la impresora
+            $printerName = "CUENTA";
+            $connector = new WindowsPrintConnector($printerName);
+            $printer = new Printer($connector);
+
+            // Comandos de impresión
+            $printer->text("Mesa: " . $table->name . "\n");
+            $printer->text("---- Orden ----\n");
+
+            // Itera sobre los platos de la orden y agrega la información al ticket
+            foreach ($order->orderDishes as $detail) {
+                $printer->text($detail->dish->name . " x" . $detail->quantity . " $" . $detail->dish->price * $detail->quantity . "\n");
+            }
+
+            // Calcula el monto total a pagar
+            $totalAmount = $order->orderDishes->sum(function ($detail) {
+                return $detail->quantity * $detail->dish->price;
+            });
+
+            $printer->text("Total: $" . $totalAmount . "\n");
+            $printer->cut();
+
+            // Cierra la conexión
+            $printer->close();
+
+            // Redirecciona de vuelta a la página anterior
+            return back()->with('mensaje', 'Impresión enviada a la impresora.');
+        } catch (ClientConnectionException $e) {
+            // Captura la excepción de conexión
+            return "Error: No se pudo conectar a la impresora. Verifica que la impresora esté disponible y la ruta sea correcta.";
+        } catch (\Exception $e) {
+            // Captura cualquier otra excepción
+            return "Error: " . $e->getMessage();
         }
     }
 }

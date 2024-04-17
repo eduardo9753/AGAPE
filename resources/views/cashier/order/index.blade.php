@@ -45,6 +45,13 @@
 
                         <!-- Row start -->
                         <div class="row gx-2">
+                            @if (session()->has('mensaje'))
+                                <div class="alert border border-danger alert-dismissible fade show" role="alert">
+                                    <b>Aviso!</b>{{ session('mensaje') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
                             <input type="text" id="count_order" name="count_order" value="1" hidden>
                             <div class="col-sm-12" id="allOrders">
                             </div>

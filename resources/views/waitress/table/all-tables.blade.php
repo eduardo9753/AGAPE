@@ -10,10 +10,11 @@
                     <h3 class="m-0 fw-semibold">{{ $table->name }}</h3>
                     @if ($table->state == 'ACTIVO')
                         <h6 class="badge bg-primary">{{ $table->state }}</h6>
-                    @else
+                    @elseif ($table->state == 'INACTIVO')
                         <h6 class="badge bg-danger">{{ $table->state }}</h6>
+                    @else
+                        <h6 class="badge bg-info">{{ $table->state }}</h6>
                     @endif
-
                 </div>
             </div>
         </div>
