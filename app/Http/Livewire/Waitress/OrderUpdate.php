@@ -70,7 +70,6 @@ class OrderUpdate extends Component
         // Validar que los campos obligatorios estén completos
         $this->validate([
             'product_id' => 'required|exists:dishes,id',
-            'table_id' => 'required|exists:tables,id'
         ]);
 
         // Agregar el plato al pedido
