@@ -174,7 +174,6 @@ class OrderUpdate extends Component
 
         $this->categories = Category::all();
         $this->products = Dish::all();
-
         $this->tables = Table::find($last_order->table_id);
     
         //cuando hay un pedido en la base de datos

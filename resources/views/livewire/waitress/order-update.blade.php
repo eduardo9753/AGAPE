@@ -58,7 +58,7 @@
                         <label for="" class="form-label">Mesa</label>
                         <div class="input-group">
                             <select wire:model="table_id" class="form-select">
-                                @foreach ($order->table as $table)
+                                @foreach ($tables as $table)
                                     <option value="{{ $table->id }}" class="text-bg-dark">
                                         {{ $table->name }} - {{ $table->state }}
                                     </option>
