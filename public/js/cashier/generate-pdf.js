@@ -10,6 +10,9 @@ $(function () {
             //variable formulario
             var form = this;
 
+            // Obtener el valor de order_id desde el campo oculto en el formulario
+            var orderId = $('#order_id').val();
+
             //metodo ajax
             $.ajax({
                 url: $(form).attr('action'), //lee la ruta del formulario
@@ -25,7 +28,7 @@ $(function () {
 
                 success: function (data) {
                     if (data.code == 1) {
-                        alert(data.msg);
+                        alert("id order: " + $orderId + data.msg);
                         //aqui podemos programar el print del pdf
                         //parametros para imprimir el pdf de origen
                         const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
