@@ -44,7 +44,7 @@ $(function () {
                             }
                         })
                             .catch(error => {
-                                alert('error: ' + error);
+                                alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
                             });
                     } else {
                         alert('no se actulizo la tabla');

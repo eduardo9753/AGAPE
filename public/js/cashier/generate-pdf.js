@@ -52,7 +52,7 @@ $(function () {
                             }
                         })
                             .catch(error => {
-                                alert('Error: ' + error);
+                                alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
                             });
 
                     } else {
