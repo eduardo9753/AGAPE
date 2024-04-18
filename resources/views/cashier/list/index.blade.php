@@ -50,6 +50,7 @@
                                 <form action="{{ route('cashier.table.update') }}" id="form-print-cashier" method="POST">
                                     @csrf
                                     <input type="text" name="table_id" value="{{ $order->table_id }}" hidden>
+                                    <input type="text" name="order_id" id="order_id" value="{{ $order->id }}" hidden>
                                     <button type="submit" class="btn btn-info">
                                         <span class="fs-3 icon-printer"></span>
                                     </button>
