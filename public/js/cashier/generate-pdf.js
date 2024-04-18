@@ -7,9 +7,6 @@ $(function () {
         $('#form-print-cashier').on('submit', function (e) {
             e.preventDefault(); //PARA TETENER EL RECARGE DE LA PAGINA
 
-            // Obtener el valor de order_id desde el campo oculto en el formulario
-            var orderId = $('#order_id').val();
-
             //variable formulario
             var form = this;
 
@@ -32,8 +29,8 @@ $(function () {
                         //aqui podemos programar el print del pdf
                         //parametros para imprimir el pdf de origen
                         //const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
-                        const urlPdf = "https://agape.familc.com/generar-pdf/17";
-                        const nombreImpresora = "CUENTA";
+                        const urlPdf = "https://agape.familc.com/generar-pdf/5";
+                        const nombreImpresora = "Microsoft Print to PDF";
                         const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
 
                         //peticion FETCH
@@ -51,11 +48,11 @@ $(function () {
                                     window.URL.revokeObjectURL(url);
                                 });
                             } else {
-                                alert('Error al descargar PDF: verifique la impresora esta compartida e instalada');
+                                alert('Error al descargar PDF');
                             }
                         })
                             .catch(error => {
-                                alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
+                                alert('Error: ' + error);
                             });
 
                     } else {
