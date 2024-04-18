@@ -10,9 +10,6 @@ $(function () {
             //variable formulario
             var form = this;
 
-            // Obtener el valor de order_id desde el campo oculto en el formulario
-            var orderId = $('#order_id').val();
-
             //metodo ajax
             $.ajax({
                 url: $(form).attr('action'), //lee la ruta del formulario
@@ -23,16 +20,17 @@ $(function () {
                 dataType: 'json',
 
                 beforeSend: function () {
+
                 },
 
                 success: function (data) {
                     if (data.code == 1) {
-                        alert("id order: " + orderId + data.msg);
+                        alert(data.msg);
                         //aqui podemos programar el print del pdf
                         //parametros para imprimir el pdf de origen
                         //const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
-                        const urlPdf = "https://agape.familc.com/generar-pdf/" + orderId;
-                        const nombreImpresora = "Microsoft Print to PDF";
+                        const urlPdf = "https://agape.familc.com/generar-pdf/17";
+                        const nombreImpresora = "CUENTA";
                         const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
 
                         //peticion FETCH
@@ -50,11 +48,11 @@ $(function () {
                                     window.URL.revokeObjectURL(url);
                                 });
                             } else {
-                                alert('Error al descargar PDF');
+                                alert('Error al descargar PDF: verifique la impresora esta compartida e instalada');
                             }
                         })
                             .catch(error => {
-                                alert('Error: ' + error);
+                                alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
                             });
 
                     } else {
