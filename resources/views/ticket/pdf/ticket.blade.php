@@ -2,40 +2,12 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
     <title>Boleta</title>
-    <style>
-        body {
-            font-family: monospace;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .bold {
-            font-weight: bold;
-        }
-
-        .underline {
-            text-decoration: underline;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 10px;
-        }
-
-        .table th,
-        .table td {
-            border: 1px solid #000;
-            padding: 5px;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="center bold underline">Boleta {{$order->id}}/div>
+    <div class="center bold underline">Boleta</div>
    
     <table class="table">
         <thead>
@@ -51,7 +23,7 @@
             
         </tbody>
     </table>
-    
+    <div class="bold">TOTAL: {{ $order->id }}</div>
 </body>
 
 </html>
