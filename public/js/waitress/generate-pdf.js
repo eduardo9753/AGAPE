@@ -28,10 +28,10 @@ $(function () {
                         alert(data.msg);
                         //aqui podemos programar el print del pdf
                         //parametros para imprimir el pdf de origen
-                        // https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf
-                        const nombrePdf = "https://agape.familc.com/cajera/generate/boleta/pdf/3";
+                        //const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
+                        const urlPdf = "https://agape.familc.com/generar-pdf/16";
                         const nombreImpresora = "Microsoft Print to PDF";
-                        const url = `http://localhost:8080/?nombrePdf=${nombrePdf}&impresora=${nombreImpresora}`;
+                        const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
 
                         //peticion FETCH
                         fetch(url).then(respuesta => {
