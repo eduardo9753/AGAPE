@@ -40,16 +40,7 @@ $(function () {
                         fetch(url).then(respuesta => {
                             if (respuesta.status === 200) {
                                 alert('datos impresos');
-                                // Descargar el PDF directamente
-                                respuesta.blob().then(blob => {
-                                    const url = window.URL.createObjectURL(blob);
-                                    const a = document.createElement('a');
-                                    a.href = url;
-                                    a.download = 'boleta.pdf';
-                                    document.body.appendChild(a);
-                                    a.click();
-                                    window.URL.revokeObjectURL(url);
-                                });
+                                
                             } else {
                                respuesta.json()
                                .then(mensaje => {
