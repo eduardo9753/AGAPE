@@ -48,7 +48,7 @@ $(function () {
                                     window.URL.revokeObjectURL(url);
                                 });
                             } else {
-                                alert('Error al descargar PDF');
+                                alert('Error al descargar PDF: verifique la impresora esta compartida e instalada');
                             }
                         })
                             .catch(error => {
