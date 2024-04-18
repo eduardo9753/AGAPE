@@ -39,9 +39,9 @@
                 <div class="card-footer">
                     <div class="text-center">
                         @if ($order->table->state == 'ACTIVO')
-                            <h6 class="p-2 bg-primary">{{ $order->table->state }}</h6>
+                            <h6 class="p-2 bg-primary">LIBRE</h6>
                         @elseif ($order->table->state == 'INACTIVO')
-                            <h6 class="p-2 bg-danger">{{ $order->table->state }}</h6>
+                            <h6 class="p-2 bg-danger">OCUPADO</h6>
                         @else
                             <h6 class="p-2 bg-info">{{ $order->table->state }}</h6>
                         @endif

@@ -58,7 +58,7 @@
                         <label for="" class="form-label">Mesa</label>
                         <div class="input-group">
                             <select wire:model="table_id" wire:click="updateTables" class="form-select">
-                                {{--<option value="" class="text-bg-dark">Seleccionar mesa</option>--}}
+                                {{-- <option value="" class="text-bg-dark">Seleccionar mesa</option> --}}
                                 @foreach ($tables as $table)
                                     <option value=" {{ $table->id }}" class="text-bg-dark">
                                         {{ $table->name }} - {{ $table->state }}
@@ -92,6 +92,12 @@
     <!-- Row start -->
     <div class="row">
         <div class="col-12">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between">
+                    <div>Items/Productos</div>
+                    <div>pedidos en <strong>{{ $name }}</strong></div>
+                </div>
+            </div>
             <div class="table-responsive w-100">
                 <table class="table table-striped table-bordered align-middle m-0">
                     <thead>

@@ -29,6 +29,7 @@ class Orders extends Component
 
     //id de la tabla "mesa"
     public $table_id;
+    public $name;
 
     //ide de la categoria
     public $category_id;
@@ -255,11 +256,22 @@ class Orders extends Component
         //inicializando primer id de la mesa
         $firstTable = Table::where('state', 'ACTIVO')->first();
         $this->table_id = $firstTable ? $firstTable->id : null;
+        $this->name =$firstTable ? $firstTable->name : null;
     }
 
     //metodo para cuando le de click al select de mesas me jale los datos actualizados
     public function updateTables()
     {
+        // Actualizar la lista de mesas activas
         $this->tables = Table::where('state', 'ACTIVO')->get();
+
+        // Buscar la mesa seleccionada
+        $selectedTable = Table::find($this->table_id);
+
+        // Verificar si se encontró la mesa seleccionada
+        if ($selectedTable) {
+            // Actualizar el nombre de la mesa seleccionada
+            $this->name = $selectedTable->name;
+        }
     }
 }
