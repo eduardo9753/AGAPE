@@ -37,15 +37,24 @@ $(function () {
                         fetch(url).then(respuesta => {
                             if (respuesta.status === 200) {
                                 alert('datos impresos');
-                            } else {
-                                respuesta.json().then(mensaje => {
-                                    alert(mensaje)
+                                // Descargar el PDF directamente
+                                respuesta.blob().then(blob => {
+                                    const url = window.URL.createObjectURL(blob);
+                                    const a = document.createElement('a');
+                                    a.href = url;
+                                    a.download = 'boleta.pdf';
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    window.URL.revokeObjectURL(url);
                                 });
+                            } else {
+                                alert('Error al descargar PDF');
                             }
                         })
                             .catch(error => {
                                 alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
                             });
+
                     } else {
                         alert('no se actulizo la tabla');
                     }
