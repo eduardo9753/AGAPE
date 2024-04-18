@@ -18,10 +18,8 @@ class TicketController extends Controller
         // Renderizar la vista Blade con los datos
         $pdf = $this->renderPdf('ticket.pdf.ticket', ['order' => $order]);
 
-        // Generar el PDF y devolver la respuesta con el tipo de contenido correcto
-        return response($pdf->output(), 200)
-            ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'inline; filename="boleta.pdf"');
+        // Generar el PDF y devolver la respuesta
+        return $pdf->stream('boleta.pdf');
     }
 
     protected function renderPdf($view, $data)
@@ -37,7 +35,7 @@ class TicketController extends Controller
 
         // (Opcional) Configurar opciones de Dompdf, como tamaño de página, orientación, etc.
         $dompdf->setPaper([0, 0, 130, 340], 'portrait');
-
+                         
         // Renderizar el PDF
         $dompdf->render();
 
