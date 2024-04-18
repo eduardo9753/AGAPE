@@ -11,7 +11,7 @@ $(function () {
     function fecthAllTables() {
         // /pedidos/public/cajera/tables/fecth  : EN LOCAL
         // /cajera/tables/fecth   : EN PRODUCCION
-        $.get('/cajera/tables/fecth', {}, function (data) {
+        $.get('/pedidos/public/cajera/tables/fecth', {}, function (data) {
             $('#allTablesCashier').html(data.result).fadeIn();
             //console.log('datos: ' + data.result);
         }, 'json');

@@ -163,4 +163,17 @@ class OrderController extends Controller
             return "Error: " . $e->getMessage();
         }
     }
+
+    //para actualizar la mesa e imprimir el ticket
+    public function update(Request $request)
+    {
+        $update = Table::find($request->table_id);
+        $save = $update->update(['state' => 'PRECUENTA']);
+        if ($save) {
+            return response()->json([
+                'code' => 1,
+                'msg' => 'MESA CON PRECUENTA ACTIVADA'
+            ]);
+        }
+    }
 }

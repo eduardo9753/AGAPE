@@ -14,14 +14,6 @@
                                     class="fs-3 icon-x-octagon"></span></button>
                         </form>
 
-                        <form action="{{ route('waitress.order.print', ['order' => $order]) }}" method="POST">
-                            @csrf
-                            <button class="btn btn-info">
-                                <span class="fs-3 icon-printer"></span>
-                            </button>
-                        </form>
-
-
                         <a href="{{ route('cashier.order.show', ['order' => $order]) }}" class="btn btn-success">
                             <span class="fs-3 icon-create"></span>
                         </a>

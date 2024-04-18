@@ -14,8 +14,8 @@ Route::get('/cajera/orders/fecth', [OrderController::class, 'fetchOrders'])->nam
 Route::get('/cajera/tables', [TableController::class, 'index'])->name('cashier.table.index');
 Route::get('/cajera/tables/fecth', [TableController::class, 'fetchTables'])->name('cashier.table.fetch');
 
-Route::post('/cajera/orders/print/{order}', [OrderController::class, 'print'])->name('cashier.order.print');
-
+//Route::post('/cajera/orders/print/{order}', [OrderController::class, 'print'])->name('cashier.order.print');
+Route::post('/cajera/orders/table/update', [OrderController::class, 'update'])->name('cashier.table.update');
 
 Route::get('/cajera/list/order/{order}', [OrderController::class, 'list'])->name('cashier.order.list');
 Route::post('/cajera/list/pay/order/{order}', [OrderController::class, 'pay'])->name('cashier.order.pay');

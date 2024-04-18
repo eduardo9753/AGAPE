@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>SysPedidos</title>
 
     <!-- Meta -->
@@ -79,8 +80,10 @@
 
 <script src="{{ asset('js/cashier/all-orders.js') }}"></script>
 <script src="{{ asset('js/cashier/all-tables.js') }}"></script>
+<script src="{{ asset('js/cashier/generate-pdf.js') }}"></script>
 
 <script src="{{ asset('js/waitress/all-orders.js') }}"></script>
 <script src="{{ asset('js/waitress/all-tables.js') }}"></script>
+<script src="{{ asset('js/waitress/generate-pdf.js') }}"></script>
 
 </html>

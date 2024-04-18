@@ -11,12 +11,12 @@
                                 class="fs-3 icon-monetization_on"></span>
                         </a>
 
-                        <form action="{{ route('cashier.order.print', ['order' => $order]) }}" method="POST">
+                        {{--<form action="{{ route('cashier.order.print', ['order' => $order]) }}" method="POST">
                             @csrf
                             <button class="btn btn-info">
                                 <span class="fs-3 icon-printer"></span>
                             </button>
-                        </form>
+                        </form>--}}
                     </div>
                 </div>
                 <div class="card-body">

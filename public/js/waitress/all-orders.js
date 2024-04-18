@@ -11,7 +11,7 @@ $(function () {
     function fecthAllOders() {
         // /pedidos/public/waitress/orders/fecth  : EN LOCAL
         // /waitress/orders/fecth   : EN PRODUCCION
-        $.get('/waitress/orders/fecth', {}, function (data) {
+        $.get('/pedidos/public/waitress/orders/fecth', {}, function (data) {
             $('#allWaitressOrders').html(data.result).fadeIn();
             //console.log('datos: ' + data.result);
         }, 'json');

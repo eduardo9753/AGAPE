@@ -10,7 +10,7 @@ Route::get('/waitress/orders', [OrderController::class, 'index'])->name('waitres
 Route::get('/waitress/orders/list', [OrderController::class , 'list'])->name('waitress.order.list');
 Route::get('/waitress/orders/fecth', [OrderController::class, 'fetchOrders'])->name('cashier.order.fetch');
 
-Route::post('/waitress/orders/print/{order}', [OrderController::class, 'print'])->name('waitress.order.print');
+Route::post('/waitress/orders/table/update', [OrderController::class, 'update'])->name('waitress.table.update');
 
 Route::get('/waitress/tables', [TableController::class, 'index'])->name('waitress.table.index');
 Route::get('/waitress/tables/fecth', [TableController::class, 'fetchTables'])->name('waitress.table.fetch');

@@ -68,46 +68,16 @@ class OrderController extends Controller
         }
     }
 
-    //imprimir los datos de manera directa
-    public function print(Order $order)
+    //para actualizar la mesa e imprimir el ticket
+    public function update(Request $request)
     {
-        try {
-            $table = Table::find($order->table_id);
-            $table->update(['state' => 'PRECUENTA']);
-
-            // Conecta a la impresora
-            $printerName = "CUENTA";
-            $connector = new WindowsPrintConnector($printerName);
-            $printer = new Printer($connector);
-
-            // Comandos de impresión
-            $printer->text("Mesa: " . $table->name . "\n");
-            $printer->text("---- Orden ----\n");
-
-            // Itera sobre los platos de la orden y agrega la información al ticket
-            foreach ($order->orderDishes as $detail) {
-                $printer->text($detail->dish->name . " x" . $detail->quantity . " $" . $detail->dish->price * $detail->quantity . "\n");
-            }
-
-            // Calcula el monto total a pagar
-            $totalAmount = $order->orderDishes->sum(function ($detail) {
-                return $detail->quantity * $detail->dish->price;
-            });
-
-            $printer->text("Total: $" . $totalAmount . "\n");
-            $printer->cut();
-
-            // Cierra la conexión
-            $printer->close();
-
-            // Redirecciona de vuelta a la página anterior
-            return back()->with('mensaje', 'Impresión enviada a la impresora.');
-        } catch (ClientConnectionException $e) {
-            // Captura la excepción de conexión
-            return "Error: No se pudo conectar a la impresora. Verifica que la impresora esté disponible y la ruta sea correcta.";
-        } catch (\Exception $e) {
-            // Captura cualquier otra excepción
-            return "Error: " . $e->getMessage();
+        $update = Table::find($request->table_id);
+        $save = $update->update(['state' => 'PRECUENTA']);
+        if ($save) {
+            return response()->json([
+                'code' => 1,
+                'msg' => 'MESA CON PRECUENTA ACTIVADA'
+            ]);
         }
     }
 }

@@ -45,6 +45,17 @@
 
                         <!-- Row start -->
                         <div class="row">
+
+                            <div class="col-xl-3 mb-3">
+                                <form action="{{ route('waitress.table.update') }}" id="form-print-waitress" method="POST">
+                                    @csrf
+                                    <input type="text" name="table_id" value="{{ $order->table_id }}" hidden>
+                                    <button type="submit" class="btn btn-info">
+                                        <span class="fs-3 icon-printer"></span>
+                                    </button>
+                                </form>
+                            </div>
+
                             <div class="col-xl-12">
                                 <div class="card mb-2">
                                     <div class="card-body">
