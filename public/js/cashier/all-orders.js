@@ -11,7 +11,7 @@ $(function () {
     function fecthAllOders() {
         // /pedidos/public/cajera/orders/fecth  : EN LOCAL
         // /cajera/orders/fecth   : EN PRODUCCION
-        $.get('/pedidos/public/cajera/orders/fecth', {}, function (data) {
+        $.get('/cajera/orders/fecth', {}, function (data) {
             $('#allOrders').html(data.result).fadeIn();
             //console.log('datos: ' + data.result);
         }, 'json');
