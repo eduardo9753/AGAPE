@@ -29,7 +29,7 @@ $(function () {
                         //aqui podemos programar el print del pdf
                         //parametros para imprimir el pdf de origen
                         //const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
-                        const urlPdf = "https://agape.familc.com/generar-pdf/1" + ".pdf";
+                        const urlPdf = "https://agape.familc.comgenerar-pdf/3";
                         const nombreImpresora = "Microsoft Print to PDF";
                         const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
 
