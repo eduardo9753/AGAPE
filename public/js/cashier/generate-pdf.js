@@ -29,23 +29,29 @@ $(function () {
                 success: function (data) {
                     if (data.code == 1) {
                         alert(data.msg);
-                        // Aquí podemos programar la impresión del PDF
-                        // Parámetros para imprimir el PDF de origen
-                        //const urlPdf = `https://agape.familc.com/generar-pdf/${orderId}`;
-                        const urlPdf = "https://agape.familc.com/cajera/generate/factura/pdf/4";
-                        const nombreImpresora = "Microsoft Print to PDF";
+                        //aqui podemos programar el print del pdf
+                        //parametros para imprimir el pdf de origen
+                        //const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
+                        const urlPdf = "https://agape.familc.com/generar-pdf/17";
+                        const nombreImpresora = "CUENTA";
                         const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
 
                         //peticion FETCH
                         fetch(url).then(respuesta => {
                             if (respuesta.status === 200) {
                                 alert('datos impresos');
-                                
+                                // Descargar el PDF directamente
+                                respuesta.blob().then(blob => {
+                                    const url = window.URL.createObjectURL(blob);
+                                    const a = document.createElement('a');
+                                    a.href = url;
+                                    a.download = 'boleta.pdf';
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    window.URL.revokeObjectURL(url);
+                                });
                             } else {
-                               respuesta.json()
-                               .then(mensaje => {
-                                  alert("Error: " + mensaje)
-                               })
+                                alert('Error al descargar PDF: verifique la impresora esta compartida e instalada');
                             }
                         })
                             .catch(error => {
