@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\auth\LoginController;
 use App\Http\Controllers\cashier\order\OrderController;
+use App\Http\Controllers\ticket\ticket\TicketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 /*Route::get('/', function () {
     return view('welcome');
 });*/
+
+
+//para imprimir ticket
+Route::get('/generar-pdf/{id}', [TicketController::class, 'generatePdf'])->name('pdf.generate');
 
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
