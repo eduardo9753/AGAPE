@@ -32,7 +32,7 @@ $(function () {
                         //aqui podemos programar el print del pdf
                         //parametros para imprimir el pdf de origen
                         //const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
-                        const urlPdf = `https://agape.familc.com/cajera/generate/factura/pdf/4`;
+                        const urlPdf = "https://agape.familc.com/cajera/generate/factura/pdf/4";
                         const nombreImpresora = "EPSON";
                         const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
 
@@ -40,7 +40,7 @@ $(function () {
                         fetch(url).then(respuesta => {
                             if (respuesta.status === 200) {
                                 alert('datos impresos');
-                                // Descargar el PDF directamente
+                                /* Descargar el PDF directamente
                                 respuesta.blob().then(blob => {
                                     const url = window.URL.createObjectURL(blob);
                                     const a = document.createElement('a');
@@ -49,7 +49,7 @@ $(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     window.URL.revokeObjectURL(url);
-                                });
+                                });*/
                             } else {
                                 alert('Error al descargar PDF: verifique la impresora esta compartida e instalada');
                             }
