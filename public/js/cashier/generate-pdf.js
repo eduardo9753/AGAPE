@@ -55,7 +55,7 @@ $(function () {
                             });*/
 
                         // Abrir la URL en la misma ventana del navegador
-                        window.location.href = urlPdf;
+                        window.open(urlPdf, '_self');
 
                     } else {
                         alert('no se actulizo la tabla');
