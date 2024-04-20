@@ -45,31 +45,23 @@
 
                         <!-- Row start -->
                         <div class="row">
+                            <div class="d-flex justify-content-between mb-3">
+                                <form action="{{ route('cashier.table.update') }}" id="form-print-cashier" method="POST">
+                                    @csrf
+                                    <input type="text" name="table_id" value="{{ $order->table_id }}" hidden>
+                                    <input type="text" name="order_id" id="order_id" value="{{ $order->id }}" hidden>
+                                    <button type="submit" class="btn btn-info">
+                                        <span class="fs-3 icon-printer"></span>
+                                    </button>
+                                </form>
 
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <form action="{{ route('cashier.table.update') }}" id="form-print-cashier"
-                                            method="POST">
-                                            @csrf
-                                            <input type="text" name="table_id" value="{{ $order->table_id }}" hidden>
-                                            <input type="text" name="order_id" id="order_id" value="{{ $order->id }}"
-                                                hidden>
-                                            <button type="submit" class="btn btn-info">
-                                                <span class="fs-3 icon-printer"></span>
-                                            </button>
-                                        </form>
-
-                                        <form id="form-print-cashier-kitchen">
-                                            <input type="text" name="table_id" value="{{ $order->table_id }}" hidden>
-                                            <input type="text" name="order_id" id="order_id" value="{{ $order->id }}"
-                                                hidden>
-                                            <button type="submit" class="btn btn-danger">
-                                                <span class="fs-3 icon-outdoor_grill"></span>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
+                                <form id="form-print-cashier-kitchen">
+                                    <input type="text" name="table_id" value="{{ $order->table_id }}" hidden>
+                                    <input type="text" name="order_id" id="order_id" value="{{ $order->id }}" hidden>
+                                    <button type="submit" class="btn btn-danger">
+                                        <span class="fs-3 icon-outdoor_grill"></span>
+                                    </button>
+                                </form>
                             </div>
 
                             <div class="col-xl-12">
