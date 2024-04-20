@@ -1,9 +1,9 @@
 $(function () {
 
-    setupEventHandlers();
+    precuentaImpresionVentanaActual();
 
     // Esta función se llama después de cargar los elementos dinámicos
-    function setupEventHandlers() {
+    function precuentaImpresionVentanaActual() {
         $('#form-print-cashier').on('submit', function (e) {
             e.preventDefault(); //PARA TETENER EL RECARGE DE LA PAGINA
 
@@ -54,7 +54,7 @@ $(function () {
                             .catch(error => {
                                 alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
                             });*/
-                        // Abrir la URL del PDF en una nueva ventana
+                        // Abrir la URL del PDF en la misma ventana del navegador
                         var nuevaVentana = window.open(urlPdf, 'self');
 
                         // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
@@ -67,6 +67,25 @@ $(function () {
                     }
                 }
             });
+        });
+    }
+
+    //funcion para abrir el pdf en la misma venta y mandar a imprimir
+    imprimirCocina();
+    function imprimirCocina() {
+        $('#form-print-cashier-kitchen').on('submit', function (e) {
+            e.preventDefault(); //PARA TETENER EL RECARGE DE LA PAGINA
+
+            // Obtener el valor de order_id
+            var orderId = $('#order_id').val();
+
+            const urlPdf = `https://agape.familc.com/generar-pdf/${orderId}`;
+            var nuevaVentana = window.open(urlPdf, 'self');
+
+            // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
+            nuevaVentana.onload = function () {
+                nuevaVentana.print();
+            };
         });
     }
 
