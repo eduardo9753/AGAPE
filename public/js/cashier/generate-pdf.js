@@ -23,16 +23,12 @@ $(function () {
                 dataType: 'json',
 
                 beforeSend: function () {
-
                 },
 
                 success: function (data) {
                     if (data.code == 1) {
                         alert(data.msg);
-                        //aqui podemos programar el print del pdf
-                        //parametros para imprimir el pdf de origen
-                        //const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
-                        const urlPdf = "https://agape.familc.com/cajera/generate/factura/pdf/4";
+                        const urlPdf = `https://agape.familc.com/generar-pdf/${orderId}`;
                         const nombreImpresora = "EPSON";
                         const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
 
@@ -58,13 +54,8 @@ $(function () {
                                 alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
                             });*/
 
-                        // Abrir una nueva ventana del navegador con el PDF generado
-                        const nuevaVentana = window.open(urlPdf, '_blank');
-                        // Una vez que la ventana se haya cargado completamente
-                        nuevaVentana.onload = function () {
-                            // Invocar el diálogo de impresión del navegador
-                            nuevaVentana.print();
-                        };
+                        // Abrir la URL en la misma ventana del navegador
+                        window.location.href = urlPdf;
 
                     } else {
                         alert('no se actulizo la tabla');
