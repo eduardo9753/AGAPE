@@ -54,14 +54,7 @@ $(function () {
                             .catch(error => {
                                 alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
                             });*/
-
-                        // Abrir una nueva ventana del navegador con el PDF generado
-                        const nuevaVentana = window.open(urlPdf, '_blank');
-                        // Una vez que la ventana se haya cargado completamente
-                        nuevaVentana.onload = function () {
-                            // Invocar el diálogo de impresión del navegador
-                            nuevaVentana.print();
-                        };
+                        window.open(urlPdf, '_self');
 
                     } else {
                         alert('no se actulizo la tabla');
