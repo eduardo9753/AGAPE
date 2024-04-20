@@ -36,11 +36,11 @@ $(function () {
                         const nombreImpresora = "EPSON";
                         const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
 
-                        //peticion FETCH
+                        /*peticion FETCH
                         fetch(url).then(respuesta => {
                             if (respuesta.status === 200) {
                                 alert('datos impresos');
-                                /* Descargar el PDF directamente
+                                // Descargar el PDF directamente
                                 respuesta.blob().then(blob => {
                                     const url = window.URL.createObjectURL(blob);
                                     const a = document.createElement('a');
@@ -49,14 +49,22 @@ $(function () {
                                     document.body.appendChild(a);
                                     a.click();
                                     window.URL.revokeObjectURL(url);
-                                });*/
+                                });
                             } else {
                                 alert('Error al descargar PDF: verifique la impresora esta compartida e instalada');
                             }
                         })
                             .catch(error => {
                                 alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
-                            });
+                            });*/
+
+                        // Abrir una nueva ventana del navegador con el PDF generado
+                        const nuevaVentana = window.open(urlPdf, '_blank');
+                        // Una vez que la ventana se haya cargado completamente
+                        nuevaVentana.onload = function () {
+                            // Invocar el diálogo de impresión del navegador
+                            nuevaVentana.print();
+                        };
 
                     } else {
                         alert('no se actulizo la tabla');
@@ -65,6 +73,9 @@ $(function () {
             });
         });
     }
+
+
+    //para abrir la impresio y mandar a imprimir
 
 
 });
