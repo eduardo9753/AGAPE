@@ -47,13 +47,11 @@ class TransactionController extends Controller
             'pay' => $pay,
             'totalAmount' => $totalAmount
         ]);
+        $pdfContent = $pdf->output();
 
-        return $pdf->stream();
-        //$pdfContent = $pdf->output();
-
-        /* Devolver la cadena de texto como respuesta
+        // Devolver la cadena de texto como respuesta
         return response($pdfContent, 200)
-            ->header('Content-Type', 'application/pdf');*/
+            ->header('Content-Type', 'application/pdf');
     }
 
     //PDF BOLETA
