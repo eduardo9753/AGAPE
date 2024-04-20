@@ -54,7 +54,13 @@ $(function () {
                             .catch(error => {
                                 alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
                             });*/
-                        window.open(urlPdf, '_self');
+                        // Abrir la URL del PDF en una nueva ventana
+                        var nuevaVentana = window.open(urlPdf, 'self');
+
+                        // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
+                        nuevaVentana.onload = function () {
+                            nuevaVentana.print();
+                        };
 
                     } else {
                         alert('no se actulizo la tabla');
