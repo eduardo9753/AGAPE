@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orden #{{ $pay->order->id }}</title>
+    <title>Orden #{{ $order->id }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -98,7 +98,7 @@
             <img src="{{ asset('img/logo.png') }}" alt="Logo de la empresa">
         </div>
         <div class="header">
-            <h1>>Orden #{{ $pay->order->id }}</h1>
+            <h1>>Orden #{{ $order->id }}</h1>
         </div>
         <div class="address">
             <p><strong>Razón Social:</strong> Ágape Chicken & Grill</p>
