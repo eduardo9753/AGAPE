@@ -115,9 +115,9 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Producto</th>
-                    <th>Precio Unitario</th>
-                    <th>Cantidad</th>
+                    <th>Produc</th>
+                    <th>Precio</th>
+                    <th>Cant</th>
                     <th>Total</th>
                 </tr>
             </thead>
