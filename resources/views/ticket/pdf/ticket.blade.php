@@ -40,9 +40,8 @@
 
         .table th,
         .table td {
-            padding: 2px; /* Padding más pequeño */
             border-bottom: 1px solid #ddd;
-            text-align: left;
+            text-align: right;
         }
 
         .table th {
