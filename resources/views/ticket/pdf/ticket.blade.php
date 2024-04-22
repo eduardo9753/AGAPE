@@ -59,8 +59,7 @@
         }
 
         .logo img {
-            width: 10px; /* Ajusta el ancho de la imagen al contenedor */
-            height: 10px;
+            width: 100%; /* Ajusta el ancho de la imagen al contenedor */
         }
     </style>
 </head>
@@ -68,7 +67,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            <img src="https://cdn-icons-png.flaticon.com/512/208/208052.png" alt="Logo de la empresa">
+            <img src="{{ asset('asserts/images/login.svg') }}" alt="Logo de la empresa">
         </div>
         <div class="header">
             <h6>Orden #{{ $order->id }}</h6>
