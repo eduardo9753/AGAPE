@@ -15,7 +15,7 @@
 
         .container {
             max-width: 400px;
-            margin: 20px auto;
+            margin: 5px auto;
             background-color: #fff;
             padding: 5px;
             border-radius: 10px;
@@ -24,7 +24,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .header h1 {
