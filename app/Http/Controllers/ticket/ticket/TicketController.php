@@ -14,9 +14,12 @@ class TicketController extends Controller
     {
         // Obtener los datos que quieres pasar a la vista
         $order = Order::find($id);
+        $totalAmount = $order->orderDishes->sum(function ($detail) {
+            return $detail->quantity * $detail->dish->price;
+        });
 
         // Renderizar la vista Blade con los datos
-        $pdf = $this->renderPdf('ticket.pdf.ticket', ['order' => $order]);
+        $pdf = $this->renderPdf('ticket.pdf.ticket', ['order' => $order, 'totalAmount' => $totalAmount]);
 
         // Generar el PDF y devolver la respuesta
         return $pdf->stream('boleta.pdf');
@@ -35,7 +38,7 @@ class TicketController extends Controller
 
         // (Opcional) Configurar opciones de Dompdf, como tamaño de página, orientación, etc.
         $dompdf->setPaper([0, 0, 150, 340], 'portrait');
-                         
+
         // Renderizar el PDF
         $dompdf->render();
 
