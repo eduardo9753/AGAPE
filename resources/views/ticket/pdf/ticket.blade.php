@@ -59,7 +59,8 @@
         }
 
         .logo img {
-            width: 100%; /* Ajusta el ancho de la imagen al contenedor */
+            width: 10px; /* Ajusta el ancho de la imagen al contenedor */
+            height: 10px;
         }
     </style>
 </head>
