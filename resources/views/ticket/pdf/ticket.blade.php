@@ -17,14 +17,14 @@
             max-width: 400px;
             margin: 20px auto;
             background-color: #fff;
-            padding: 20px;
+            padding: 5px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .header h1 {
