@@ -29,18 +29,18 @@
 
         .header h1 {
             color: #333;
-            font-size: 1.5em; /* Tamaño de fuente relativo */
+            font-size: 1.2em; /* Tamaño de fuente más pequeño */
             margin: 0;
         }
 
         .info h5 {
-            font-size: 1em; /* Tamaño de fuente relativo */
+            font-size: 0.8em; /* Tamaño de fuente más pequeño */
             margin: 5px 0;
         }
 
         .table th,
         .table td {
-            padding: 8px;
+            padding: 2px; /* Padding más pequeño */
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
