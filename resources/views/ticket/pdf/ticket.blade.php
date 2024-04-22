@@ -67,7 +67,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            <img src="{{ asset('img/logo.png') }}" alt="Logo de la empresa">
+            <img src="{{ asset('asserts/images/shape6.png') }}" alt="Logo de la empresa">
         </div>
         <div class="header">
             <h6>Orden #{{ $order->id }}</h6>
