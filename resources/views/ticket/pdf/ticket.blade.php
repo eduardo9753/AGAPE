@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orden #{{ $order->id }}</title>
-    {{--<style>
+    {{-- <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -89,7 +89,7 @@
         .address p {
             margin: 5px 0;
         }
-    </style>--}}
+    </style> --}}
 </head>
 
 <body>
@@ -101,43 +101,59 @@
             <h6>Orden #{{ $order->id }}</h6>
         </div>
         <div class="address">
-            <p><strong>Razón Social:</strong> Ágape Chicken & Grill</p>
-            <p><strong>Dirección: </strong> parque sinchi roc, Av. Universitaria 9311, Comas 15316</p>
-            <p><strong>RUC: </strong> 20523287568 </p>
+            <h5><strong>Razón Social:</strong> Ágape Chicken & Grill</h5>
+            <h5><strong>Dirección: </strong> parque sinchi roc, Av. Universitaria 9311, Comas 15316</h5>
+            <h5><strong>RUC: </strong> 20523287568 </h5>
         </div>
         <div class="info">
-            <p><strong>Mesa:</strong> {{ $order->table->name }}</p>
-            <p><strong>Fecha:</strong>
-                {{ \Carbon\Carbon::parse($order->payment_date)->formatLocalized('%d de %B de %Y') }}</p>
-            <p><strong>Hora:</strong> {{ \Carbon\Carbon::parse($order->payment_time)->format('h:i A') }}</p>
-            <p><strong>Número de Boleta:</strong> BOL-000{{ $order->id }}</p>
+            <h5><strong>Mesa:</strong> {{ $order->table->name }}</h5>
+            <h5><strong>Fecha:</strong>
+                {{ \Carbon\Carbon::parse($order->payment_date)->formatLocalized('%d de %B de %Y') }}</h5>
+            <h5><strong>Hora:</strong> {{ \Carbon\Carbon::parse($order->payment_time)->format('h:i A') }}</h5>
+            <h5><strong>Número de Boleta:</strong> BOL-000{{ $order->id }}</h5>
         </div>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Produc</th>
-                    <th>Precio</th>
-                    <th>Cant</th>
-                    <th>Total</th>
+                    <th>
+                        <h5>Produc</h5>
+                    </th>
+                    <th>
+                        <h5>Precio</h5>
+                    </th>
+                    <th>
+                        <h5>Cant</h5>
+                    </th>
+                    <th>
+                        <h5>Total</h5>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($order->orderDishes as $orderDish)
                     <tr>
-                        <td>{{ $orderDish->dish->name }}</td>
-                        <td>{{ $orderDish->dish->price }}</td>
-                        <td>{{ $orderDish->quantity }}</td>
-                        <td>{{ number_format($orderDish->dish->price * $orderDish->quantity, 2) }}</td>
+                        <td>
+                            <h5>{{ $orderDish->dish->name }}</h5>
+                        </td>
+                        <td>
+                            <h5>{{ $orderDish->dish->price }}</h5>
+                        </td>
+                        <td>
+                            <h5>{{ $orderDish->quantity }}</h5>
+                        </td>
+                        <td>
+                            <h5>{{ number_format($orderDish->dish->price * $orderDish->quantity, 2) }}</h5>
+                        </td>
                         <!-- Aquí se calcula el total -->
                     </tr>
                 @endforeach
             </tbody>
         </table>
         <div class="total">
-            <p><strong>Total Pagado:</strong> S/.{{ $totalAmount }}</p>
+            <h5><strong>Total Pagado:</strong> S/.{{ $totalAmount }}</h5>
         </div>
         <div class="footer">
-            <p>Gracias por su compra - <strong>{{ $order->table->name }}</strong></p>
+            <h5>Gracias por su compra - <strong>{{ $order->table->name }}</strong></h5>
         </div>
     </div>
 </body>
