@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orden #{{ $order->id }}</title>
-    {{-- <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -29,21 +29,13 @@
 
         .header h1 {
             color: #333;
-            font-size: 32px;
+            font-size: 1.5em; /* Tamaño de fuente relativo */
             margin: 0;
         }
 
-        .info {
-            margin-bottom: 20px;
-        }
-
-        .info p {
+        .info h5 {
+            font-size: 1em; /* Tamaño de fuente relativo */
             margin: 5px 0;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
         }
 
         .table th,
@@ -57,11 +49,6 @@
             background-color: #f2f2f2;
         }
 
-        .total {
-            margin-top: 20px;
-            text-align: right;
-        }
-
         .total p {
             margin: 5px 0;
             font-weight: bold;
@@ -73,23 +60,10 @@
             color: #777;
         }
 
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
         .logo img {
-            width: 150px;
+            width: 100%; /* Ajusta el ancho de la imagen al contenedor */
         }
-
-        .address {
-            margin-bottom: 20px;
-        }
-
-        .address p {
-            margin: 5px 0;
-        }
-    </style> --}}
+    </style>
 </head>
 
 <body>
