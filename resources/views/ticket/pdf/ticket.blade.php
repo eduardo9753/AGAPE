@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orden #{{ $order->id }}</title>
-    <style>
+    {{--<style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -89,7 +89,7 @@
         .address p {
             margin: 5px 0;
         }
-    </style>
+    </style>--}}
 </head>
 
 <body>
