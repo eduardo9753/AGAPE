@@ -73,7 +73,7 @@
             <h6>Orden #{{ $order->id }}</h6>
         </div>
         <div class="address">
-            <h6><strong>Razon Social:</strong> Ágape Chicken & Grill</h6>
+            <h4><strong>Razon Social:</strong> Ágape Chicken & Grill</h4>
             <h6><strong>Direccion: </strong> parque sinchi roc, Av. Universitaria 9311, Comas 15316</h6>
             <h6><strong>RUC: </strong> 20523287568 </h6>
         </div>
@@ -126,9 +126,9 @@
             @foreach ($order->orderDishes as $orderDish)
                 <li class="order-item">
                     <h6>{{ $orderDish->dish->name }}</h6>
-                    <p>Precio: {{ $orderDish->dish->price }}</p>
-                    <p>Cantidad: {{ $orderDish->quantity }}</p>
-                    <p>Total: {{ number_format($orderDish->dish->price * $orderDish->quantity, 2) }}</p>
+                    <h6><strong>Precio:</strong> S/.{{ $orderDish->dish->price }}</h6>
+                    <h6><strong>Cantidad:</strong> S/.{{$orderDish->quantity }}</h6>
+                    <h6><strong>Total:</strong> S/.{{ number_format($orderDish->dish->price * $orderDish->quantity, 2) }}</h6>
                 </li>
             @endforeach
         </ul>
