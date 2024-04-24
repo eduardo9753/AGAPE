@@ -4,8 +4,10 @@ namespace App\Http\Controllers\ticket\ticket;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDish;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class TicketController extends Controller
@@ -14,9 +16,12 @@ class TicketController extends Controller
     {
         // Obtener los datos que quieres pasar a la vista
         $order = Order::find($id);
-        $totalAmount = $order->orderDishes->sum(function ($detail) {
+        /*$totalAmount = $order->orderDishes->sum(function ($detail) {
             return $detail->quantity * $detail->dish->price;
-        });
+        });*/
+
+        $totalAmount = OrderDish::where('order_id', $id)->sum(DB::raw('quantity * (SELECT price FROM dishes WHERE id = order_dishes.dish_id)'));
+
 
         // Renderizar la vista Blade con los datos
         $pdf = $this->renderPdf('ticket.pdf.ticket', ['order' => $order, 'totalAmount' => $totalAmount]);
