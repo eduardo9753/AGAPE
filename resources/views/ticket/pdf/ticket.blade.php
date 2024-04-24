@@ -73,8 +73,8 @@
             <h6>Orden #{{ $order->id }}</h6>
         </div>
         <div class="address">
-            <h6><strong>Razón Social:</strong> Ágape Chicken & Grill</h6>
-            <h6><strong>Dirección: </strong> parque sinchi roc, Av. Universitaria 9311, Comas 15316</h6>
+            <h6><strong>Razon Social:</strong> Ágape Chicken & Grill</h6>
+            <h6><strong>Direccion: </strong> parque sinchi roc, Av. Universitaria 9311, Comas 15316</h6>
             <h6><strong>RUC: </strong> 20523287568 </h6>
         </div>
         <div class="info">
@@ -82,9 +82,9 @@
             <h6><strong>Fecha:</strong>
                 {{ \Carbon\Carbon::parse($order->payment_date)->formatLocalized('%d de %B de %Y') }}</h6>
             <h6><strong>Hora:</strong> {{ \Carbon\Carbon::parse($order->payment_time)->format('h:i A') }}</h6>
-            <h6><strong>Número de Boleta:</strong> BOL-000{{ $order->id }}</h6>
+            <h6><strong>Numero Bol:</strong> BOL-000{{ $order->id }}</h6>
         </div>
-        <table class="table">
+        {{--<table class="table">
             <thead>
                 <tr>
                     <th>
@@ -120,7 +120,19 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
+
+        <ul class="order-list">
+            @foreach ($order->orderDishes as $orderDish)
+                <li class="order-item">
+                    <h6>{{ $orderDish->dish->name }}</h6>
+                    <p>Precio: {{ $orderDish->dish->price }}</p>
+                    <p>Cantidad: {{ $orderDish->quantity }}</p>
+                    <p>Total: {{ number_format($orderDish->dish->price * $orderDish->quantity, 2) }}</p>
+                </li>
+            @endforeach
+        </ul>
+        
         <div class="total">
             <h6><strong>Total Pagado:</strong> S/.{{ $totalAmount }}</h6>
         </div>
