@@ -79,8 +79,11 @@ $(function () {
             // Obtener el valor de order_id
             var orderId = $('#order_id').val();
 
+            // Construir la URL del PDF
             const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
-            var nuevaVentana = window.open(urlPdf, 'self');
+
+            // Abrir una nueva ventana con la URL del PDF
+            var nuevaVentana = window.open(urlPdf, '_blank');
 
             // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
             nuevaVentana.onload = function () {
