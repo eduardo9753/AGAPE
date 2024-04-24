@@ -57,10 +57,15 @@ $(function () {
                         // Abrir una nueva ventana con la URL del PDF
                         var nuevaVentana = window.open(urlPdf, '_blank');
 
-                        // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
-                        nuevaVentana.onload = function () {
-                            nuevaVentana.print();
-                        };
+                        // Verificar si la ventana emergente fue bloqueada por el navegador
+                        if (nuevaVentana === null || typeof (nuevaVentana) === 'undefined') {
+                            alert('Tu navegador ha bloqueado la apertura de la ventana emergente. Por favor, permite ventanas emergentes para este sitio web.');
+                        } else {
+                            // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
+                            nuevaVentana.onload = function () {
+                                nuevaVentana.print();
+                            };
+                        }
 
                     } else {
                         alert('no se actulizo la tabla');
@@ -85,10 +90,15 @@ $(function () {
             // Abrir una nueva ventana con la URL del PDF
             var nuevaVentana = window.open(urlPdf, '_blank');
 
-            // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
-            nuevaVentana.onload = function () {
-                nuevaVentana.print();
-            };
+            // Verificar si la ventana emergente fue bloqueada por el navegador
+            if (nuevaVentana === null || typeof (nuevaVentana) === 'undefined') {
+                alert('Tu navegador ha bloqueado la apertura de la ventana emergente. Por favor, permite ventanas emergentes para este sitio web.');
+            } else {
+                // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
+                nuevaVentana.onload = function () {
+                    nuevaVentana.print();
+                };
+            }
         });
     }
 
