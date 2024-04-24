@@ -37,7 +37,7 @@ class TicketController extends Controller
         $dompdf->loadHtml($html);
 
         // (Opcional) Configurar opciones de Dompdf, como tamaño de página, orientación, etc.
-        $dompdf->setPaper([0, 0, 150, 1620], 'portrait');        
+        $dompdf->setPaper([0, 0, 150, 1400], 'portrait');        
         //$dompdf->setPaper([0, 0, 80, 0], 'portrait');
 
         // Renderizar el PDF
