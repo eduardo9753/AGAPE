@@ -72,7 +72,7 @@
 
         .footer {
             margin-top: 10px;
-            font-size: 10px;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -80,16 +80,17 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Ágape Chicken & Grill</h1>
-            <p>------------------------------------------------------</p>
+            <h1>Agape Chicken & Grill</h1>
+            <p>------------------------------------------------</p>
             <p>PEDIDO #{{ $order->id }}</p>
-            <p>------------------------------------------------------</p>
+            <p>------------------------------------------------</p>
         </div>
         <div class="info">
             <p>Domicilio:</p>
             <p>parque sinchi roc, Av. Universitaria 9311, Comas 15316</p>
             <p>hora: {{ \Carbon\Carbon::parse($order->payment_time)->format('h:i A') }}</p>
-            <p>------------------------------------------------------</p>
+            <p></p>
+            <p></p>
         </div>
         <div class="products">
             <p>Productos</p>
