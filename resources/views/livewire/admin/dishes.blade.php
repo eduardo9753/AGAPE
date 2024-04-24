@@ -16,7 +16,7 @@
                 <div class="col-md-2">
                     <div class="form-group my-2">
                         <label for="">Precio:</label>
-                        <input wire:model="price" type="number" class="form-control" placeholder="60.00">
+                        <input wire:model="price" type="text" class="form-control" placeholder="60.00">
                         @error('name')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -106,7 +106,7 @@
 
                 <div class="col-md-3">
                     <div class="form-group my-2">
-                        <label for="">Categoria:</label>
+                        <label for="">Tipo producto:</label>
                         <select wire:model="type_id" class="form-select">
                             @foreach ($categories as $category)
                                 <option class="text-bg-dark" value="{{ $category->id }}">{{ $category->name }}
