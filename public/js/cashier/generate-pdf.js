@@ -54,8 +54,8 @@ $(function () {
                             .catch(error => {
                                 alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
                             });*/
-                        // Abrir la URL del PDF en la misma ventana del navegador
-                        var nuevaVentana = window.open(urlPdf, 'self');
+                        // Abrir una nueva ventana con la URL del PDF
+                        var nuevaVentana = window.open(urlPdf, '_blank');
 
                         // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
                         nuevaVentana.onload = function () {
