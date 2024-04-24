@@ -79,7 +79,7 @@ $(function () {
             // Obtener el valor de order_id
             var orderId = $('#order_id').val();
 
-            const urlPdf = `https://agape.familc.com/generar-pdf/${orderId}`;
+            const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
             var nuevaVentana = window.open(urlPdf, 'self');
 
             // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
