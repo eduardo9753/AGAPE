@@ -15,6 +15,7 @@
         .container {
             margin: 0 auto;
             width: 80mm;
+            height: 100vh;
             /* Ancho del papel térmico */
             padding: 10px;
             text-align: center;
