@@ -29,43 +29,27 @@ $(function () {
                 success: function (data) {
                     if (data.code == 1) {
                         alert(data.msg);
-                        const urlPdf = `https://agape.familc.com/generar-pdf/${orderId}`;
-                        const nombreImpresora = "EPSON";
-                        const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
+                        // Construir la URL del PDF
+                        const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
 
-                        /*peticion FETCH
-                        fetch(url).then(respuesta => {
-                            if (respuesta.status === 200) {
-                                alert('datos impresos');
-                                // Descargar el PDF directamente
-                                respuesta.blob().then(blob => {
-                                    const url = window.URL.createObjectURL(blob);
-                                    const a = document.createElement('a');
-                                    a.href = url;
-                                    a.download = 'boleta.pdf';
-                                    document.body.appendChild(a);
-                                    a.click();
-                                    window.URL.revokeObjectURL(url);
-                                });
-                            } else {
-                                alert('Error al descargar PDF: verifique la impresora esta compartida e instalada');
-                            }
-                        })
-                            .catch(error => {
-                                alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
-                            });*/
-                        // Abrir una nueva ventana con la URL del PDF
-                        var nuevaVentana = window.open(urlPdf, '_blank');
+                        // Crear un nuevo objeto de tipo iframe
+                        var iframe = document.createElement('iframe');
+                        iframe.src = urlPdf;
+                        iframe.style.display = 'none';
 
-                        // Verificar si la ventana emergente fue bloqueada por el navegador
-                        if (nuevaVentana === null || typeof (nuevaVentana) === 'undefined') {
-                            alert('Tu navegador ha bloqueado la apertura de la ventana emergente. Por favor, permite ventanas emergentes para este sitio web.');
-                        } else {
-                            // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
-                            nuevaVentana.onload = function () {
-                                nuevaVentana.print();
-                            };
-                        }
+                        // Adjuntar el iframe al cuerpo del documento
+                        document.body.appendChild(iframe);
+
+                        // Esperar a que el iframe se haya cargado completamente
+                        iframe.onload = function () {
+                            // Llamar a la función de impresión del iframe
+                            iframe.contentWindow.print();
+                        };
+
+                        // Eliminar el iframe después de un tiempo de espera
+                        setTimeout(function () {
+                            document.body.removeChild(iframe);
+                        }, 10000); // Espera 10 segundos antes de eliminar el iframe (ajusta este valor según sea necesario)
 
                     } else {
                         alert('no se actulizo la tabla');
@@ -87,18 +71,24 @@ $(function () {
             // Construir la URL del PDF
             const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
 
-            // Abrir una nueva ventana con la URL del PDF
-            var nuevaVentana = window.open(urlPdf, '_blank');
+            // Crear un nuevo objeto de tipo iframe
+            var iframe = document.createElement('iframe');
+            iframe.src = urlPdf;
+            iframe.style.display = 'none';
 
-            // Verificar si la ventana emergente fue bloqueada por el navegador
-            if (nuevaVentana === null || typeof (nuevaVentana) === 'undefined') {
-                alert('Tu navegador ha bloqueado la apertura de la ventana emergente. Por favor, permite ventanas emergentes para este sitio web.');
-            } else {
-                // Una vez que la ventana se ha cargado completamente, invocar el diálogo de impresión
-                nuevaVentana.onload = function () {
-                    nuevaVentana.print();
-                };
-            }
+            // Adjuntar el iframe al cuerpo del documento
+            document.body.appendChild(iframe);
+
+            // Esperar a que el iframe se haya cargado completamente
+            iframe.onload = function () {
+                // Llamar a la función de impresión del iframe
+                iframe.contentWindow.print();
+            };
+
+            // Eliminar el iframe después de un tiempo de espera
+            setTimeout(function () {
+                document.body.removeChild(iframe);
+            }, 10000); // Espera 10 segundos antes de eliminar el iframe (ajusta este valor según sea necesario)
         });
     }
 

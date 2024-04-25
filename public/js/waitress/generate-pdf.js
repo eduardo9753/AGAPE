@@ -30,13 +30,12 @@ $(function () {
                     if (data.code == 1) {
                         alert(data.msg);
                         //aqui podemos programar el print del pdf
-                        //parametros para imprimir el pdf de origen
                         //const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
                         const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
                         const nombreImpresora = "EPSON";
                         const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
 
-                        //peticion FETCH
+                        /*peticion FETCH
                         fetch(url).then(respuesta => {
                             if (respuesta.status === 200) {
                                 alert('datos impresos');
@@ -56,7 +55,7 @@ $(function () {
                         })
                             .catch(error => {
                                 alert('El servidor de Impresión no se cuentra activado en este dispositivo: ' + error);
-                            });
+                            });*/
 
                     } else {
                         alert('no se actulizo la tabla');

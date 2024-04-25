@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\View;
 
 class TicketController extends Controller
 {
-    public function generatePdf($id)
+    //generacion de pdf con descarga automatica
+    /*public function generatePdf($id)
     {
         // Obtener los datos que quieres pasar a la vista
         $order = Order::find($id);
@@ -23,9 +25,9 @@ class TicketController extends Controller
 
         // Generar el PDF y devolver la respuesta
         return $pdf->stream('boleta.pdf');
-    }
+    }*/
 
-    protected function renderPdf($view, $data)
+    /*protected function renderPdf($view, $data)
     {
         // Crear una nueva instancia de Dompdf
         $dompdf = new Dompdf();
@@ -45,5 +47,24 @@ class TicketController extends Controller
 
         // Devolver el objeto Dompdf
         return $dompdf;
+    }*/
+
+    //NUEVA TIKETERA
+    public function generatePdf($id)
+    {
+        // Cargar la vista y renderizarla como una cadena de texto
+        $order = Order::find($id);
+        $totalAmount = $order->orderDishes->sum(function ($detail) {
+            return $detail->quantity * $detail->dish->price;
+        });
+        $pdf = PDF::loadView('ticket.pdf.orden', [
+            'order' => $order,
+            'totalAmount' => $totalAmount
+        ]);
+        $pdfContent = $pdf->output();
+
+        // Devolver la cadena de texto como respuesta
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf');
     }
 }
