@@ -3,6 +3,29 @@
         <div class="create-invoice-wrapper">
             <!-- Row start -->
             <div class="row">
+
+                <div class="col-md-3 col-12">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Mesa</label>
+                        <div class="input-group">
+                            <select wire:model="table_id" wire:click="updateTables" class="form-select">
+                                {{-- <option value="" class="text-bg-dark">Seleccionar mesa</option> --}}
+                                @foreach ($tables as $table)
+                                    <option value=" {{ $table->id }}" class="text-bg-dark">
+                                        {{ $table->name }} - {{ $table->state }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <span class="input-group-text">
+                                <i class="icon-calendar"></i>
+                            </span>
+                        </div>
+                        @error('table_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
                 <div class="col-md-3 col-12">
                     <div class="mb-3">
                         <label for="" class="form-label">Categorias</label>
@@ -50,31 +73,6 @@
                         @enderror
                     </div>
                 </div>
-
-
-
-                <div class="col-md-3 col-12">
-                    <div class="mb-3">
-                        <label for="" class="form-label">Mesa</label>
-                        <div class="input-group">
-                            <select wire:model="table_id" wire:click="updateTables" class="form-select">
-                                {{-- <option value="" class="text-bg-dark">Seleccionar mesa</option> --}}
-                                @foreach ($tables as $table)
-                                    <option value=" {{ $table->id }}" class="text-bg-dark">
-                                        {{ $table->name }} - {{ $table->state }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <span class="input-group-text">
-                                <i class="icon-calendar"></i>
-                            </span>
-                        </div>
-                        @error('table_id')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
 
                 <div class="col-sm-2 col-12">
                     <div class="mb-3">

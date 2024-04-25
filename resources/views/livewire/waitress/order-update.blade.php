@@ -3,6 +3,22 @@
         <div class="create-invoice-wrapper">
             <!-- Row start -->
             <div class="row">
+
+                <div class="col-md-3 col-12">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Mesa</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" wire:model="table_id">
+                            <span class="input-group-text">
+                                <i class="icon-calendar"></i>
+                            </span>
+                        </div>
+                        @error('table_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
                 <div class="col-md-3 col-12">
                     <div class="mb-3">
                         <label for="" class="form-label">Categorias</label>
@@ -24,7 +40,6 @@
                         @enderror
                     </div>
                 </div>
-
 
                 <div class="col-md-3 col-12">
                     <div class="mb-3">
@@ -50,24 +65,6 @@
                         @enderror
                     </div>
                 </div>
-
-
-
-                <div class="col-md-3 col-12">
-                    <div class="mb-3">
-                        <label for="" class="form-label">Mesa</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" wire:model="table_id">
-                            <span class="input-group-text">
-                                <i class="icon-calendar"></i>
-                            </span>
-                        </div>
-                        @error('table_id')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
 
                 <div class="col-sm-2 col-12">
                     <div class="mb-3">
