@@ -81,14 +81,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Agape Chicken & Grill</h1>
+            <h1>AGAPE CHICKEN & GRILL</h1>
             <p>------------------------------------------------</p>
             <p>PEDIDO #{{ $order->id }}</p>
             <p>------------------------------------------------</p>
         </div>
         <div class="info">
             <p>Domicilio:</p>
-            <p>parque sinchi roc, Av. Universitaria 9311, Comas 15316</p>
+            <p>parque sinchi roca, Av. Universitaria 9311, Comas 15316</p>
             <p>hora: {{ \Carbon\Carbon::parse($order->payment_time)->format('h:i A') }}</p>
             <p></p>
             <p></p>

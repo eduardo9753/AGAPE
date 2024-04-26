@@ -84,6 +84,9 @@
 
         <div class="header">
             <p>------------------------------------------------</p>
+            <p>AGAPE CHICKEN & GRILL
+            <p>------------------------------------------------</p>
+            <p>------------------------------------------------</p>
             <p>PEDIDO #{{ $order->id }}</p>
             <p>------------------------------------------------</p>
         </div>
@@ -92,32 +95,34 @@
             <p>hora: {{ \Carbon\Carbon::parse($order->payment_time)->format('h:i A') }}</p>
             <p>------------------------------------------------</p>
             <p>------------------------------------------------</p>
-            <p>parque sinchi roc, Av. Universitaria 9311, Comas 15316</p>
+            <p>parque sinchi roca, Av. Universitaria 9311, Comas 15316</p>
             <p>------------------------------------------------</p>
         </div>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
+                    <th>PRODUCTO|</th>
+                    <th>CANTIDA|</th>
+                    <th>PRECIO|</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($order->orderDishes as $orderDish)
                     <tr>
                         <td>{{ $orderDish->dish->name }}</td>
-                        <td>S/.{{ number_format($orderDish->dish->price, 2) }}</td>
                         <td>{{ $orderDish->quantity }}</td>
+                        <td>S/.{{ number_format($orderDish->dish->price, 2) }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
         <div class="total">
+            <p>------------------------------------------------</p>
             <p><strong>Total:</strong> S/.{{ number_format($totalAmount, 2) }}</p>
+            <p>------------------------------------------------</p>
         </div>
         <div class="footer">
-            <p>Gracias por su compra</p>
+            <p>GRACIAS POR SU COMPRA</p>
         </div>
     </div>
 </body>

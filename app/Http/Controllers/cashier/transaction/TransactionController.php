@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\cashier\transaction;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Transaction;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -13,11 +15,15 @@ class TransactionController extends Controller
     //lista de las ordenes pagadas tipo FACTURA
     public function index()
     {
+        $today = Carbon::today();
+
         $pays = Transaction::with('order')
             ->where('type_receipt', 'FACTURA')
             ->whereHas('order', function ($query) {
                 $query->whereNotNull('customer_id');
+                $query->where('state', 'COBRADO'); // Filtrar por estado 'COBRADO'
             })
+            ->whereDate('payment_date', $today)
             ->latest()
             ->get();
         return view('cashier.transaction.index', [
@@ -28,7 +34,15 @@ class TransactionController extends Controller
     //lista de las ordenes pagadas tipo boleta
     public function boleta()
     {
-        $pays = Transaction::with('order')->where('type_receipt', 'BOLETA')->latest()->get();
+        $today = Carbon::today();
+        $pays = Transaction::with('order')
+            ->where('type_receipt', 'BOLETA')
+            ->whereHas('order', function ($query) {
+                $query->where('state', 'COBRADO');
+            })
+            ->whereDate('payment_date', $today)
+            ->latest()
+            ->get();
         return view('cashier.transaction.boleta', [
             'pays' => $pays
         ]);
@@ -38,6 +52,10 @@ class TransactionController extends Controller
     //PDF DE LA FACTURA
     public function pdf(Transaction $pay)
     {
+        $order_id = $pay->order_id;
+        $update = Order::find($order_id);
+        $update->update(['state' => 'OCULTO']);
+
         // Cargar la vista y renderizarla como una cadena de texto
         $totalAmount = 0;
         $totalAmount = $pay->order->orderDishes->sum(function ($detail) {
@@ -57,6 +75,10 @@ class TransactionController extends Controller
     //PDF BOLETA
     public function pdfBoleta(Transaction $pay)
     {
+        $order_id = $pay->order_id;
+        $update = Order::find($order_id);
+        $update->update(['state' => 'OCULTO']);
+
         // Cargar la vista y renderizarla como una cadena de texto
         $totalAmount = 0;
         $totalAmount = $pay->order->orderDishes->sum(function ($detail) {

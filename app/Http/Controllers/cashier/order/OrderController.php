@@ -59,6 +59,7 @@ class OrderController extends Controller
     //para guardar el cobro si es factura o pedido de mesa
     public function pay(Order $order, Request $request)
     {
+        $order = Order::find($order->id);
         $totalAmount = 0;
         $totalAmount = $order->orderDishes->sum(function ($detail) {
             return $detail->quantity * $detail->dish->price;

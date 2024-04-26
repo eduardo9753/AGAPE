@@ -9,7 +9,7 @@
                         <label for="" class="form-label">Mesa</label>
                         <div class="input-group">
                             <select wire:model="table_id" wire:click="updateTables" class="form-select">
-                                {{-- <option value="" class="text-bg-dark">Seleccionar mesa</option> --}}
+                                <option value="" class="text-bg-dark">Seleccionar mesa</option>
                                 @foreach ($tables as $table)
                                     <option value=" {{ $table->id }}" class="text-bg-dark">
                                         {{ $table->name }} - {{ $table->state }}

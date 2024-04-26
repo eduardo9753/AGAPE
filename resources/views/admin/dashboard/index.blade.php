@@ -185,7 +185,6 @@
                                                     <div class="mb-4">
                                                         <h5>Monto total de hoy</h5>
                                                         <p class="mb-1">S/. {{ $transactionsAmount }}</p>
-                                                        <p class="m-0 text-light">3 mins ago</p>
                                                     </div>
                                                 </div>
                                             </div>

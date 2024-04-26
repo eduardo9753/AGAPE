@@ -67,6 +67,7 @@
                                                         <th>TIPO</th>
                                                         <th>ESTADO</th>
                                                         <th>MESA</th>
+                                                        <th>FECHA</th>
                                                         <th>PDF</th>
                                                     </tr>
                                                 </thead>
@@ -87,6 +88,7 @@
                                                             <td>{{ $pay->type_receipt }}</td>
                                                             <td>{{ $pay->order->state }}</td>
                                                             <td>{{ $pay->order->table->name }}</td>
+                                                            <td>{{ $pay->payment_date }}</td>
                                                             <td>
                                                                 <a target="_blank" class="btn btn-outline-danger"
                                                                     href="{{ route('cashier.pdf.boleta', ['pay' => $pay]) }}">PDF</a>

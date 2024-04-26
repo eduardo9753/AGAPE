@@ -63,11 +63,13 @@ class Orders extends Component
         ]);
     }
 
-    // Método para crear el pedido
+    // Método para platos a la orden
     public function create()
     {
         // Validar que los campos obligatorios estén completos
         $this->validate([
+            'table_id' => 'required|exists:tables,id',
+            'category_id' => 'required|exists:categories,id',
             'product_id' => 'required|exists:dishes,id',
             'table_id' => 'required|exists:tables,id'
         ]);
@@ -95,6 +97,8 @@ class Orders extends Component
 
         // Recuperar los detalles de los platos asociados a esta orden
         $this->orderDetails = OrderDish::where('order_id', $order->id)->with('dish')->get();
+        $this->category_id = null;
+        $this->product_id = null;
 
         // Emitir un mensaje de éxito
         session()->flash('message', 'Pedido creado exitosamente.');
@@ -190,29 +194,14 @@ class Orders extends Component
     {
         // Obtener la orden pendiente
         $order = Order::where('state', 'PENDIENTE')->where('user_id', auth()->user()->id)->latest()->first();
+        $update = $order->update(['state' => 'PEDIDO']);
 
-        if ($order) {
-            // Intentar actualizar el estado de la orden a "PEDIDO"
-            DB::beginTransaction();
-            try {
-                $order->update(['state' => 'PEDIDO']);
-
-                // Actualizar el estado de la mesa a "INACTIVO"
-                $table = Table::find($this->table_id);
-                $table->update(['state' => 'INACTIVO']);
-
-                DB::commit();
-
-                // Emitir un mensaje de éxito
-                session()->flash('message', 'Pedido generado correctamente.');
-            } catch (\Exception $e) {
-                DB::rollBack();
-                // Emitir un mensaje de error específico
-                session()->flash('message', 'Error al generar el pedido: ' . $e->getMessage());
-            }
+        if ($update) {
+            $tables = Table::find($this->table_id);
+            $tables->update(['state' => 'INACTIVO']);
+            session()->flash('message', 'Pedido generado correctamente.');
         } else {
-            // Emitir un mensaje si no se encuentra la orden
-            session()->flash('message', 'No se encontró ninguna orden pendiente para esta mesa.');
+            session()->flash('message', 'Error del pedido.');
         }
         // Actualizar los detalles del pedido
         $this->reload();
@@ -253,10 +242,10 @@ class Orders extends Component
             $this->orderDetails = collect(); // Puedes usar collect() para crear una colección vacía
         }
 
-        //inicializando primer id de la mesa
+        /*inicializando primer id de la mesa
         $firstTable = Table::where('state', 'ACTIVO')->first();
         $this->table_id = $firstTable ? $firstTable->id : null;
-        $this->name =$firstTable ? $firstTable->name : null;
+        $this->name =$firstTable ? $firstTable->name : null;*/
     }
 
     //metodo para cuando le de click al select de mesas me jale los datos actualizados
