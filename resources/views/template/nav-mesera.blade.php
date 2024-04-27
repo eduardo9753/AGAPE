@@ -17,7 +17,7 @@
                 </li>
 
                 <li class="nav-item">
-                    {{ auth()->user()->name }}
+                    <a class="nav-link" href="#"> {{ auth()->user()->name }} </a>
                 </li>
 
                 <li class="nav-item">
