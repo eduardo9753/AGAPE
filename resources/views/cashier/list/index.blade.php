@@ -370,10 +370,16 @@
                 }*/
 
                 // Calcular el vuelto
-                var vuelto = totalIngresado - totalAmount;
+                if(totalIngresado > totalAmount){
+                    var vuelto = totalIngresado - totalAmount;
+                    document.getElementById('vuelto').value = vuelto.toFixed(2);
+                } else {
+                    document.getElementById('vuelto').value = 0;
+                }
+               
 
                 // Actualizar el campo de entrada de "VUELTO" con el resultado
-                document.getElementById('vuelto').value = vuelto.toFixed(2);
+               // document.getElementById('vuelto').value = vuelto.toFixed(2);
             }
 
             // Asignar la función calcularVuelto a los eventos oninput de los campos de entrada de los montos
