@@ -62,9 +62,8 @@
                                 <div class="col-sm-4 col-6">
                                     <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
                                         <div class="position-relative shape-block">
-                                            <a href="{{ route('waitress.order.index', ['table' => $table]) }}"><img
-                                                    src="https://cdn-icons-png.flaticon.com/512/607/607008.png"
-                                                    class="img-fluid img-4x" alt="Bootstrap Themes" /></a>
+                                            <img src="https://cdn-icons-png.flaticon.com/512/607/607008.png"
+                                                class="img-fluid img-4x" alt="Bootstrap Themes" />
                                             <i class="icon-book-open"></i>
                                         </div>
                                         <div class="ms-2">
