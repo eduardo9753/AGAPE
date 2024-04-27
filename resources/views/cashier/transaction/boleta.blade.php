@@ -45,6 +45,7 @@
 
                         <!-- Row start -->
                         <div class="row">
+                            <a class="btn btn-info" href="">ACTUALIZAR</a>
                             <div class="col-xl-12">
                                 @if (session()->has('message'))
                                     <div class="alert border border-info alert-dismissible fade show" role="alert">
