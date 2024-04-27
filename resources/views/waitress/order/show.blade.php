@@ -33,7 +33,7 @@
                                 <ol class="breadcrumb mb-3">
                                     <li class="breadcrumb-item">
                                         <i class="icon-home lh-1"></i>
-                                        {{--<a href="{{ route('waitress.order.index') }}" class="text-decoration-none">Mesera</a>--}}
+                                        {{-- <a href="{{ route('waitress.order.index') }}" class="text-decoration-none">Mesera</a> --}}
                                     </li>
                                     <li class="breadcrumb-item">Pedidos</li>
                                     <li class="breadcrumb-item text-light">Editar Pedidos</li>
@@ -46,15 +46,19 @@
                         <!-- Row start -->
                         <div class="row">
 
-                            <div class="col-xl-3 mb-3">
+                            <div class="d-flex justify-content-between">
                                 <form action="{{ route('waitress.table.update') }}" id="form-print-waitress" method="POST">
                                     @csrf
                                     <input type="text" name="table_id" value="{{ $order->table_id }}" hidden>
                                     <input type="text" name="order_id" id="order_id" value="{{ $order->id }}" hidden>
                                     <button type="submit" class="btn btn-info">
-                                        <span class="fs-3 icon-printer"></span>
+                                        PRECUENTA
                                     </button>
                                 </form>
+
+                                <div>
+                                    <a href="{{ route('waitress.table.index') }}" class="btn btn-outline-warning">Mesas</a>
+                                </div>
                             </div>
 
                             <div class="col-xl-12">
