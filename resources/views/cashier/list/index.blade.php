@@ -353,7 +353,7 @@
                 totalIngresado = soles + (dolares * 3.77) + tarjeta;
 
                 // Verificar si algún monto ingresado es mayor que el monto total a pagar
-                if (totalIngresado > totalAmount) {
+                /*if (totalIngresado > totalAmount) {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'warning',
@@ -367,10 +367,10 @@
                     totalIngresado = 0; // Establecer el total ingresado a cero
                     document.getElementById('vuelto').value = 0;
                     return; // Detener la ejecución
-                }
+                }*/
 
                 // Calcular el vuelto
-                var vuelto = totalAmount - totalIngresado;
+                var vuelto = totalIngresado - totalAmount;
 
                 // Actualizar el campo de entrada de "VUELTO" con el resultado
                 document.getElementById('vuelto').value = vuelto.toFixed(2);

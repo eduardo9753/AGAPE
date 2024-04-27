@@ -55,7 +55,7 @@ $(function () {
                         // Eliminar el iframe después de un tiempo de espera
                         setTimeout(function () {
                             document.body.removeChild(iframe);
-                        }, 10000); // Espera 10 segundos antes de eliminar el iframe (ajusta este valor según sea necesario)
+                        }, 10000);// Espera 10 segundos antes de eliminar el iframe (ajusta este valor según sea necesario)
 
                     } else {
                         Swal.fire({
