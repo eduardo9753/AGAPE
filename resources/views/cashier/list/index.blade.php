@@ -267,28 +267,32 @@
                                                 </div>
                                             </div>
 
-                                            {{-- PARA CALCULAR LOS VUELTOS --}}
-                                            <div class="input-group mt-4">
-                                                <span class="input-group-text" id="basic-addon1">S/.</span>
-                                                <input id="soles" type="text" class="form-control"
-                                                    placeholder="SOLES">
-                                            </div>
-                                            <div class="input-group mt-1">
-                                                <span class="input-group-text" id="basic-addon1">$/.</span>
-                                                <input id="dolares" type="text" class="form-control"
-                                                    placeholder="DOLARES">
-                                            </div>
-                                            <div class="input-group mt-1">
-                                                <span class="input-group-text" id="basic-addon1">VISA</span>
-                                                <input id="tarjeta" type="text" class="form-control"
-                                                    placeholder="TARJETA">
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                                                    {{-- PARA CALCULAR LOS VUELTOS --}}
+                                                    <div class="input-group mt-4">
+                                                        <span class="input-group-text" id="basic-addon1">S/.</span>
+                                                        <input id="soles" type="text" class="form-control"
+                                                            placeholder="SOLES">
+                                                    </div>
+                                                    <div class="input-group mt-1">
+                                                        <span class="input-group-text" id="basic-addon2">$/.</span>
+                                                        <input id="dolares" type="text" class="form-control"
+                                                            placeholder="DOLARES">
+                                                    </div>
+                                                    <div class="input-group mt-1">
+                                                        <span class="input-group-text" id="basic-addon3">VISA</span>
+                                                        <input id="tarjeta" type="text" class="form-control"
+                                                            placeholder="TARJETA">
+                                                    </div>
+                                                    <div class="input-group mt-1">
+                                                        <span class="input-group-text" id="basic-addon4">VUELTO</span>
+                                                        <input id="vuelto" type="text" class="form-control"
+                                                            placeholder="VUELTO" readonly>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="input-group mt-1">
-                                                <span class="input-group-text" id="basic-addon1">VUELTO</span>
-                                                <input id="vuelto" type="text" class="form-control"
-                                                    placeholder="VUELTO" readonly>
-                                            </div>
 
                                         </div>
                                     </div>
@@ -370,16 +374,16 @@
                 }*/
 
                 // Calcular el vuelto
-                if(totalIngresado > totalAmount){
+                if (totalIngresado > totalAmount) {
                     var vuelto = totalIngresado - totalAmount;
                     document.getElementById('vuelto').value = vuelto.toFixed(2);
                 } else {
                     document.getElementById('vuelto').value = 0;
                 }
-               
+
 
                 // Actualizar el campo de entrada de "VUELTO" con el resultado
-               // document.getElementById('vuelto').value = vuelto.toFixed(2);
+                // document.getElementById('vuelto').value = vuelto.toFixed(2);
             }
 
             // Asignar la función calcularVuelto a los eventos oninput de los campos de entrada de los montos
