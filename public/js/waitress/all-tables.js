@@ -2,7 +2,7 @@ $(function () {
 
     count_order = $('#count_table_waitress').val();
     if(count_order >= 1){ setInterval(contador,1000); }
-    function contador(){ fecthAllTables(); console.log('mesas');}
+    function contador(){ fecthAllTables(); /*console.log('mesas')*/;}
     
 
     //FECTH DE PRODUCTOS EN LA TABLA 

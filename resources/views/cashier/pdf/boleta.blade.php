@@ -98,7 +98,7 @@
             <img src="{{ asset('img/logo.png') }}" alt="Logo de la empresa">
         </div>
         <div class="header">
-            <h1>Boleta de Venta</h1>
+            <h1></h1>
         </div>
         <div class="address">
             <p><strong>Razón Social:</strong> Ágape Chicken & Grill</p>

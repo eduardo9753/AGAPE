@@ -20,9 +20,11 @@ class OrderController extends Controller
     }
 
     //PARA TOMAR LA ORDEN DEL CLIENTE
-    public function index()
+    public function index(Table $table)
     {
-        return view('waitress.order.index');
+        return view('waitress.order.index', [
+            'table' => $table
+        ]);
     }
 
     //lista de ordenes de la cajera
@@ -62,9 +64,9 @@ class OrderController extends Controller
         $table->update(['state' => 'ACTIVO']);
 
         if ($order->delete()) {
-            return redirect()->route('waitress.order.list')->with('mensaje', '¡La orden se ha eliminado correctamente!');
+            return redirect()->route('waitress.table.index')->with('mensaje', '¡La orden se ha eliminado correctamente!');
         } else {
-            return redirect()->route('waitress.order.list')->with('mensaje', '¡Orden no eliminada!');
+            return redirect()->route('waitress.table.index')->with('mensaje', '¡Orden no eliminada!');
         }
     }
 

@@ -44,10 +44,48 @@
                         <!-- Row end -->
 
                         <!-- Row start -->
+                        <a class="btn btn-info" href="">ACTUALIZAR</a>
+                        <a href="{{ route('waitress.table.index') }}" class="btn btn-outline-warning">Mesas</a>
+                        <a href="{{ route('waitress.order.list') }}" class="btn btn-outline-primary">Tus Ordenes</a>
                         <div class="row gx-2">
-                            <input type="text" id="count_table_waitress" name="count_table_waitress" value="1" hidden>
-                            <div class="col-sm-12" id="allTablesWaitress">
-                            </div>
+                            @if (session()->has('mensaje'))
+                                <div class="alert border border-danger alert-dismissible fade show" role="alert">
+                                    <b>Aviso!</b>{{ session('mensaje') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+                            <input type="text" id="count_table_waitress" name="count_table_waitress" value="1"
+                                hidden>
+
+                            @foreach ($tables as $table)
+                                <div class="col-sm-4 col-6">
+                                    <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
+                                        <div class="position-relative shape-block">
+                                            <a href="{{ route('waitress.order.index', ['table' => $table]) }}"><img
+                                                    src="https://cdn-icons-png.flaticon.com/512/607/607008.png"
+                                                    class="img-fluid img-4x" alt="Bootstrap Themes" /></a>
+                                            <i class="icon-book-open"></i>
+                                        </div>
+                                        <div class="ms-2">
+                                            <h3 class="m-0 fw-semibold">{{ $table->name }}</h3>
+                                            @if ($table->state == 'ACTIVO')
+                                                <a href="{{ route('waitress.order.index', ['table' => $table]) }}">
+                                                    <button class="btn btn-primary btn-sm">LIBRE</button>
+                                                </a>
+                                            @elseif ($table->state == 'INACTIVO')
+                                                <button class="btn btn-danger btn-sm">OCUPADO</button>
+                                            @else
+                                                <button class="btn btn-info btn-sm">CON {{ $table->state }}</button>
+                                            @endif
+                                        </div>
+
+                                    </div>
+                                </div>
+                            @endforeach
+
+
+                            {{-- <div class="col-sm-12" id="allTablesWaitress"></div> --}}
                         </div>
                         <!-- Row end -->
 

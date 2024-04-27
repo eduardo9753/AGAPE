@@ -11,10 +11,10 @@
                   <!-- App brand starts -->
                   <div class="app-brand">
                       <a href="#" class="d-lg-block d-none">
-                          <img src="{{  asset('img/logo.png') }}" class="logo" alt="Bootstrap Gallery" />
+                          <img src="{{ asset('img/logo.png') }}" class="logo" alt="Bootstrap Gallery" />
                       </a>
                       <a href="#" class="d-lg-none d-md-block">
-                          <img src="{{  asset('img/logo.png') }}" class="logo" alt="Bootstrap Gallery" />
+                          <img src="{{ asset('img/logo.png') }}" class="logo" alt="Bootstrap Gallery" />
                       </a>
                   </div>
                   <!-- App brand ends -->
@@ -33,7 +33,7 @@
                       <!-- Search container end -->
 
 
-                      <div class="dropdown d-sm-block d-none">
+                      {{-- <div class="dropdown d-sm-block d-none">
                           <a class="dropdown-toggle d-flex p-3 position-relative" href="#!" role="button"
                               data-bs-toggle="dropdown" aria-expanded="false">
                               <i class="icon-mail fs-4 lh-1"></i>
@@ -83,20 +83,20 @@
                                   <a href="javascript:void(0)" class="btn btn-outline-primary">View all</a>
                               </div>
                           </div>
-                      </div>
+                      </div> --}}
                       <div class="dropdown ms-2">
                           <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!"
                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               <span class="d-none d-md-block">{{ auth()->user()->name }}</span>
-                              <img src="{{ asset('assets/images/user3.png') }}" class="img-3x m-2 me-0 rounded-5"
-                                  alt="Bootstrap Gallery" />
+                              <img src="https://cdn-icons-png.flaticon.com/512/3126/3126589.png"
+                                  class="img-3x m-2 me-0 rounded-5" alt="Bootstrap Gallery" />
                           </a>
                           <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">
-                              <a class="dropdown-item d-flex align-items-center py-2"><i
+                              {{--<a class="dropdown-item d-flex align-items-center py-2"><i
                                       class="icon-smile fs-4 me-3"></i>User
                                   Profile</a>
                               <a class="dropdown-item d-flex align-items-center py-2"><i
-                                      class="icon-settings fs-4 me-3"></i>Configuraciones</a>
+                                      class="icon-settings fs-4 me-3"></i>Configuraciones</a>--}}
 
                               <form action="{{ route('logout') }}" class="dropdown-item d-flex align-items-center py-2"
                                   method="POST">

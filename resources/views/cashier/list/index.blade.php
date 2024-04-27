@@ -46,20 +46,22 @@
                         <!-- Row start -->
                         <div class="row">
                             <div class="d-flex justify-content-between mb-3">
+                                {{-- FORM DE PRECUENTA --}}
                                 <form action="{{ route('cashier.table.update') }}" id="form-print-cashier" method="POST">
                                     @csrf
                                     <input type="text" name="table_id" value="{{ $order->table_id }}" hidden>
                                     <input type="text" name="order_id" id="order_id" value="{{ $order->id }}" hidden>
                                     <button type="submit" class="btn btn-info">
-                                        <span class="fs-3 icon-printer"></span>
+                                        PRECUENTA
                                     </button>
                                 </form>
 
+                                {{-- FORM DE MANDAR A COCINA --}}
                                 <form id="form-print-cashier-kitchen">
                                     <input type="text" name="table_id" value="{{ $order->table_id }}" hidden>
                                     <input type="text" name="order_id" id="order_id" value="{{ $order->id }}" hidden>
                                     <button type="submit" class="btn btn-danger">
-                                        <span class="fs-3 icon-outdoor_grill"></span>
+                                        COCINA
                                     </button>
                                 </form>
                             </div>
@@ -91,7 +93,7 @@
                                                                             value="option2"
                                                                             onclick="toggleFields(this.value)" />
                                                                         <label class="form-check-label"
-                                                                            for="inlineRadio2">OTRO</label>
+                                                                            for="inlineRadio2">INVITACIÓN</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -124,21 +126,6 @@
 
                                                         <div class="col-md-3 col-12">
                                                             <div class="mb-3">
-                                                                <label for="" class="form-label">TIPO</label>
-                                                                <div class="input-group">
-                                                                    <select class="form-select" name="type_receipt">
-                                                                        <option value="BOLETA" class="text-bg-dark">BOLETA
-                                                                        </option>
-                                                                    </select>
-                                                                    <span class="input-group-text">
-                                                                        <i class="icon-calendar"></i>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-3 col-12">
-                                                            <div class="mb-3">
                                                                 <label for="" class="form-label">METODO DE
                                                                     PAGO</label>
                                                                 <div class="input-group">
@@ -154,6 +141,15 @@
                                                                         </option>
                                                                         <option value="EFECTIVO" class="text-bg-dark">
                                                                             EFECTIVO
+                                                                        </option>
+                                                                        <option value="TUNKY" class="text-bg-dark">
+                                                                            TUNKY
+                                                                        </option>
+                                                                        <option value="AMEX" class="text-bg-dark">
+                                                                            AMEX
+                                                                        </option>
+                                                                        <option value="IZIPAY" class="text-bg-dark">
+                                                                            IZIPAY
                                                                         </option>
                                                                     </select>
                                                                     <span class="input-group-text">
@@ -270,6 +266,30 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            {{-- PARA CALCULAR LOS VUELTOS --}}
+                                            <div class="input-group mt-4">
+                                                <span class="input-group-text" id="basic-addon1">S/.</span>
+                                                <input id="soles" type="text" class="form-control"
+                                                    placeholder="SOLES">
+                                            </div>
+                                            <div class="input-group mt-1">
+                                                <span class="input-group-text" id="basic-addon1">$/.</span>
+                                                <input id="dolares" type="text" class="form-control"
+                                                    placeholder="DOLARES">
+                                            </div>
+                                            <div class="input-group mt-1">
+                                                <span class="input-group-text" id="basic-addon1">VISA</span>
+                                                <input id="tarjeta" type="text" class="form-control"
+                                                    placeholder="TARJETA">
+                                            </div>
+
+                                            <div class="input-group mt-1">
+                                                <span class="input-group-text" id="basic-addon1">VUELTO</span>
+                                                <input id="vuelto" type="text" class="form-control"
+                                                    placeholder="VUELTO" readonly>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -311,5 +331,58 @@
                 }
             }
         </script>
+
+        <script>
+            // Obtener el monto total de la compra
+            var totalAmount = {{ $totalAmount }};
+            var totalIngresado = 0;
+
+            // Función para calcular el vuelto
+            function calcularVuelto() {
+                // Obtener los valores de los campos de entrada de los montos
+                var soles = parseFloat(document.getElementById('soles').value);
+                var dolares = parseFloat(document.getElementById('dolares').value);
+                var tarjeta = parseFloat(document.getElementById('tarjeta').value);
+
+                // Verificar si los valores parseados son falsy y asignar cero en ese caso
+                soles = soles || 0;
+                dolares = dolares || 0;
+                tarjeta = tarjeta || 0;
+
+                // Calcular el monto total ingresado
+                totalIngresado = soles + (dolares * 3.77) + tarjeta;
+
+                // Verificar si algún monto ingresado es mayor que el monto total a pagar
+                if (totalIngresado > totalAmount) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: 'LA SUMA DE LOS CAMPOS ES DE ' + 'S/' + totalIngresado.toFixed(2) +
+                            '  Y ES MAYOR AL TOTAL: ' + 'S/' +
+                            totalAmount.toFixed(2),
+                        showConfirmButton: false,
+                        timer: 3500
+                    })
+
+                    totalIngresado = 0; // Establecer el total ingresado a cero
+                    document.getElementById('vuelto').value = 0;
+                    return; // Detener la ejecución
+                }
+
+                // Calcular el vuelto
+                var vuelto = totalAmount - totalIngresado;
+
+                // Actualizar el campo de entrada de "VUELTO" con el resultado
+                document.getElementById('vuelto').value = vuelto.toFixed(2);
+            }
+
+            // Asignar la función calcularVuelto a los eventos oninput de los campos de entrada de los montos
+            document.getElementById('soles').oninput = calcularVuelto;
+            document.getElementById('dolares').oninput = calcularVuelto;
+            document.getElementById('tarjeta').oninput = calcularVuelto;
+        </script>
+
+
+
     </body>
 @endsection

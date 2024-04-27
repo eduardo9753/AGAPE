@@ -33,7 +33,7 @@
                                 <ol class="breadcrumb mb-3">
                                     <li class="breadcrumb-item">
                                         <i class="icon-home lh-1"></i>
-                                        <a href="{{ route('waitress.order.index') }}" class="text-decoration-none">Mesera</a>
+                                        {{-- <a href="{{ route('waitress.order.index') }}" class="text-decoration-none">Mesera</a> --}}
                                     </li>
                                     <li class="breadcrumb-item">Pedidos</li>
                                     <li class="breadcrumb-item text-light">Lista de Pedidos</li>
@@ -44,6 +44,8 @@
                         <!-- Row end -->
 
                         <!-- Row start -->
+                        <a href="{{ route('waitress.table.index') }}" class="btn btn-outline-warning">Mesas</a>
+                        <a href="{{ route('waitress.order.list') }}" class="btn btn-outline-primary">Tus Ordenes</a>
                         <div class="row gx-2">
                             @if (session()->has('mensaje'))
                                 <div class="alert border border-danger alert-dismissible fade show" role="alert">

@@ -33,7 +33,7 @@
                                 <ol class="breadcrumb mb-3">
                                     <li class="breadcrumb-item">
                                         <i class="icon-home lh-1"></i>
-                                        <a href="{{ route('waitress.order.index') }}" class="text-decoration-none">Mesera</a>
+                                        {{--<a href="{{ route('waitress.order.index') }}" class="text-decoration-none">Mesera</a>--}}
                                     </li>
                                     <li class="breadcrumb-item">Pedidos</li>
                                     <li class="breadcrumb-item text-light">Crear Pedidos</li>
@@ -48,7 +48,7 @@
                             <div class="col-xl-12">
                                 <div class="card mb-2">
                                     <div class="card-body">
-                                        @livewire('waitress.orders', ['user' => auth()->user()], key(auth()->user()->id))
+                                        @livewire('waitress.orders', ['table' => $table], key(auth()->user()->id))
                                     </div>
                                 </div>
                             </div>

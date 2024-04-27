@@ -104,7 +104,7 @@ class OrderController extends Controller
             $payment = Transaction::create([
                 'amount' => $totalAmount,
                 'payment_method' => $request->payment_method,
-                'type_receipt' => $request->type_receipt,
+                'type_receipt' => 'BOLETA',
                 'payment_date' => date('Y-m-d'),
                 'payment_time' => date('H:i:s'),
                 'order_id' => $order->id,

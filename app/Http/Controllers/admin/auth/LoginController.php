@@ -37,7 +37,7 @@ class LoginController extends Controller
             } else if ($roles->contains('Cajera')) {
                 return redirect()->route('cashier.order.index');
             } else {
-                return redirect()->route('waitress.order.index');
+                return redirect()->route('waitress.table.index');
             }
         }
     }

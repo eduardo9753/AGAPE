@@ -17,7 +17,10 @@ class TableController extends Controller
 
     public function index()
     {
-        return view('cashier.table.index');
+        $tables = Table::all();
+        return view('cashier.table.index', [
+            'tables' => $tables
+        ]);
     }
 
 

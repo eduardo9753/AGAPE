@@ -28,7 +28,13 @@ $(function () {
 
                 success: function (data) {
                     if (data.code == 1) {
-                        alert(data.msg);
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: data.msg,
+                            showConfirmButton: false,
+                            timer: 3500
+                        })
                         //aqui podemos programar el print del pdf
                         //const urlPdf = "https://parzibyte.github.io/plugin-silent-pdf-print-examples/delgado.pdf";
                         const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
@@ -58,7 +64,13 @@ $(function () {
                             });*/
 
                     } else {
-                        alert('no se actulizo la tabla');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'no se actulizo la tabla',
+                            showConfirmButton: false,
+                            timer: 3500
+                        })
                     }
                 }
             });

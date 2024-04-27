@@ -31,6 +31,9 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/main.min.css') }}" />
 
+    <!--CSS SWEEALERT2-->
+    <link rel="stylesheet" href="{{ asset('lib/sweetalert2/sweetalert2.min.css') }}">
+
     <!-- *************
    ************ Vendor Css Files *************
   ************ -->
@@ -73,6 +76,8 @@
 <script src="{{ asset('assets/vendor/rating/raty.js') }}"></script>
 <script src="{{ asset('assets/vendor/rating/raty-custom.js') }}"></script>-->
 
+<!--JS SWEEALERT2-->
+<script src="{{ asset('lib/sweetalert2/sweetalert2.min.js') }}"></script>
 
 
 <!-- Custom JS files -->

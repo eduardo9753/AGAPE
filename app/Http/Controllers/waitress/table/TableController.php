@@ -17,7 +17,10 @@ class TableController extends Controller
 
     public function index()
     {
-        return view('waitress.table.index');
+        $tables = Table::all();
+        return view('waitress.table.index', [
+            'tables' => $tables
+        ]);
     }
 
 

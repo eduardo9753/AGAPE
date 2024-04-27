@@ -1,8 +1,8 @@
 $(function () {
 
     count_order = $('#count_order_waitress').val();
-    if(count_order >= 1){ setInterval(contador,1000); }
-    function contador(){ fecthAllOders(); console.log('mesera');}
+    if(count_order >= 1){ setInterval(contador,2000); }
+    function contador(){ fecthAllOders(); /*console.log('mesera')*/;}
     
 
     //FECTH DE PRODUCTOS EN LA TABLA 

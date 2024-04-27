@@ -4,14 +4,14 @@ $(function () {
 
     // Esta función se llama después de cargar los elementos dinámicos
     function precuentaImpresionVentanaActual() {
-        $('#form-print-cashier').on('submit', function (e) {
+        $('[id^="form-print-cashier"]').on('submit', function (e) {
             e.preventDefault(); //PARA TETENER EL RECARGE DE LA PAGINA
 
             //variable formulario
             var form = this;
 
             // Obtener el valor de order_id
-            var orderId = $('#order_id').val();
+            var orderId = $(form).find('input[name="order_id"]').val();
 
             //metodo ajax
             $.ajax({
@@ -28,7 +28,13 @@ $(function () {
 
                 success: function (data) {
                     if (data.code == 1) {
-                        alert(data.msg);
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: data.msg,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                         // Construir la URL del PDF
                         const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
 
@@ -52,7 +58,13 @@ $(function () {
                         }, 10000); // Espera 10 segundos antes de eliminar el iframe (ajusta este valor según sea necesario)
 
                     } else {
-                        alert('no se actulizo la tabla');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'no se actulizo la tabla',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     }
                 }
             });
@@ -62,11 +74,11 @@ $(function () {
     //funcion para abrir el pdf en la misma venta y mandar a imprimir
     imprimirCocina();
     function imprimirCocina() {
-        $('#form-print-cashier-kitchen').on('submit', function (e) {
+        $('[id^="form-print-cashier-kitchen"]').on('submit', function (e) {
             e.preventDefault(); //PARA TETENER EL RECARGE DE LA PAGINA
 
             // Obtener el valor de order_id
-            var orderId = $('#order_id').val();
+            var orderId = $(this).find('input[name="order_id"]').val();
 
             // Construir la URL del PDF
             const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;

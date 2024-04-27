@@ -15,9 +15,6 @@ class Orders extends Component
     //tabla orderDish
     public $orderDetails;
 
-    //tabla table
-    public $tables;
-
     //tabla categorias
     public $categories;
 
@@ -41,8 +38,11 @@ class Orders extends Component
     public $totalAmount;
 
 
-    public function mount()
+    public function mount(Table $table)
     {
+        $this->table_id = $table->id;
+        $this->name = $table->name;
+        
         // Actualiza los detalles del pedido
         $this->reload();
 
@@ -100,7 +100,7 @@ class Orders extends Component
         $this->category_id = null;
         $this->product_id = null;
 
-        // Emitir un mensaje de éxito
+        // direccionamos a las mesas
         session()->flash('message', 'Pedido creado exitosamente.');
     }
 
@@ -187,6 +187,7 @@ class Orders extends Component
         }
         // Actualizar los detalles del pedido
         $this->reload();
+        return redirect()->route('waitress.table.index');
     }
 
     //para pedir la orden a cocina y mandar a caja
@@ -199,12 +200,12 @@ class Orders extends Component
         if ($update) {
             $tables = Table::find($this->table_id);
             $tables->update(['state' => 'INACTIVO']);
-            session()->flash('message', 'Pedido generado correctamente.');
         } else {
             session()->flash('message', 'Error del pedido.');
         }
         // Actualizar los detalles del pedido
         $this->reload();
+        return redirect()->route('waitress.table.index');
     }
 
     public function filterProductsByCategory()
@@ -230,7 +231,6 @@ class Orders extends Component
         $last_order = Order::where('state', 'PENDIENTE')->where('user_id', auth()->user()->id)->latest()->first();
         $this->categories = Category::all();
         $this->products = Dish::all();
-        $this->tables = Table::where('state', 'ACTIVO')->get();
 
         //cuando hay un pedido en la base de datos
         if ($last_order) {
@@ -242,25 +242,5 @@ class Orders extends Component
             $this->orderDetails = collect(); // Puedes usar collect() para crear una colección vacía
         }
 
-        /*inicializando primer id de la mesa
-        $firstTable = Table::where('state', 'ACTIVO')->first();
-        $this->table_id = $firstTable ? $firstTable->id : null;
-        $this->name =$firstTable ? $firstTable->name : null;*/
-    }
-
-    //metodo para cuando le de click al select de mesas me jale los datos actualizados
-    public function updateTables()
-    {
-        // Actualizar la lista de mesas activas
-        $this->tables = Table::where('state', 'ACTIVO')->get();
-
-        // Buscar la mesa seleccionada
-        $selectedTable = Table::find($this->table_id);
-
-        // Verificar si se encontró la mesa seleccionada
-        if ($selectedTable) {
-            // Actualizar el nombre de la mesa seleccionada
-            $this->name = $selectedTable->name;
-        }
     }
 }
