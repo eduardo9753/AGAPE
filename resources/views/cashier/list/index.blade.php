@@ -124,32 +124,136 @@
                                                             <input type="hidden" name="is_factura" value="0">
                                                         </div>
 
-                                                        <div class="col-md-3 col-12">
+
+
+
+                                                    </div>
+                                                    <!-- Row end -->
+                                                </div>
+
+
+                                                <!-- Row start -->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="table-responsive w-100">
+                                                            <table
+                                                                class="table table-striped table-bordered align-middle m-0">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>
+                                                                            <div class="d-flex align-items-center">
+                                                                                <span
+                                                                                    class="icon-add_task me-2 fs-4"></span>
+                                                                                Plato
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="d-flex align-items-center">
+                                                                                <span
+                                                                                    class="icon-published_with_changes me-2 fs-4"></span>
+                                                                                Cantidad
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="d-flex align-items-center">
+                                                                                <span
+                                                                                    class="icon-playlist_add_check me-2 fs-4"></span>
+                                                                                Precio
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="d-flex align-items-center">
+                                                                                <span
+                                                                                    class="icon-calendar me-2 fs-4"></span>
+                                                                                Monto
+                                                                            </div>
+                                                                        </th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($order->orderDishes as $key => $detail)
+                                                                        <tr>
+                                                                            <td>{{ $key + 1 }}</td>
+                                                                            <td>
+                                                                                <input type="text" class="form-control"
+                                                                                    value="{{ $detail->dish->name }}">
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="text" class="form-control"
+                                                                                    value="{{ $detail->quantity }}">
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="text" class="form-control"
+                                                                                    value="{{ $detail->dish->price }}">
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="text" class="form-control"
+                                                                                    value="{{ $detail->quantity * $detail->dish->price }}">
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                            @if (session()->has('message'))
+                                                                <div class="alert alert-success mt-3">
+                                                                    {{ session('message') }}
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Row end -->
+
+                                                <div class="d-flex justify-content-between">
+                                                    <div class=" gap-2">
+                                                        <label for="" class="">TOTAL: </label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $totalAmount }}">
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        {{-- PARA CALCULAR LOS VUELTOS --}}
+                                                        <div class="input-group mt-4">
+                                                            <span class="input-group-text" id="basic-addon1">S/.</span>
+                                                            <input id="soles" type="text" class="form-control"
+                                                                placeholder="SOLES">
+                                                        </div>
+                                                        <div class="input-group mt-1">
+                                                            <span class="input-group-text" id="basic-addon2">$/.</span>
+                                                            <input id="dolares" type="text" class="form-control"
+                                                                placeholder="DOLARES">
+                                                        </div>
+                                                        <div class="input-group mt-1">
+                                                            <span class="input-group-text" id="basic-addon3">VISA</span>
+                                                            <input id="tarjeta" type="text" class="form-control"
+                                                                placeholder="TARJETA">
+                                                        </div>
+                                                        <div class="input-group mt-1">
+                                                            <span class="input-group-text" id="basic-addon4">VUELTO</span>
+                                                            <input id="vuelto" type="text" class="form-control"
+                                                                placeholder="VUELTO" readonly>
+                                                        </div>
+
+                                                        <div class="col-md-12 col-12">
                                                             <div class="mb-3">
-                                                                <label for="" class="form-label">METODO DE
-                                                                    PAGO</label>
                                                                 <div class="input-group">
                                                                     <select class="form-select" name="payment_method">
-                                                                        <option value="YAPE" class="text-bg-dark">
-                                                                            YAPE
+                                                                        <option value="YAPE" class="text-bg-dark">YAPE
                                                                         </option>
-                                                                        <option value="PLIN" class="text-bg-dark">
-                                                                            PLIN
+                                                                        <option value="PLIN" class="text-bg-dark">PLIN
                                                                         </option>
                                                                         <option value="TARJETA" class="text-bg-dark">
-                                                                            TARJETA
-                                                                        </option>
+                                                                            TARJETA</option>
                                                                         <option value="EFECTIVO" class="text-bg-dark">
-                                                                            EFECTIVO
+                                                                            EFECTIVO</option>
+                                                                        <option value="TUNKY" class="text-bg-dark">TUNKY
                                                                         </option>
-                                                                        <option value="TUNKY" class="text-bg-dark">
-                                                                            TUNKY
+                                                                        <option value="AMEX" class="text-bg-dark">AMEX
                                                                         </option>
-                                                                        <option value="AMEX" class="text-bg-dark">
-                                                                            AMEX
-                                                                        </option>
-                                                                        <option value="IZIPAY" class="text-bg-dark">
-                                                                            IZIPAY
+                                                                        <option value="IZIPAY" class="text-bg-dark">IZIPAY
                                                                         </option>
                                                                     </select>
                                                                     <span class="input-group-text">
@@ -159,11 +263,9 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-sm-3 col-12">
+                                                        <div class="col-sm-12 col-12">
                                                             <div class="mb-3">
                                                                 @if ($order->state == 'PEDIDO')
-                                                                    <label for=""
-                                                                        class="form-label">Transacción</label>
                                                                     <button type="submit"
                                                                         class="btn btn-primary w-100">Cobrar</button>
                                                                 @else
@@ -178,121 +280,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- Row end -->
                                                 </div>
+
                                             </form>
-
-                                            <!-- Row start -->
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="table-responsive w-100">
-                                                        <table class="table table-striped table-bordered align-middle m-0">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>
-                                                                        <div class="d-flex align-items-center">
-                                                                            <span class="icon-add_task me-2 fs-4"></span>
-                                                                            Plato
-                                                                        </div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="d-flex align-items-center">
-                                                                            <span
-                                                                                class="icon-published_with_changes me-2 fs-4"></span>
-                                                                            Cantidad
-                                                                        </div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="d-flex align-items-center">
-                                                                            <span
-                                                                                class="icon-playlist_add_check me-2 fs-4"></span>
-                                                                            Precio
-                                                                        </div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="d-flex align-items-center">
-                                                                            <span class="icon-calendar me-2 fs-4"></span>
-                                                                            Monto
-                                                                        </div>
-                                                                    </th>
-
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach ($order->orderDishes as $key => $detail)
-                                                                    <tr>
-                                                                        <td>{{ $key + 1 }}</td>
-                                                                        <td>
-                                                                            <input type="text" class="form-control"
-                                                                                value="{{ $detail->dish->name }}">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input type="text" class="form-control"
-                                                                                value="{{ $detail->quantity }}">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input type="text" class="form-control"
-                                                                                value="{{ $detail->dish->price }}">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input type="text" class="form-control"
-                                                                                value="{{ $detail->quantity * $detail->dish->price }}">
-                                                                        </td>
-
-                                                                    </tr>
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                        @if (session()->has('message'))
-                                                            <div class="alert alert-success mt-3">{{ session('message') }}
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Row end -->
-
-                                            <div class="col-12">
-                                                <div class="d-flex justify-content-between mt-3">
-                                                    <div class="text-end">
-
-                                                    </div>
-
-                                                    <div class="d-flex align-items-center gap-2">
-                                                        <label for="" class="">TOTAL: </label>
-                                                        <input type="text" class="form-control"
-                                                            value="{{ $totalAmount }}">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row justify-content-center">
-                                                <div class="col-md-6">
-                                                    {{-- PARA CALCULAR LOS VUELTOS --}}
-                                                    <div class="input-group mt-4">
-                                                        <span class="input-group-text" id="basic-addon1">S/.</span>
-                                                        <input id="soles" type="text" class="form-control"
-                                                            placeholder="SOLES">
-                                                    </div>
-                                                    <div class="input-group mt-1">
-                                                        <span class="input-group-text" id="basic-addon2">$/.</span>
-                                                        <input id="dolares" type="text" class="form-control"
-                                                            placeholder="DOLARES">
-                                                    </div>
-                                                    <div class="input-group mt-1">
-                                                        <span class="input-group-text" id="basic-addon3">VISA</span>
-                                                        <input id="tarjeta" type="text" class="form-control"
-                                                            placeholder="TARJETA">
-                                                    </div>
-                                                    <div class="input-group mt-1">
-                                                        <span class="input-group-text" id="basic-addon4">VUELTO</span>
-                                                        <input id="vuelto" type="text" class="form-control"
-                                                            placeholder="VUELTO" readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-
 
                                         </div>
                                     </div>

@@ -21,9 +21,10 @@ class DashboardController extends Controller
     {
         $users = User::all();
         $tables = Table::all();
+
         $ordersCount = DB::table('orders')
-            ->where('state', 'COBRADO')
-            ->whereDate('created_at', Carbon::today())
+            ->whereIn('state', ['COBRADO', 'OCULTO'])
+            ->whereBetween('created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()])
             ->count();
 
         $transactiopnCount = DB::table('transactions')

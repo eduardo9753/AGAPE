@@ -29,6 +29,7 @@
                         <select wire:model="state" class="form-select">
                             <option class="text-bg-dark" value="ACTIVO">ACTIVO</option>
                             <option class="text-bg-dark" value="INACTIVO">INACTIVO</option>
+                            <option class="text-bg-dark" value="PRECUENTA">PRECUENTA</option>
                         </select>
                     </div>
                 </div>
@@ -69,6 +70,7 @@
                         <select wire:model="state" class="form-select">
                             <option class="text-bg-dark" value="ACTIVO">ACTIVO</option>
                             <option class="text-bg-dark" value="INACTIVO">INACTIVO</option>
+                            <option class="text-bg-dark" value="PRECUENTA">PRECUENTA</option>
                         </select>
                     </div>
                 </div>

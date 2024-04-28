@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 //para imprimir ticket
 Route::get('/generar-pdf/{id}', [TicketController::class, 'generatePdf'])->name('pdf.generate');
+Route::get('/generar-pdf/comanda/{id}', [TicketController::class, 'generatePdfComanda'])->name('pdf.generate.comanda');
 
 
 Route::get('/', [LoginController::class, 'index'])->name('login');

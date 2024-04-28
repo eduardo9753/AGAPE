@@ -49,7 +49,7 @@ class TicketController extends Controller
         return $dompdf;
     }*/
 
-    //NUEVA TIKETERA
+    //PRECUENTA
     public function generatePdf($id)
     {
         // Cargar la vista y renderizarla como una cadena de texto
@@ -58,6 +58,25 @@ class TicketController extends Controller
             return $detail->quantity * $detail->dish->price;
         });
         $pdf = PDF::loadView('ticket.pdf.orden', [
+            'order' => $order,
+            'totalAmount' => $totalAmount
+        ]);
+        $pdfContent = $pdf->output();
+
+        // Devolver la cadena de texto como respuesta
+        return response($pdfContent, 200)
+            ->header('Content-Type', 'application/pdf');
+    }
+
+    //COMANDA
+    public function generatePdfComanda($id)
+    {
+        // Cargar la vista y renderizarla como una cadena de texto
+        $order = Order::find($id);
+        $totalAmount = $order->orderDishes->sum(function ($detail) {
+            return $detail->quantity * $detail->dish->price;
+        });
+        $pdf = PDF::loadView('ticket.pdf.comanda', [
             'order' => $order,
             'totalAmount' => $totalAmount
         ]);

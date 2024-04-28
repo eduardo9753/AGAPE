@@ -2,7 +2,7 @@ $(function () {
 
     precuentaImpresionVentanaActual();
 
-    // Esta función se llama después de cargar los elementos dinámicos
+    // PRECUENTA
     function precuentaImpresionVentanaActual() {
         $('[id^="form-print-cashier"]').on('submit', function (e) {
             e.preventDefault(); //PARA TETENER EL RECARGE DE LA PAGINA
@@ -37,6 +37,7 @@ $(function () {
                         })
                         // Construir la URL del PDF
                         const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
+                        //const urlPdf = `http://localhost/pedidos/public/generar-pdf/${orderId}`;
 
                         // Crear un nuevo objeto de tipo iframe
                         var iframe = document.createElement('iframe');
@@ -71,7 +72,7 @@ $(function () {
         });
     }
 
-    //funcion para abrir el pdf en la misma venta y mandar a imprimir
+    //COMANDA
     imprimirCocina();
     function imprimirCocina() {
         $('[id^="form-print-cashier-kitchen"]').on('submit', function (e) {
@@ -81,8 +82,9 @@ $(function () {
             var orderId = $(this).find('input[name="order_id"]').val();
 
             // Construir la URL del PDF
-            const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
-
+            const urlPdf = `https://agapechicken.com/generar-pdf/comanda/${orderId}`;
+            //const urlPdf = `http://localhost/pedidos/public/generar-pdf/comanda/${orderId}`;
+           
             // Crear un nuevo objeto de tipo iframe
             var iframe = document.createElement('iframe');
             iframe.src = urlPdf;
