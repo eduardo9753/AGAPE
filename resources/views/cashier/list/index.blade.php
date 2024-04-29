@@ -215,6 +215,23 @@
                                                     </div>
 
                                                     <div class="col-md-6">
+                                                        <div class="col-sm-12 col-12 mt-3">
+                                                            <div class="mb-3">
+                                                                @if ($order->state == 'PEDIDO')
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary w-100">Cobrar</button>
+                                                                @else
+                                                                    <div class="alert border border-info alert-dismissible fade show"
+                                                                        role="alert">
+                                                                        <b>Info!</b> Ya ha sido cobrado este monto
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="alert"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
                                                         {{-- PARA CALCULAR LOS VUELTOS --}}
                                                         <div class="input-group mt-4">
                                                             <span class="input-group-text" id="basic-addon1">S/.</span>
@@ -227,9 +244,10 @@
                                                                 placeholder="DOLARES">
                                                         </div>
                                                         <div class="input-group mt-1">
-                                                            <span class="input-group-text" id="basic-addon3">VISA</span>
+                                                            <span class="input-group-text"
+                                                                id="visaSpan">BILLETERAS</span>
                                                             <input id="tarjeta" type="text" class="form-control"
-                                                                placeholder="TARJETA">
+                                                                placeholder="">
                                                         </div>
                                                         <div class="input-group mt-1">
                                                             <span class="input-group-text" id="basic-addon4">VUELTO</span>
@@ -237,10 +255,13 @@
                                                                 placeholder="VUELTO" readonly>
                                                         </div>
 
-                                                        <div class="col-md-12 col-12">
+
+
+                                                        <div class="col-md-12 col-12 mt-3">
                                                             <div class="mb-3">
                                                                 <div class="input-group">
-                                                                    <select class="form-select" name="payment_method">
+                                                                    <select class="form-select" id="paymentMethodSelect"
+                                                                        name="payment_method">
                                                                         <option value="YAPE" class="text-bg-dark">YAPE
                                                                         </option>
                                                                         <option value="PLIN" class="text-bg-dark">PLIN
@@ -260,23 +281,6 @@
                                                                         <i class="icon-calendar"></i>
                                                                     </span>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-12 col-12">
-                                                            <div class="mb-3">
-                                                                @if ($order->state == 'PEDIDO')
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary w-100">Cobrar</button>
-                                                                @else
-                                                                    <div class="alert border border-info alert-dismissible fade show"
-                                                                        role="alert">
-                                                                        <b>Info!</b> Ya ha sido cobrado este monto
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="alert"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -380,6 +384,60 @@
             document.getElementById('soles').oninput = calcularVuelto;
             document.getElementById('dolares').oninput = calcularVuelto;
             document.getElementById('tarjeta').oninput = calcularVuelto;
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Seleccionar el elemento select y el elemento span
+                const paymentMethodSelect = document.getElementById('paymentMethodSelect');
+                const visaSpan = document.getElementById('visaSpan');
+
+                // Función para actualizar el texto del span
+                function updateVisaSpan() {
+                    // Obtener el valor seleccionado del select
+                    const selectedPaymentMethod = paymentMethodSelect.value;
+
+                    // Actualizar el texto del span según el método de pago seleccionado
+                    switch (selectedPaymentMethod) {
+                        case 'YAPE':
+                            visaSpan.textContent = 'YAPE';
+                            break;
+                        case 'PLIN':
+                            visaSpan.textContent = 'PLIN';
+                            break;
+                        case 'TARJETA':
+                            visaSpan.textContent = 'TARJETA';
+                            break;
+                        case 'EFECTIVO':
+                            visaSpan.textContent = 'EFECTIVO';
+                            break;
+                        case 'TUNKY':
+                            visaSpan.textContent = 'TUNKY';
+                            break;
+                        case 'AMEX':
+                            visaSpan.textContent = 'AMEX';
+                            break;
+                        case 'IZIPAY':
+                            visaSpan.textContent = 'IZIPAY';
+                            break;
+                        default:
+                            // Si no coincide con ninguna opción, dejar el texto del span como está
+                            // Puedes ajustar esto según sea necesario
+                            visaSpan.textContent = 'Otro método de pago';
+                            break;
+                    }
+                }
+
+                // Llamar a la función de actualización del span al cargar la página
+                updateVisaSpan();
+
+                // Agregar un evento de cambio al elemento select
+                paymentMethodSelect.addEventListener('change', function() {
+                    // Llamar a la función de actualización del span cuando cambie la selección
+                    updateVisaSpan();
+                });
+            });
         </script>
 
 

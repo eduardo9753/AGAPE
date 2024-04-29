@@ -65,6 +65,9 @@ class OrderController extends Controller
             return $detail->quantity * $detail->dish->price;
         });
 
+        $tables = Table::find($order->table_id);
+        $tables->update(['state' => 'ACTIVO']);
+
         if ($request->is_factura == '1') {
             //guardar al cliente 
             $customer = Customer::create([
@@ -92,8 +95,6 @@ class OrderController extends Controller
 
                     if ($payment) {
                         $order->update(['state' => 'COBRADO']);
-                        $tables = Table::find($order->table_id);
-                        $tables->update(['state' => 'ACTIVO']);
                         return redirect()->route('cashier.pay.index')->with('message', 'pago procesado correctamente');
                     } else {
                         return redirect()->route('cashier.pay.index')->with('message', 'pago no procesado');
@@ -113,8 +114,6 @@ class OrderController extends Controller
 
             if ($payment) {
                 $order->update(['state' => 'COBRADO']);
-                $tables = Table::find($order->table_id);
-                $tables->update(['state' => 'ACTIVO']);
                 return redirect()->route('cashier.pay.boleta')->with('message', 'pago procesado correctamente');
             } else {
                 return redirect()->route('cashier.pay.boleta')->with('message', 'pago no procesado');

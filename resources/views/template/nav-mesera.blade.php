@@ -8,20 +8,16 @@
                 </button>
             </div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{ route('waitress.order.index') }}"> Pedidos </a>
-                </li> --}}
-
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('waitress.table.index') }}"> Mesas </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"> {{ auth()->user()->name }} </a>
+                    <a class="nav-link" href="{{ route('waitress.order.list') }}"> Tus Ordenes </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('waitress.order.list') }}"> Tus Ordenes </a>
+                    <a class="nav-link" href="#"> {{ auth()->user()->name }} </a>
                 </li>
             </ul>
         </div>

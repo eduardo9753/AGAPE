@@ -84,7 +84,7 @@ $(function () {
             // Construir la URL del PDF
             const urlPdf = `https://agapechicken.com/generar-pdf/comanda/${orderId}`;
             //const urlPdf = `http://localhost/pedidos/public/generar-pdf/comanda/${orderId}`;
-           
+
             // Crear un nuevo objeto de tipo iframe
             var iframe = document.createElement('iframe');
             iframe.src = urlPdf;
@@ -102,7 +102,8 @@ $(function () {
             // Eliminar el iframe después de un tiempo de espera
             setTimeout(function () {
                 document.body.removeChild(iframe);
-            }, 10000); // Espera 10 segundos antes de eliminar el iframe (ajusta este valor según sea necesario)
+            }, 5000);
+
         });
     }
 

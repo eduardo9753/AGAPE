@@ -76,7 +76,8 @@ class OrderUpdate extends Component
         OrderDish::create([
             'order_id' => $this->order->id,
             'dish_id' => $this->product_id,
-            'quantity' => 1 // Puedes cambiar esto según la lógica de tu aplicación
+            'quantity' => 1, // Puedes cambiar esto según la lógica de tu aplicación
+            'state' => 'NUEVO', //estado de cada plato
         ]);
 
         // Recuperar los detalles de los platos asociados a esta orden

@@ -71,15 +71,39 @@ class TicketController extends Controller
     //COMANDA
     public function generatePdfComanda($id)
     {
-        // Cargar la vista y renderizarla como una cadena de texto
+        // Cargar la orden
         $order = Order::find($id);
-        $totalAmount = $order->orderDishes->sum(function ($detail) {
+
+        // Filtrar los platos según su estado
+        $dishes = $order->orderDishes->where('state', 'NUEVO');
+
+        // Calcular el total solo con los platos filtrados
+        $totalAmount = $dishes->sum(function ($detail) {
             return $detail->quantity * $detail->dish->price;
         });
-        $pdf = PDF::loadView('ticket.pdf.comanda', [
-            'order' => $order,
-            'totalAmount' => $totalAmount
-        ]);
+
+        // Si hay platos con estado "NUEVO", generar el PDF solo con esos platos
+        if ($dishes->isNotEmpty()) {
+            $pdf = PDF::loadView('ticket.pdf.comanda', [
+                'order' => $order,
+                'dishes' => $dishes,
+                'totalAmount' => $totalAmount
+            ]);
+        } else {
+            // Si no hay platos con estado "NUEVO", generar el PDF con los platos con estado "PEDIDO"
+            $dishes = $order->orderDishes->where('state', 'PEDIDO');
+            $totalAmount = $dishes->sum(function ($detail) {
+                return $detail->quantity * $detail->dish->price;
+            });
+
+            $pdf = PDF::loadView('ticket.pdf.comanda', [
+                'order' => $order,
+                'dishes' => $dishes,
+                'totalAmount' => $totalAmount
+            ]);
+        }
+
+        // Obtener el contenido del PDF como una cadena de texto
         $pdfContent = $pdf->output();
 
         // Devolver la cadena de texto como respuesta

@@ -35,8 +35,8 @@
                                         <i class="icon-home lh-1"></i>
                                         <a href="{{ route('cashier.order.index') }}" class="text-decoration-none">Cajera</a>
                                     </li>
-                                    <li class="breadcrumb-item">Pedidos</li>
-                                    <li class="breadcrumb-item text-light">Lista de Pedidos</li>
+                                    <li class="breadcrumb-item">Cobrar</li>
+                                    <li class="breadcrumb-item text-light">Lista de Cobros</li>
                                 </ol>
                                 <!-- Breadcrumb end -->
                             </div>

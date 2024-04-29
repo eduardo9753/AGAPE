@@ -4,6 +4,7 @@ namespace App\Http\Controllers\cashier\transaction;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Table;
 use App\Models\Transaction;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\Carbon;
@@ -53,8 +54,11 @@ class TransactionController extends Controller
     public function pdf(Transaction $pay)
     {
         $order_id = $pay->order_id;
-        $update = Order::find($order_id);
-        $update->update(['state' => 'OCULTO']);
+        $order = Order::find($order_id);
+        $order->update(['state' => 'OCULTO']);
+
+        $table = Table::find($order->table_id);
+        $table->update(['state' => 'ACTIVO']);
 
         // Cargar la vista y renderizarla como una cadena de texto
         $totalAmount = 0;
@@ -76,8 +80,11 @@ class TransactionController extends Controller
     public function pdfBoleta(Transaction $pay)
     {
         $order_id = $pay->order_id;
-        $update = Order::find($order_id);
-        $update->update(['state' => 'OCULTO']);
+        $order = Order::find($order_id);
+        $order->update(['state' => 'OCULTO']);
+
+        $table = Table::find($order->table_id);
+        $table->update(['state' => 'ACTIVO']);
 
         // Cargar la vista y renderizarla como una cadena de texto
         $totalAmount = 0;

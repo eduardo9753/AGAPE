@@ -20,6 +20,7 @@ class CreateOrderDishesTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('dish_id');
             $table->integer('quantity');
+            $table->string('state')->nullable();
 
             // Restricciones de clave foránea
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

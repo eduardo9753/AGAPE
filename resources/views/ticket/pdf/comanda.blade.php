@@ -86,17 +86,14 @@
             <p>------------------------------------------------</p>
             <p>AGAPE CHICKEN & GRILL</p>
             <p>------------------------------------------------</p>
-            <p>------------------------------------------------</p>
             <p>MOZO: {{ $order->user->name }}</p>
             <p>------------------------------------------------</p>
-            <p>------------------------------------------------</p>
             <p>COMANDA</p>
-            <p>------------------------------------------------</p>
             <p>------------------------------------------------</p>
             <p>N:{{ $order->table->name }}</p>
             <p>------------------------------------------------</p>
             <p>------------------------------------------------</p>
-            <p>PEDIDO #{{ $order->id }}</p>
+            <p>PEDIDO #00{{ $order->order_number }}</p>
             <p>------------------------------------------------</p>
         </div>
         <div class="info">
@@ -110,14 +107,16 @@
                     <th>PRODUCTO|</th>
                     <th>CANTIDA|</th>
                     <th>PRECIO|</th>
+                    <th>ESTADO|</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($order->orderDishes as $orderDish)
+                @foreach ($dishes as $orderDish)
                     <tr>
                         <td>{{ $orderDish->dish->name }}|</td>
                         <td>{{ $orderDish->quantity }}|</td>
-                        <td>S/.{{ number_format($orderDish->dish->price, 2) }}</td>
+                        <td>S/.{{ number_format($orderDish->dish->price, 2) }}|</td>
+                        <td>{{ $orderDish->state }}|</td>
                     </tr>
                 @endforeach
             </tbody>

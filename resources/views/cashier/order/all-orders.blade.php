@@ -3,7 +3,7 @@
         <div class="col-md-4">
             <div class="card mb-2">
                 <div class="card-header">
-                    <h5 class="card-title text-primary">Pedido: #{{ $order->id }} </h5>
+                    <h5 class="card-title text-primary">Pedido: #{{ $order->order_number }} </h5>
                     <h5 class="card-title text-primary">{{ $order->table->name }}</h5>
                     <h5 class="card-title text-primary">Usuario: {{ $order->user->name }}</h5>
 

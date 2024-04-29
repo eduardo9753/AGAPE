@@ -22,6 +22,9 @@ class OrderController extends Controller
     //PARA TOMAR LA ORDEN DEL CLIENTE
     public function index(Table $table)
     {
+        if($table->state == 'INACTIVO'){
+            return redirect()->route('waitress.table.index');
+        }
         return view('waitress.order.index', [
             'table' => $table
         ]);

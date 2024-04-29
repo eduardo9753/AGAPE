@@ -101,7 +101,7 @@
             <h1></h1>
         </div>
         <div class="address">
-            <p><strong>Razón Social:</strong> Ágape Chicken & Grill</p>
+            <p><strong>Razon Social:</strong> Agape Chicken & Grill</p>
             <p><strong>Dirección: </strong> parque sinchi roc, Av. Universitaria 9311, Comas 15316</p>
             <p><strong>RUC: </strong> 20523287568 </p>
         </div>
@@ -110,7 +110,7 @@
             <p><strong>Fecha:</strong>
                 {{ \Carbon\Carbon::parse($pay->payment_date)->formatLocalized('%d de %B de %Y') }}</p>
             <p><strong>Hora:</strong> {{ \Carbon\Carbon::parse($pay->payment_time)->format('h:i A') }}</p>
-            <p><strong>Número de pedido:</strong> PEDIDO-{{ $pay->order->id }}</p>
+            <p><strong>Número de pedido:</strong> #00{{ $pay->order->order_number }}</p>
         </div>
         <table class="table">
             <thead>

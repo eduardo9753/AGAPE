@@ -7,6 +7,7 @@ use App\Models\Dish;
 use App\Models\Order;
 use App\Models\OrderDish;
 use App\Models\Table;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -42,7 +43,7 @@ class Orders extends Component
     {
         $this->table_id = $table->id;
         $this->name = $table->name;
-        
+
         // Actualiza los detalles del pedido
         $this->reload();
 
@@ -79,11 +80,23 @@ class Orders extends Component
             ->where('table_id', $this->table_id)
             ->first();
 
+        //contador de pedidos para que se reinicie cada dia
+        $ordersCount = DB::table('orders')
+            ->whereBetween('created_at', [Carbon::today()->startOfDay(), Carbon::today()->endOfDay()])
+            ->count();
+
+        if ($ordersCount) {
+            $ordersCount = $ordersCount + 1;
+        } else {
+            $ordersCount = 1;
+        }
+
         // Si no hay una orden pendiente para la mesa, crear una nueva orden
         if (!$order) {
             $order = Order::create([
                 'state' => 'PENDIENTE',
                 'table_id' => $this->table_id,
+                'order_number' => $ordersCount,
                 'user_id' => auth()->user()->id
             ]);
         }
@@ -92,7 +105,8 @@ class Orders extends Component
         OrderDish::create([
             'order_id' => $order->id,
             'dish_id' => $this->product_id,
-            'quantity' => 1 // Puedes cambiar esto según la lógica de tu aplicación
+            'quantity' => 1, // Puedes cambiar esto según la lógica de tu aplicación
+            'state' => 'PEDIDO', //estado de cada plato
         ]);
 
         // Recuperar los detalles de los platos asociados a esta orden
@@ -241,6 +255,5 @@ class Orders extends Component
             $this->last_order = null;
             $this->orderDetails = collect(); // Puedes usar collect() para crear una colección vacía
         }
-
     }
 }

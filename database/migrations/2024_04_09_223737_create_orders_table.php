@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('table_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('order_number')->nullable();
 
             // Restricciones de clave foránea
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
