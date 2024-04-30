@@ -9,19 +9,19 @@
             </div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cashier.order.index') }}"> Cobrar </a>
+                    <a class="nav-link" href="{{ route('cashier.order.index') }}"> COBRAR </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cashier.table.index') }}"> Mesas </a>
+                    <a class="nav-link" href="{{ route('cashier.table.index') }}"> MESAS </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cashier.pay.index') }}">Facturas</a>
+                    <a class="nav-link" href="{{ route('cashier.pay.index') }}">FACTURAS</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cashier.pay.boleta') }}">Boletas</a>
+                    <a class="nav-link" href="{{ route('cashier.pay.boleta') }}">BOLETAS</a>
                 </li>
             </ul>
         </div>

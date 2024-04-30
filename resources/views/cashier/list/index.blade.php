@@ -218,7 +218,7 @@
                                                         <div class="col-sm-12 col-12 mt-3">
                                                             <div class="mb-3">
                                                                 @if ($order->state == 'PEDIDO')
-                                                                    <button type="submit"
+                                                                    <button type="submit" id="botonCobrar"
                                                                         class="btn btn-primary w-100">Cobrar</button>
                                                                 @else
                                                                     <div class="alert border border-info alert-dismissible fade show"
@@ -328,6 +328,38 @@
                     isFactura.value = '0';
                 }
             }
+        </script>
+
+        <style>
+            #botonCobrar {
+                opacity: 0.5;
+                /* Hacer el botón opaco */
+                pointer-events: none;
+                /* Desactivar clics en el botón */
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var input = document.getElementById('tarjeta');
+                var botonCobrar = document.getElementById('botonCobrar');
+
+                // Cambiar estilo del botón si el campo de entrada tiene algún valor al principio
+                if (input.value.trim() !== '') {
+                    botonCobrar.style.opacity = '1'; // Volver el botón opaco a su estado normal
+                    botonCobrar.style.pointerEvents = 'auto'; // Permitir clics en el botón
+                }
+
+                // Agregar evento de entrada para cambiar el estilo del botón
+                input.addEventListener('input', function() {
+                    if (input.value.trim() === '') {
+                        botonCobrar.style.opacity = '0.5'; // Hacer el botón opaco
+                        botonCobrar.style.pointerEvents = 'none'; // Desactivar clics en el botón
+                    } else {
+                        botonCobrar.style.opacity = '1'; // Volver el botón opaco a su estado normal
+                        botonCobrar.style.pointerEvents = 'auto'; // Permitir clics en el botón
+                    }
+                });
+            });
         </script>
 
         <script>

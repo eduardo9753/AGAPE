@@ -9,11 +9,11 @@
             </div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('waitress.table.index') }}"> Mesas </a>
+                    <a class="nav-link" href="{{ route('waitress.table.index') }}"> MESAS </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('waitress.order.list') }}"> Tus Ordenes </a>
+                    <a class="nav-link" href="{{ route('waitress.order.list') }}"> TUS ORDENES </a>
                 </li>
 
                 <li class="nav-item">
