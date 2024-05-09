@@ -235,18 +235,18 @@
                                                         {{-- PARA CALCULAR LOS VUELTOS --}}
                                                         <div class="input-group mt-4">
                                                             <span class="input-group-text" id="basic-addon1">S/.</span>
-                                                            <input id="soles" type="text" class="form-control"
+                                                            <input id="soles" name="soles" type="text" class="form-control"
                                                                 placeholder="SOLES">
                                                         </div>
                                                         <div class="input-group mt-1">
                                                             <span class="input-group-text" id="basic-addon2">$/.</span>
-                                                            <input id="dolares" type="text" class="form-control"
+                                                            <input id="dolares" name="dolares" type="text" class="form-control"
                                                                 placeholder="DOLARES">
                                                         </div>
                                                         <div class="input-group mt-1">
                                                             <span class="input-group-text"
                                                                 id="visaSpan">BILLETERAS</span>
-                                                            <input id="tarjeta" type="text" class="form-control"
+                                                            <input id="tarjeta" name="tarjeta" type="text" class="form-control"
                                                                 placeholder="">
                                                         </div>
                                                         <div class="input-group mt-1">
@@ -262,14 +262,14 @@
                                                                 <div class="input-group">
                                                                     <select class="form-select" id="paymentMethodSelect"
                                                                         name="payment_method">
+                                                                        <option value="EFECTIVO" class="text-bg-dark">
+                                                                            EFECTIVO</option>
                                                                         <option value="YAPE" class="text-bg-dark">YAPE
                                                                         </option>
                                                                         <option value="PLIN" class="text-bg-dark">PLIN
                                                                         </option>
                                                                         <option value="TARJETA" class="text-bg-dark">
                                                                             TARJETA</option>
-                                                                        <option value="EFECTIVO" class="text-bg-dark">
-                                                                            EFECTIVO</option>
                                                                         <option value="TUNKY" class="text-bg-dark">TUNKY
                                                                         </option>
                                                                         <option value="AMEX" class="text-bg-dark">AMEX
@@ -316,6 +316,7 @@
         <!-- Page wrapper end -->
 
         <script>
+            //FUNCION EN DONDE APARECE LOS INPUT DEL CLIENTE Y SU RUC
             function toggleFields(value) {
                 var facturaFields = document.getElementById('facturaFields');
                 var isFactura = document.querySelector('input[name="is_factura"]');
@@ -330,35 +331,34 @@
             }
         </script>
 
-        <style>
-            #botonCobrar {
-                opacity: 0.5;
-                /* Hacer el botón opaco */
-                pointer-events: none;
-                /* Desactivar clics en el botón */
-            }
-        </style>
+        
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var input = document.getElementById('tarjeta');
+            //PARA PDOER MOSTRAR EL BOTON DE COBRO CUANDO HAYA UN VALOR EN EL INPUT
+            function actualizarEstadoBotonCobrar() {
+                var soles = document.getElementById('soles');
+                var dolares = document.getElementById('dolares');
+                var tarjeta = document.getElementById('tarjeta');
                 var botonCobrar = document.getElementById('botonCobrar');
 
-                // Cambiar estilo del botón si el campo de entrada tiene algún valor al principio
-                if (input.value.trim() !== '') {
-                    botonCobrar.style.opacity = '1'; // Volver el botón opaco a su estado normal
-                    botonCobrar.style.pointerEvents = 'auto'; // Permitir clics en el botón
+                // Verificar si alguno de los campos tiene un valor
+                if (soles.value.trim() !== '' || dolares.value.trim() !== '' || tarjeta.value.trim() !== '') {
+                    // Si alguno tiene un valor, activar el botón de cobrar
+                    botonCobrar.disabled = false;
+                } else {
+                    // Si ninguno tiene un valor, desactivar el botón de cobrar
+                    botonCobrar.disabled = true;
                 }
+            }
 
-                // Agregar evento de entrada para cambiar el estilo del botón
-                input.addEventListener('input', function() {
-                    if (input.value.trim() === '') {
-                        botonCobrar.style.opacity = '0.5'; // Hacer el botón opaco
-                        botonCobrar.style.pointerEvents = 'none'; // Desactivar clics en el botón
-                    } else {
-                        botonCobrar.style.opacity = '1'; // Volver el botón opaco a su estado normal
-                        botonCobrar.style.pointerEvents = 'auto'; // Permitir clics en el botón
-                    }
-                });
+            // Esta función se ejecuta cuando se carga la página
+            document.addEventListener('DOMContentLoaded', function() {
+                // Llamar a la función para actualizar el estado del botón de cobrar al cargar la página
+                actualizarEstadoBotonCobrar();
+
+                // Agregar eventos de entrada a los campos de soles, dólares y tarjeta
+                document.getElementById('soles').addEventListener('input', actualizarEstadoBotonCobrar);
+                document.getElementById('dolares').addEventListener('input', actualizarEstadoBotonCobrar);
+                document.getElementById('tarjeta').addEventListener('input', actualizarEstadoBotonCobrar);
             });
         </script>
 
@@ -382,23 +382,6 @@
                 // Calcular el monto total ingresado
                 totalIngresado = soles + (dolares * 3.77) + tarjeta;
 
-                // Verificar si algún monto ingresado es mayor que el monto total a pagar
-                /*if (totalIngresado > totalAmount) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'warning',
-                        title: 'LA SUMA DE LOS CAMPOS ES DE ' + 'S/' + totalIngresado.toFixed(2) +
-                            '  Y ES MAYOR AL TOTAL: ' + 'S/' +
-                            totalAmount.toFixed(2),
-                        showConfirmButton: false,
-                        timer: 3500
-                    })
-
-                    totalIngresado = 0; // Establecer el total ingresado a cero
-                    document.getElementById('vuelto').value = 0;
-                    return; // Detener la ejecución
-                }*/
-
                 // Calcular el vuelto
                 if (totalIngresado > totalAmount) {
                     var vuelto = totalIngresado - totalAmount;
@@ -406,8 +389,6 @@
                 } else {
                     document.getElementById('vuelto').value = 0;
                 }
-
-
                 // Actualizar el campo de entrada de "VUELTO" con el resultado
                 // document.getElementById('vuelto').value = vuelto.toFixed(2);
             }

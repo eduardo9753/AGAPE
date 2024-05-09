@@ -84,6 +84,7 @@
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 
 <script src="{{ asset('js/cashier/all-orders.js') }}"></script>
+<script src="{{ asset('js/cashier/all-orders-delivery.js') }}"></script>
 <script src="{{ asset('js/cashier/all-tables.js') }}"></script>
 <script src="{{ asset('js/cashier/generate-pdf.js') }}"></script>
 

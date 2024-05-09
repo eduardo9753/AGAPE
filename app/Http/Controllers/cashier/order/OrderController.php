@@ -65,6 +65,23 @@ class OrderController extends Controller
             return $detail->quantity * $detail->dish->price;
         });
 
+        // Calcular el monto del IGV
+        $igv = $totalAmount * 0.18; // La tasa estándar de IGV en Perú es del 18%
+
+        // Calcular el monto total a pagar (subtotal + IGV)
+        $totalToPay = $totalAmount + $igv;
+
+        //para guardar la moneda del cliente
+        if (isset($request->soles)) {
+            $dineroCliente = $request->soles;
+        } else if (isset($request->dolares)) {
+            $dineroCliente = "$/." . $request->dolares;
+        } else if (isset($request->tarjeta)) {
+            $dineroCliente = $request->tarjeta;
+        } else {
+            $dineroCliente = 'dinero no ingreso';
+        }
+
         $tables = Table::find($order->table_id);
         $tables->update(['state' => 'ACTIVO']);
 
@@ -85,6 +102,8 @@ class OrderController extends Controller
                 if ($save) {
                     $payment = Transaction::create([
                         'amount' => $totalAmount,
+                        'income_tax' => $igv,
+                        'cash_payment' => $dineroCliente,
                         'payment_method' => $request->payment_method,
                         'type_receipt' => 'FACTURA',
                         'payment_date' => date('Y-m-d'),
@@ -104,6 +123,8 @@ class OrderController extends Controller
         } else {
             $payment = Transaction::create([
                 'amount' => $totalAmount,
+                'income_tax' => $igv,
+                'cash_payment' => $dineroCliente,
                 'payment_method' => $request->payment_method,
                 'type_receipt' => 'BOLETA',
                 'payment_date' => date('Y-m-d'),
@@ -121,7 +142,7 @@ class OrderController extends Controller
         }
     }
 
-    //imprimir los datos de manera directa
+    //imprimir los datos de manera directa (metodo sin funcion)
     public function print(Order $order)
     {
         try {
@@ -167,13 +188,31 @@ class OrderController extends Controller
     //para actualizar la mesa e imprimir el ticket
     public function update(Request $request)
     {
-        $update = Table::find($request->table_id);
-        $save = $update->update(['state' => 'PRECUENTA']);
-        if ($save) {
-            return response()->json([
-                'code' => 1,
-                'msg' => 'MESA CON PRECUENTA ACTIVADA'
-            ]);
+        $order = Order::find($request->order_id);
+        if ($order->state == 'OCULTO' || $order->state == 'COBRADO') {
+            $update = Table::find($request->table_id);
+            $save = $update->update(['state' => 'ACTIVO']);
+
+            if ($save) {
+                return response()->json([
+                    'code' => 2,
+                    'msg' => 'ORDEN YA COBRADA, LIBERANDO MESA'
+                ]);
+            }
+        } else {
+            $update = Table::find($request->table_id);
+            $save = $update->update(['state' => 'PRECUENTA']);
+            if ($save) {
+                return response()->json([
+                    'code' => 1,
+                    'msg' => 'MESA CON PRECUENTA ACTIVADA'
+                ]);
+            } else {
+                return response()->json([
+                    'code' => 0,
+                    'msg' => 'MESA SIN ACTUALIZAR'
+                ]);
+            }
         }
     }
 }

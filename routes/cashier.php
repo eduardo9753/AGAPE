@@ -3,6 +3,7 @@
 use App\Http\Controllers\cashier\order\OrderController;
 use App\Http\Controllers\cashier\table\TableController;
 use App\Http\Controllers\cashier\transaction\TransactionController;
+use App\Http\Controllers\delivery\DeliberyController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,3 +26,10 @@ Route::get('/cajera/pays/facturas',[TransactionController::class, 'index'])->nam
 Route::get('/cajera/pays/boletas',[TransactionController::class, 'boleta'])->name('cashier.pay.boleta');
 Route::get('/cajera/generate/factura/pdf/{pay}',[TransactionController::class, 'pdf'])->name('cashier.pdf');
 Route::get('/cajera/generate/boleta/pdf/{pay}',[TransactionController::class, 'pdfBoleta'])->name('cashier.pdf.boleta');
+
+
+//ruta para el delibery de la cajera
+Route::get('/cajera/delivery', [DeliberyController::class ,'deliberyCashier'])->name('cashier.delibery.index');
+Route::get('/cajera/orders/delivery', [DeliberyController::class, 'orderdeliberyCashier'])->name('cashier.delibery.order');
+Route::get('/cajera/orders/delivery/fecth', [DeliberyController::class, 'fetchOrdersDelivery'])->name('cashier.order.delivery.fetch');
+Route::delete('/cajera/order/delete/{order}', [DeliberyController::class , 'delete'])->name('cashier.order.delete');

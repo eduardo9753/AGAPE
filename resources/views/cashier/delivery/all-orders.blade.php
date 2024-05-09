@@ -6,16 +6,16 @@
                     <h5 class="card-title text-primary">Pedido: #{{ $order->order_number }} </h5>
                     <h5 class="card-title text-primary">{{ $order->table->name }}</h5>
                     <h5 class="card-title text-primary">Usuario: {{ $order->user->name }}</h5>
+                    <h5 class="card-title text-primary">Tipo: {{ $order->type }}</h5>
 
                     <div class="d-flex justify-content-between mt-2">
-                        <form action="{{ route('waitress.order.delete', ['order' => $order]) }}" method="POST">
+                        <form action="{{ route('cashier.order.delete', ['order' => $order]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="btn btn-danger">ELIMINAR</button>
                         </form>
 
-                        <a href="{{ route('waitress.order.show', ['order' => $order]) }}" class="btn btn-success">
-                            EDITAR
+                        <a href="{{ route('cashier.order.list', ['order' => $order]) }}" class="btn btn-success">COBRAR
                         </a>
                     </div>
                 </div>

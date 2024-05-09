@@ -110,7 +110,8 @@
             <p><strong>Fecha:</strong>
                 {{ \Carbon\Carbon::parse($pay->payment_date)->formatLocalized('%d de %B de %Y') }}</p>
             <p><strong>Hora:</strong> {{ \Carbon\Carbon::parse($pay->payment_time)->format('h:i A') }}</p>
-            <p><strong>Número de pedido:</strong> #00{{ $pay->order->order_number }}</p>
+            <p><strong># de pedido:</strong> #00{{ $pay->order->order_number }}</p>
+            <p><strong>pago con:</strong> {{ $pay->cash_payment }}</p>
         </div>
         <table class="table">
             <thead>

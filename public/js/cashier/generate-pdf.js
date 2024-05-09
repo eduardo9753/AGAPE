@@ -1,11 +1,10 @@
 $(function () {
 
-    precuentaImpresionVentanaActual();
-
     // PRECUENTA
+    precuentaImpresionVentanaActual();
     function precuentaImpresionVentanaActual() {
         $('[id^="form-print-cashier"]').on('submit', function (e) {
-            e.preventDefault(); //PARA TETENER EL RECARGE DE LA PAGINA
+            e.preventDefault(); // Para evitar la recarga de la página
 
             //variable formulario
             var form = this;
@@ -35,9 +34,10 @@ $(function () {
                             showConfirmButton: false,
                             timer: 1500
                         })
+
                         // Construir la URL del PDF
                         const urlPdf = `https://agapechicken.com/generar-pdf/${orderId}`;
-                        //const urlPdf = `http://localhost/pedidos/public/generar-pdf/${orderId}`;
+                        //const urlPdf = `http://127.0.0.1:8000/generar-pdf/${orderId}`;
 
                         // Crear un nuevo objeto de tipo iframe
                         var iframe = document.createElement('iframe');
@@ -51,26 +51,38 @@ $(function () {
                         iframe.onload = function () {
                             // Llamar a la función de impresión del iframe
                             iframe.contentWindow.print();
+
+                            // Recargar la página después de 3 segundos (ajustar según sea necesario)
+                            setTimeout(function () {
+                                location.reload();
+                            }, 6000);
                         };
 
-                        // Eliminar el iframe después de un tiempo de espera
-                        setTimeout(function () {
-                            document.body.removeChild(iframe);
-                        }, 10000);// Espera 10 segundos antes de eliminar el iframe (ajusta este valor según sea necesario)
-
-                    } else {
+                    } else if (data.code == 0) {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'error',
-                            title: 'no se actulizo la tabla',
+                            title: data.msg,
                             showConfirmButton: false,
                             timer: 1500
                         })
+                    } else if (data.code == 2) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'warning',
+                            title: data.msg,
+                            showConfirmButton: false,
+                            timer: 3500
+                        }).then(function () {
+                            location.reload();
+                        });
                     }
                 }
             });
         });
     }
+
+
 
     //COMANDA
     imprimirCocina();
@@ -83,7 +95,7 @@ $(function () {
 
             // Construir la URL del PDF
             const urlPdf = `https://agapechicken.com/generar-pdf/comanda/${orderId}`;
-            //const urlPdf = `http://localhost/pedidos/public/generar-pdf/comanda/${orderId}`;
+            //const urlPdf = `http://127.0.0.1:8000/generar-pdf/comanda/${orderId}`;
 
             // Crear un nuevo objeto de tipo iframe
             var iframe = document.createElement('iframe');
@@ -102,7 +114,7 @@ $(function () {
             // Eliminar el iframe después de un tiempo de espera
             setTimeout(function () {
                 document.body.removeChild(iframe);
-            }, 5000);
+            }, 10000);
 
         });
     }

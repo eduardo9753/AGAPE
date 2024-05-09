@@ -51,7 +51,7 @@
                                     <div class="col-sm-6 col-12">
                                         <div class="card mb-2">
                                             <div class="card-header">
-                                                <h5 class="card-title">ordes cobradas hoy</h5>
+                                                <h5 class="card-title">ordenes cobradas hoy</h5>
                                             </div>
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between mb-2">
@@ -80,6 +80,29 @@
                                                     <div class="progress-bar bg-danger" role="progressbar"
                                                         style="width: 100%" aria-valuenow="100" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-lg-12 col-12">
+                                        <div class="card mb-2">
+                                            <div class="card-header">
+                                                <h5 class="card-title">Flujos</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="scroll200">
+                                                    <div class="my-2">
+                                                        <div class="d-flex align-items-start">
+                                                            <div class="media-box me-3 bg-primary rounded-5">
+                                                                <i class="icon-thumbs-up"></i>
+                                                            </div>
+                                                            <div class="mb-4">
+                                                                <h5>Monto total de hoy</h5>
+                                                                <p class="mb-1">S/. {{ $transactionsAmount }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,28 +188,6 @@
                                                         @endforeach
                                                     </tbody>
                                                 </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-12">
-                                <div class="card mb-2">
-                                    <div class="card-header">
-                                        <h5 class="card-title">Flujos</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="scroll200">
-                                            <div class="my-2">
-                                                <div class="d-flex align-items-start">
-                                                    <div class="media-box me-3 bg-primary rounded-5">
-                                                        <i class="icon-thumbs-up"></i>
-                                                    </div>
-                                                    <div class="mb-4">
-                                                        <h5>Monto total de hoy</h5>
-                                                        <p class="mb-1">S/. {{ $transactionsAmount }}</p>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

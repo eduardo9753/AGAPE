@@ -14,6 +14,6 @@ Route::get('/waitress/tables', [TableController::class, 'index'])->name('waitres
 Route::get('/waitress/tables/fecth', [TableController::class, 'fetchTables'])->name('waitress.table.fetch');
 
 
-Route::get('/waitress/orders/show/{order}', [OrderController::class, 'show'])->name('cashier.order.show');
-Route::delete('/waitress/order/delete/{order}', [OrderController::class , 'delete'])->name('cashier.order.delete');
+Route::get('/waitress/orders/show/{order}', [OrderController::class, 'show'])->name('waitress.order.show');
+Route::delete('/waitress/order/delete/{order}', [OrderController::class , 'delete'])->name('waitress.order.delete');
 Route::get('/waitress/orders/{table}', [OrderController::class, 'index'])->name('waitress.order.index');

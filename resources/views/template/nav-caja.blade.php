@@ -23,6 +23,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('cashier.pay.boleta') }}">BOLETAS</a>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        GESTIÓN DELIVERY
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item current-page" href="{{ route('cashier.delibery.index') }}">
+                                <span>DELIVERYS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('cashier.delibery.order') }}">
+                                <span>COBROS</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
