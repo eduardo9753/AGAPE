@@ -55,7 +55,7 @@ $(function () {
                             // Recargar la página después de 3 segundos (ajustar según sea necesario)
                             setTimeout(function () {
                                 location.reload();
-                            }, 6000);
+                            }, 15000);
                         };
 
                     } else if (data.code == 0) {
@@ -114,7 +114,7 @@ $(function () {
             // Eliminar el iframe después de un tiempo de espera
             setTimeout(function () {
                 document.body.removeChild(iframe);
-            }, 10000);
+            }, 15000);
 
         });
     }
