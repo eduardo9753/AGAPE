@@ -88,6 +88,52 @@
                                     <div class="col-xl-12 col-lg-12 col-12">
                                         <div class="card mb-2">
                                             <div class="card-header">
+                                                <h5 class="card-title">Reportes</h5>
+                                            </div>
+                                            <div class="card-body">
+
+                                                <form action="{{ route('admin.dashboard.reporte') }}" method="POST"
+                                                    target="_blank">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-12">
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Fecha
+                                                                    Inicio</label>
+                                                                <div class="input-group">
+                                                                    <input type="date" class="form-control"
+                                                                        name="fecha_inicio" value="{{ date('Y-m-d') }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 col-12">
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Fecha
+                                                                    Final</label>
+                                                                <div class="input-group">
+                                                                    <input type="date" class="form-control"
+                                                                        name="fecha_final" value="{{ date('Y-m-d') }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-12">
+                                                            <div class="mb-3">
+                                                                <input type="submit" class="btn btn-danger w-100"
+                                                                    value="GENERAR PDF">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-lg-12 col-12">
+                                        <div class="card mb-2">
+                                            <div class="card-header">
                                                 <h5 class="card-title">Flujos</h5>
                                             </div>
                                             <div class="card-body">
@@ -103,40 +149,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <form action="{{ route('admin.dashboard.reporte') }}" method="POST" target="_blank">
-                                                        @csrf
-                                                        <div class="row">
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="mb-3">
-                                                                    <label for="" class="form-label">Fecha
-                                                                        Inicio</label>
-                                                                    <div class="input-group">
-                                                                        <input type="date" class="form-control"
-                                                                            name="fecha_inicio" value="{{ date('Y-m-d') }}">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-6 col-12">
-                                                                <div class="mb-3">
-                                                                    <label for="" class="form-label">Fecha
-                                                                        Final</label>
-                                                                    <div class="input-group">
-                                                                        <input type="date" class="form-control"
-                                                                            name="fecha_final" value="{{ date('Y-m-d') }}">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-12 col-12">
-                                                                <div class="mb-3">
-                                                                    <input type="submit" class="btn btn-danger w-100"
-                                                                        value="GENERAR PDF">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
