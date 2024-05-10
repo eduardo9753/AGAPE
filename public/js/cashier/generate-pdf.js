@@ -76,6 +76,16 @@ $(function () {
                         }).then(function () {
                             location.reload();
                         });
+                    } else if (data.code == 3) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'warning',
+                            title: data.msg,
+                            showConfirmButton: false,
+                            timer: 3500
+                        }).then(function () {
+                            location.reload();
+                        });
                     }
                 }
             });

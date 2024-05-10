@@ -33,7 +33,7 @@
                                 <ol class="breadcrumb mb-3">
                                     <li class="breadcrumb-item">
                                         <i class="icon-home lh-1"></i>
-                                        <a href="{{ route('cashier.order.index') }}" class="text-decoration-none">Mesera</a>
+                                        <a href="{{ route('waitress.table.index') }}" class="text-decoration-none">Mesera</a>
                                     </li>
                                     <li class="breadcrumb-item">Mesas</li>
                                     <li class="breadcrumb-item text-light">Lista de Mesas</li>
@@ -47,7 +47,7 @@
                         <a class="btn btn-info" href="">ACTUALIZAR</a>
                         <a href="{{ route('waitress.table.index') }}" class="btn btn-outline-warning">Mesas</a>
                         <a href="{{ route('waitress.order.list') }}" class="btn btn-outline-primary">Tus Ordenes</a>
-                        <div class="row gx-2">
+                        <div class="row gx-2 mb-3">
                             @if (session()->has('mensaje'))
                                 <div class="alert border border-danger alert-dismissible fade show" role="alert">
                                     <b>Aviso!</b>{{ session('mensaje') }}
@@ -73,9 +73,21 @@
                                                     <button class="btn btn-primary btn-sm">LIBRE</button>
                                                 </a>
                                             @elseif ($table->state == 'INACTIVO')
-                                                <button class="btn btn-danger btn-sm">OCUPADO</button>
+                                                @php
+                                                    $order = $table->orders->last(); // Obtener la última orden asociada a la mesa
+                                                @endphp
+                                                <a href="{{ route('waitress.order.show', ['order' => $order]) }}"
+                                                    class="btn btn-danger btn-sm">
+                                                    OCUPADO
+                                                </a>
                                             @else
-                                                <button class="btn btn-info btn-sm">CON {{ $table->state }}</button>
+                                                @php
+                                                    $order = $table->orders->last(); // Obtener la última orden asociada a la mesa
+                                                @endphp
+                                                <a href="{{ route('waitress.order.show', ['order' => $order]) }}"
+                                                    class="btn btn-info btn-sm">
+                                                    CON {{ $table->state }}
+                                                </a>
                                             @endif
                                         </div>
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Table;
+use App\Models\Transaction;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -42,5 +44,24 @@ class DashboardController extends Controller
             'transactiopnCount' => $transactiopnCount,
             'transactionsAmount' => $transactionsAmount
         ]);
+    }
+
+    public function reportePdf(Request $request)
+    {
+        $totalAmount = Transaction::whereBetween('payment_date', [$request->fecha_inicio, $request->fecha_final])
+            ->sum('amount');
+
+        $totalOrders = Transaction::whereBetween('payment_date', [$request->fecha_inicio, $request->fecha_final])
+            ->distinct('order_id')
+            ->count('order_id');
+
+
+        $pdf = PDF::loadView('ticket.pdf.reporte', [
+            'totalAmount' => $totalAmount,
+            'totalOrders' => $totalOrders,
+            'request' =>  $request
+        ]);
+
+        return $pdf->stream('reportes.pdf');
     }
 }

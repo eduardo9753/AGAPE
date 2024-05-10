@@ -3,13 +3,8 @@
 namespace App\Http\Controllers\waitress\order;
 
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Table;
-use Illuminate\Http\Client\ConnectionException as ClientConnectionException;
-use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
-use Mike42\Escpos\Printer;
-use Mike42\Escpos\Exception\ConnectionException;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -22,7 +17,7 @@ class OrderController extends Controller
     //PARA TOMAR LA ORDEN DEL CLIENTE
     public function index(Table $table)
     {
-        if($table->state == 'INACTIVO'){
+        if ($table->state == 'INACTIVO') {
             return redirect()->route('waitress.table.index');
         }
         return view('waitress.order.index', [
@@ -54,10 +49,49 @@ class OrderController extends Controller
     //para poder modificar el pedido del cliente "agregar mas platos"
     public function show(Order $order)
     {
-        //dd($order);
-        return view('waitress.order.show', [
-            'order' => $order
-        ]);
+        //si orden de la mesa esta cobrada la liberamos y volvemos a la lista de mesas
+        $order = Order::find($order->id);
+        if ($order->state == 'OCULTO' || $order->state == 'COBRADO') {
+            $update = Table::find($order->table_id);
+            $save = $update->update(['state' => 'ACTIVO']);
+
+            if ($save) {
+                return redirect()->route('waitress.table.index');
+            }
+        } else {
+            //de lo contrario vemos la lista de pedidos
+            $table = Table::find($order->table_id);
+            $tables = Table::where('state', 'ACTIVO')->get();
+            return view('waitress.order.show', [
+                'order' => $order,
+                'table' => $table,
+                'tables' => $tables
+            ]);
+        }
+    }
+
+    //para cambiar de mesa 
+    public function tableChange(Request $request)
+    {
+        //dd($request);
+
+        $table = Table::find($request->table_id);
+        $save = $table->update(['state' => 'ACTIVO']);
+
+        if ($save) {
+            $order = Order::find($request->order_id);
+            $update = $order->update(['table_id' => $request->table_change_id]);
+
+            if ($update) {
+                $change = Table::find($request->table_change_id);
+                $save = $change->update(['state' => 'INACTIVO']);
+                if ($save) {
+                    return redirect()->route('waitress.table.index');
+                } else {
+                    return redirect()->route('waitress.table.index');
+                }
+            }
+        }
     }
 
     //para eliminar una orden 

@@ -34,3 +34,5 @@ Route::get('/admin/user/create', [UserController::class, 'create'])->name('admin
 Route::post('/admin/user/store', [UserController::class, 'store'])->name('admin.users.store');
 Route::put('/admin/user/update/{user}', [UserController::class, 'update'])->name('admin.users.update');
 Route::get('/admin/user/edit/{user}', [UserController::class, 'edit'])->name('admin.users.edit');
+
+Route::post('/admin/user/reportes/PDF' , [DashboardController::class, 'reportePdf'])->name('admin.dashboard.reporte');

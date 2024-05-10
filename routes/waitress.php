@@ -13,6 +13,7 @@ Route::post('/waitress/orders/table/update', [OrderController::class, 'update'])
 Route::get('/waitress/tables', [TableController::class, 'index'])->name('waitress.table.index');
 Route::get('/waitress/tables/fecth', [TableController::class, 'fetchTables'])->name('waitress.table.fetch');
 
+Route::post('/waitress/orders/table/change', [OrderController::class, 'tableChange'])->name('waitress.order.table.change');
 
 Route::get('/waitress/orders/show/{order}', [OrderController::class, 'show'])->name('waitress.order.show');
 Route::delete('/waitress/order/delete/{order}', [OrderController::class , 'delete'])->name('waitress.order.delete');

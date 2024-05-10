@@ -188,6 +188,7 @@ class OrderController extends Controller
     //para actualizar la mesa e imprimir el ticket
     public function update(Request $request)
     {
+        //validamos si la orden ya ha sido cobrada y liberamos la mes
         $order = Order::find($request->order_id);
         if ($order->state == 'OCULTO' || $order->state == 'COBRADO') {
             $update = Table::find($request->table_id);
@@ -199,19 +200,29 @@ class OrderController extends Controller
                     'msg' => 'ORDEN YA COBRADA, LIBERANDO MESA'
                 ]);
             }
-        } else {
-            $update = Table::find($request->table_id);
-            $save = $update->update(['state' => 'PRECUENTA']);
-            if ($save) {
+        } else if ($order->state == 'PEDIDO') {
+            //validamos si la mesa esta libre , eso quiere decir que la mesa se ha cambiado
+            $libre = Table::find($request->table_id);
+            if ($libre->state == 'ACTIVO') {
                 return response()->json([
-                    'code' => 1,
-                    'msg' => 'MESA CON PRECUENTA ACTIVADA'
+                    'code' => 3,
+                    'msg' => 'MESA MOVIDA, LIBERANDO MESA'
                 ]);
             } else {
-                return response()->json([
-                    'code' => 0,
-                    'msg' => 'MESA SIN ACTUALIZAR'
-                ]);
+                // de  lo contrario activamos precuenta
+                $update = Table::find($request->table_id);
+                $save = $update->update(['state' => 'PRECUENTA']);
+                if ($save) {
+                    return response()->json([
+                        'code' => 1,
+                        'msg' => 'MESA CON PRECUENTA ACTIVADA'
+                    ]);
+                } else {
+                    return response()->json([
+                        'code' => 0,
+                        'msg' => 'MESA SIN ACTUALIZAR'
+                    ]);
+                }
             }
         }
     }

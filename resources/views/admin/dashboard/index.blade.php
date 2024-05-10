@@ -103,6 +103,92 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <form action="{{ route('admin.dashboard.reporte') }}" method="POST" target="_blank">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="mb-3">
+                                                                    <label for="" class="form-label">Fecha
+                                                                        Inicio</label>
+                                                                    <div class="input-group">
+                                                                        <input type="date" class="form-control"
+                                                                            name="fecha_inicio" value="{{ date('Y-m-d') }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="mb-3">
+                                                                    <label for="" class="form-label">Fecha
+                                                                        Final</label>
+                                                                    <div class="input-group">
+                                                                        <input type="date" class="form-control"
+                                                                            name="fecha_final" value="{{ date('Y-m-d') }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-12 col-12">
+                                                                <div class="mb-3">
+                                                                    <input type="submit" class="btn btn-danger w-100"
+                                                                        value="GENERAR PDF">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12 col-lg-12 col-12">
+                                        <div class="card mb-2">
+                                            <div class="card-header">
+                                                <h5 class="card-title">Usuarios</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="border rounded-3">
+                                                    <div class="table-responsive">
+                                                        <table class="table align-middle custom-table m-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Usuario</th>
+                                                                    <th>correo</th>
+                                                                    <th>rol</th>
+                                                                    <th>conexion</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($users as $user)
+                                                                    <tr>
+                                                                        <td>{{ $user->id }}</td>
+                                                                        <td>
+                                                                            <div class="fw-semibold">{{ $user->name }}
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <span
+                                                                                class="badge bg-primary">{{ $user->email }}</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="badge border border-light">
+                                                                                @foreach ($user->getRoleNames() as $role)
+                                                                                    {{ $role }}
+                                                                                @endforeach
+                                                                            </span>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <div class="starReadOnly1 rating-stars my-2">
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,63 +223,6 @@
 
                                 </div>
                             </div>
-                        </div>
-                        <!-- Row end -->
-
-
-
-                        <!-- Row start -->
-                        <div class="row gx-2">
-                            <div class="col-xl-6 col-lg-12 col-12">
-                                <div class="card mb-2">
-                                    <div class="card-header">
-                                        <h5 class="card-title">Usuarios</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="border rounded-3">
-                                            <div class="table-responsive">
-                                                <table class="table align-middle custom-table m-0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Usuario</th>
-                                                            <th>correo</th>
-                                                            <th>rol</th>
-                                                            <th>conexion</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($users as $user)
-                                                            <tr>
-                                                                <td>{{ $user->id }}</td>
-                                                                <td>
-                                                                    <div class="fw-semibold">{{ $user->name }}</div>
-                                                                </td>
-                                                                <td>
-                                                                    <span
-                                                                        class="badge bg-primary">{{ $user->email }}</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="badge border border-light">
-                                                                        @foreach ($user->getRoleNames() as $role)
-                                                                            {{ $role }}
-                                                                        @endforeach
-                                                                    </span>
-                                                                </td>
-
-                                                                <td>
-                                                                    <div class="starReadOnly1 rating-stars my-2"></div>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                         <!-- Row end -->
 
