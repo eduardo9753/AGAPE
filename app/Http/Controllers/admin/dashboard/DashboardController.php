@@ -55,11 +55,25 @@ class DashboardController extends Controller
             ->distinct('order_id')
             ->count('order_id');
 
+        $totalYAPEOrders = Transaction::whereBetween('payment_date', [$request->fecha_inicio, $request->fecha_final])
+            ->where('payment_method', 'YAPE')
+            ->sum('amount');
+
+        $totalEFECTIVOrders = Transaction::whereBetween('payment_date', [$request->fecha_inicio, $request->fecha_final])
+            ->where('payment_method', 'EFECTIVO')
+            ->sum('amount');
+
+        $totalTARJETAOrders = Transaction::whereBetween('payment_date', [$request->fecha_inicio, $request->fecha_final])
+            ->where('payment_method', 'TARJETA')
+            ->sum('amount');
 
         $pdf = PDF::loadView('ticket.pdf.reporte', [
             'totalAmount' => $totalAmount,
             'totalOrders' => $totalOrders,
-            'request' =>  $request
+            'request' =>  $request,
+            'totalYAPEOrders' => $totalYAPEOrders,
+            'totalEFECTIVOrders' => $totalEFECTIVOrders,
+            'totalTARJETAOrders' => $totalTARJETAOrders
         ]);
 
         return $pdf->stream('reportes.pdf');

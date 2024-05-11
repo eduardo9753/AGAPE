@@ -95,7 +95,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            <!-- Establecer el ancho máximo del logo -->
+            <!-- Establecer el ancho máximo del logo-->
             <img src="{{ asset('img/logo.png') }}" alt="Logo de la empresa" style="max-width: 100%;">
         </div>
         <div class="header">
@@ -128,8 +128,27 @@
 
             </tbody>
         </table>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>CANT. YAPE</th>
+                    <th>CANT. EFECTIVO</th>
+                    <th>CANT. TARJETA</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>S/.{{ $totalYAPEOrders }}</td>
+                    <td>S/.{{ $totalEFECTIVOrders }}</td>
+                    <td>S/.{{ $totalTARJETAOrders }}</td>
+                </tr>
+
+            </tbody>
+        </table>
         <div class="total">
-            <p><strong>Total Pagado:</strong> S/.</p>
+            <p><strong>Total Pagado:</strong> S/.{{ $totalAmount }}</p>
         </div>
         <div class="footer">
             <p>--- Para Tacuchi ---</strong></p>
