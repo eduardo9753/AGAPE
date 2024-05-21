@@ -108,9 +108,8 @@
                     <div class="form-group my-2">
                         <label for="">Tipo producto:</label>
                         <select wire:model="type_id" class="form-select">
-                            @foreach ($categories as $category)
-                                <option class="text-bg-dark" value="{{ $category->id }}">{{ $category->name }}
-                                </option>
+                            @foreach ($types as $type)
+                                <option class="text-bg-dark" value="{{ $type->id }}">{{ $type->name }}</option>
                             @endforeach
                         </select>
                     </div>
