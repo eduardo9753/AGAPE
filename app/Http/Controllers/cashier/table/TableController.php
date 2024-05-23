@@ -24,6 +24,20 @@ class TableController extends Controller
     }
 
 
+    public function liberarMesa(Table $table)
+    {
+        $table = Table::find($table->id);
+        $update = $table->update([
+            'state' => 'ACTIVO'
+        ]);
+
+        if ($update) {
+            return redirect()->back()->with('mensaje', 'mesa activada');
+        } else {
+            return redirect()->back()->with('mensaje', 'mesa no activada');
+        }
+    }
+
     public function fetchTables()
     {
         $tables = Table::all();

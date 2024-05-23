@@ -57,7 +57,7 @@
 
                             <input type="text" id="count_order_waitress" name="count_order_waitress" value="1"
                                 hidden>
-                            <div class="col-sm-12" id="allWaitressOrders"></div>
+                            <div class="col-sm-12 mt-3" id="allWaitressOrders"></div>
                         </div>
                         <!-- Row end -->
 
@@ -81,6 +81,6 @@
         </div>
         <!-- Page wrapper end -->
 
-
+        <script src="{{ asset('js/waitress/all-orders.js') }}"></script>
     </body>
 @endsection

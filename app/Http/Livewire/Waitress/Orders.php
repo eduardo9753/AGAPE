@@ -78,6 +78,7 @@ class Orders extends Component
         // Buscar una orden pendiente para la mesa seleccionada
         $order = Order::where('state', 'PENDIENTE')
             ->where('table_id', $this->table_id)
+            ->where('user_id', auth()->user()->id)
             ->first();
 
         //contador de pedidos para que se reinicie cada dia

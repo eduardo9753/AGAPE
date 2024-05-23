@@ -78,6 +78,6 @@
         </div>
         <!-- Page wrapper end -->
 
-
+        <script src="{{ asset('js/cashier/all-orders.js') }}"></script>
     </body>
 @endsection

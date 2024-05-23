@@ -55,11 +55,11 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
-                            <input type="text" id="count_table_waitress" name="count_table_waitress" value="1"
-                                hidden>
+                            {{-- <input type="text" id="count_table_waitress" name="count_table_waitress" value="1"
+                                hidden> --}}
 
                             @foreach ($tables as $table)
-                                <div class="col-sm-4 col-6">
+                                <div class="col-sm-4 col-6 mt-3">
                                     <div class="card px-3 py-2 mb-2 d-flex flex-row align-items-center">
                                         <div class="position-relative shape-block">
                                             <img src="https://cdn-icons-png.flaticon.com/512/607/607008.png"

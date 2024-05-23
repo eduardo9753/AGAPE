@@ -15,4 +15,13 @@ class Table extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function getLastOrderWithinTwoDays()
+    {
+        return $this->orders()
+            ->where('created_at', '>=', now()->subDays(2)->startOfDay())
+            ->where('created_at', '<=', now()->endOfDay())
+            ->latest()
+            ->first();
+    }
 }

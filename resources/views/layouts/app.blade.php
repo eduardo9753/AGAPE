@@ -37,7 +37,8 @@
     <!-- *************
    ************ Vendor Css Files *************
   ************ -->
-
+    {{-- JQUERY --}}
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- Scrollbar CSS
     <link rel="stylesheet" href="{{ asset('assets/vendor/overlay-scroll/OverlayScrollbars.min.css') }}" />-->
     <!-- ESTILOS LIVEWIRE -->
@@ -52,7 +53,6 @@
            ************ JavaScript Files *************
           ************* -->
 <!-- Required jQuery first, then Bootstrap Bundle JS -->
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
 <!-- *************
@@ -83,12 +83,12 @@
 <!-- Custom JS files -->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-<script src="{{ asset('js/cashier/all-orders.js') }}"></script>
-<script src="{{ asset('js/cashier/all-orders-delivery.js') }}"></script>
+
+
 <script src="{{ asset('js/cashier/all-tables.js') }}"></script>
 <script src="{{ asset('js/cashier/generate-pdf.js') }}"></script>
 
-<script src="{{ asset('js/waitress/all-orders.js') }}"></script>
+
 <script src="{{ asset('js/waitress/all-tables.js') }}"></script>
 <script src="{{ asset('js/waitress/generate-pdf.js') }}"></script>
 

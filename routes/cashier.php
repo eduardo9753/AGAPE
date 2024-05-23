@@ -13,6 +13,7 @@ Route::get('/cajera/orders/fecth', [OrderController::class, 'fetchOrders'])->nam
 
 
 Route::get('/cajera/tables', [TableController::class, 'index'])->name('cashier.table.index');
+Route::get('/cajera/tables/liberar/{table}', [TableController::class, 'liberarMesa'])->name('cashier.table.liberar');
 Route::get('/cajera/tables/fecth', [TableController::class, 'fetchTables'])->name('cashier.table.fetch');
 
 //Route::post('/cajera/orders/print/{order}', [OrderController::class, 'print'])->name('cashier.order.print');
